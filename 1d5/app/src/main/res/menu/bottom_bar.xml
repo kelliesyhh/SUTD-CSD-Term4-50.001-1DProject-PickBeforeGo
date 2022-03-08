@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home" android:icon="@drawable/ic_baseline_home_24"
+        android:id="@+id/home2"/>
+    <item android:title="Search" android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:id="@+id/cart"/>
+    <item android:title="Fav" android:icon="@drawable/ic_baseline_stars_24"
+        android:id="@+id/fav"/>
+</menu>
