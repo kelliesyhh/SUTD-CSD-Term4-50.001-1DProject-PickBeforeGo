@@ -24,18 +24,44 @@
             android:baselineAligned="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imgPicture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|top"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="26dp"
-                android:layout_marginRight="28dp"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/placeholder_product_pic"
-                android:contentDescription="Picture of Product" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+
+                <ImageView
+                    android:id="@+id/imgPicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginRight="28dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="Picture of Product"
+                    app:srcCompat="@drawable/placeholder_product_pic" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/imgPicture"
+                    android:layout_alignTop="@id/imgPicture"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="6dp">
+
+                    <TextView
+                        android:id="@+id/txtNoStock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/noStockRed"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="No Stock"
+                        android:textColor="@color/white" />
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
