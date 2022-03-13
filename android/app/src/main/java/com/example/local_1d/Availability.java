@@ -38,6 +38,8 @@ public class Availability extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static Availability newInstance(String param1, String param2) {
+
+        // TODO: BRAINSTORMING ONLY. BUT I THINK HERE CAN ADD IN BOOLEAN TO SAY WHETHER IN STOCK/NO STOCK. FROM THERE, CHANGE THE INFLATE USING IFELSE?
         Availability fragment = new Availability();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);

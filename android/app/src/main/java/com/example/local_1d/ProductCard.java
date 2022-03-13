@@ -38,6 +38,8 @@ public class ProductCard extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static ProductCard newInstance(String param1, String param2) {
+
+        // TODO: BRAINSTORMING ONLY. BUT I THINK HERE CAN ADD IN BOOLEAN TO SAY WHETHER IN STOCK/NO STOCK. FROM THERE, CHANGE THE INFLATE USING IFELSE?
         ProductCard fragment = new ProductCard();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
