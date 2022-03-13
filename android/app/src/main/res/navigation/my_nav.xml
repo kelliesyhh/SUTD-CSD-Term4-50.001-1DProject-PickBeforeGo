@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/home2"
-        android:name="com.example.a1d5.Home"
+        android:name="com.example.local_1d.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.a1d5.Cart"
+        android:name="com.example.local_1d.Cart"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/fav"
-        android:name="com.example.a1d5.Fav"
+        android:name="com.example.local_1d.Fav"
         android:label="fragment_fav"
         tools:layout="@layout/fragment_fav" />
     <fragment
         android:id="@+id/promotion_detail"
-        android:name="com.example.a1d5.promotion_detail"
+        android:name="com.example.local_1d.promotion_detail"
         android:label="fragment_promotion_detail"
         tools:layout="@layout/fragment_promotion_detail" />
 </navigation>

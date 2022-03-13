@@ -1,4 +1,4 @@
-package com.example.a1d5;
+package com.example.local_1d;
 
 import android.os.Bundle;
 import android.view.Menu;

@@ -59,6 +59,8 @@ public class ProductCard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        // TODO: if pass in info that there is no stock, use this return inflater.inflate(R.layout.fragment_product_card_no_stock, container, false);
         return inflater.inflate(R.layout.fragment_product_card, container, false);
     }
 }

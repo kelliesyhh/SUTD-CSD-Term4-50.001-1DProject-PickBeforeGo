@@ -12,4 +12,5 @@
     <color name="textaddressgrey">#4C4C4C</color>
     <color name="inStockGreen">#3DDC84</color>
     <color name="noStockRed">#DE4141</color>
+    <color name="brandOrange">#F19F39</color>
 </resources>
