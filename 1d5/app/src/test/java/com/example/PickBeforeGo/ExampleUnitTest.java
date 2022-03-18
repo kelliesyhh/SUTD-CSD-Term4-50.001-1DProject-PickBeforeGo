@@ -1,4 +1,4 @@
-package com.example.a1d5;
+package com.example.PickBeforeGo;
 
 import org.junit.Test;
 

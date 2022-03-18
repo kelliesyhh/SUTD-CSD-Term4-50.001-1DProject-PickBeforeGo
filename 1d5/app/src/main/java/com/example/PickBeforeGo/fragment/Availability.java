@@ -1,19 +1,20 @@
-package com.example.a1d5;
+package com.example.PickBeforeGo.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
+import com.example.PickBeforeGo.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fav#newInstance} factory method to
+ * Use the {@link Availability#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fav extends Fragment {
+public class Availability extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +25,7 @@ public class Fav extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Fav() {
+    public Availability() {
         // Required empty public constructor
     }
 
@@ -34,11 +35,13 @@ public class Fav extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fav.
+     * @return A new instance of fragment Availability.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fav newInstance(String param1, String param2) {
-        Fav fragment = new Fav();
+    public static Availability newInstance(String param1, String param2) {
+
+        // TODO: BRAINSTORMING ONLY. BUT I THINK HERE CAN ADD IN BOOLEAN TO SAY WHETHER IN STOCK/NO STOCK. FROM THERE, CHANGE THE INFLATE USING IFELSE?
+        Availability fragment = new Availability();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +62,6 @@ public class Fav extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fav, container, false);
+        return inflater.inflate(R.layout.fragment_availability, container, false);
     }
 }

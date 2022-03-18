@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.Cart">
+    tools:context=".detail">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Second_Fragment"
-        android:textSize="25sp"
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="121dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="307dp"
+        android:layout_marginEnd="154dp"
+        android:layout_marginBottom="376dp"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
-
-
-
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

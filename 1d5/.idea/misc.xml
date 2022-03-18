@@ -4,14 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/java/android/1d5/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/drawable/background.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/drawable/background_catalogue.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/drawable/background_searchbar.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/drawable/ic_baseline_stars_24.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/drawable/ic_nav_account.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/drawable/rectangle.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/activity_catalogue.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/layout/activity_main.xml" value="0.10190217391304347" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/activity_product_screen.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_all.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_availability.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_availability_no_stock.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_cart.xml" value="0.125" />
         <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_fav.xml" value="0.1" />
-        <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_home.xml" value="0.11162521688837479" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_favourite.xml" value="0.1" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_home.xml" value="0.125" />
         <entry key="..\:/java/android/1d5/app/src/main/res/layout/fragment_promotion_detail.xml" value="0.125" />
+        <entry key="..\:/java/android/1d5/app/src/main/res/layout/individual_product.xml" value="0.5" />
         <entry key="..\:/java/android/1d5/app/src/main/res/layout/promotion_detail.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/menu/bottom_bar.xml" value="0.125" />
         <entry key="..\:/java/android/1d5/app/src/main/res/menu/top_bar.xml" value="0.1796875" />

@@ -1,19 +1,20 @@
-package com.example.a1d5;
+package com.example.PickBeforeGo.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
+import com.example.PickBeforeGo.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link promotion_detail#newInstance} factory method to
+ * Use the {@link Home#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class promotion_detail extends Fragment {
+public class Home extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +25,7 @@ public class promotion_detail extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public promotion_detail() {
+    public Home() {
         // Required empty public constructor
     }
 
@@ -34,11 +35,11 @@ public class promotion_detail extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment promotion_detail.
+     * @return A new instance of fragment Home.
      */
     // TODO: Rename and change types and number of parameters
-    public static promotion_detail newInstance(String param1, String param2) {
-        promotion_detail fragment = new promotion_detail();
+    public static Home newInstance(String param1, String param2) {
+        Home fragment = new Home();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +60,6 @@ public class promotion_detail extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_promotion_detail, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

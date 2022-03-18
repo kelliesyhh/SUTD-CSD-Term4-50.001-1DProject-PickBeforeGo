@@ -1,6 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.1d5" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.1d5" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+        <!-- Customize your theme here. -->
+    </style>
+    
+    <style name="roundImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="roundSnack" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="Theme.Local1d" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/brandOrange</item>
         <item name="colorPrimaryVariant">@color/brandOrange</item>
@@ -14,12 +31,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.1d5.NoActionBar">
+    <style name="Theme.Local1d.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.1d5.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Local1d.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.1d5.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Local1d.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
