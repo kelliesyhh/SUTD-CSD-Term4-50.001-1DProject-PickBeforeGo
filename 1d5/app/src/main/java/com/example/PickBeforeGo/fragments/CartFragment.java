@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.fragment;
+package com.example.PickBeforeGo.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import com.example.PickBeforeGo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProductCard#newInstance} factory method to
+ * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProductCard extends Fragment {
+public class CartFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +25,7 @@ public class ProductCard extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProductCard() {
+    public CartFragment() {
         // Required empty public constructor
     }
 
@@ -35,13 +35,11 @@ public class ProductCard extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductCard.
+     * @return A new instance of fragment Cart.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProductCard newInstance(String param1, String param2) {
-
-        // TODO: BRAINSTORMING ONLY. BUT I THINK HERE CAN ADD IN BOOLEAN TO SAY WHETHER IN STOCK/NO STOCK. FROM THERE, CHANGE THE INFLATE USING IFELSE?
-        ProductCard fragment = new ProductCard();
+    public static CartFragment newInstance(String param1, String param2) {
+        CartFragment fragment = new CartFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,8 +60,6 @@ public class ProductCard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        // TODO: if pass in info that there is no stock, use this return inflater.inflate(R.layout.fragment_product_card_no_stock, container, false);
-        return inflater.inflate(R.layout.fragment_product_card, container, false);
+        return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 }

@@ -27,10 +27,24 @@
         <entry key="..\:/java/android/1d5/app/src/main/res/layout/promotion_detail.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/menu/bottom_bar.xml" value="0.125" />
         <entry key="..\:/java/android/1d5/app/src/main/res/menu/top_bar.xml" value="0.1796875" />
+        <entry key="app/src/main/res/layout/activity_catalogue.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/activity_product_screen.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_all.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_availability.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_availability_no_stock.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_product_card.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_product_card_no_stock.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/fragment_promotion_detail.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/individual_product.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/product_card.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/promotion_detail.xml" value="0.3305471124620061" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

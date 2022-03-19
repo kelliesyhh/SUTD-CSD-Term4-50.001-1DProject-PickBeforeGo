@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.fragment;
+package com.example.PickBeforeGo.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import com.example.PickBeforeGo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link promotion_detail#newInstance} factory method to
+ * Use the {@link PromotionDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class promotion_detail extends Fragment {
+public class PromotionDetailFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +25,7 @@ public class promotion_detail extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public promotion_detail() {
+    public PromotionDetailFragment() {
         // Required empty public constructor
     }
 
@@ -38,8 +38,8 @@ public class promotion_detail extends Fragment {
      * @return A new instance of fragment promotion_detail.
      */
     // TODO: Rename and change types and number of parameters
-    public static promotion_detail newInstance(String param1, String param2) {
-        promotion_detail fragment = new promotion_detail();
+    public static PromotionDetailFragment newInstance(String param1, String param2) {
+        PromotionDetailFragment fragment = new PromotionDetailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

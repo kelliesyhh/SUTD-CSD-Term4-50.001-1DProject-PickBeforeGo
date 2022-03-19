@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.fragment;
+package com.example.PickBeforeGo.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,7 +33,7 @@ public class TabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_all,null);
+        View rootView = inflater.inflate(R.layout.fragment_tab,null);
 
         ArrayList<Product> productArrayList = new ArrayList<Product>();
 

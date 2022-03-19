@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.items.Product;
+import com.example.PickBeforeGo.components.Product;
 
 import java.util.ArrayList;
 

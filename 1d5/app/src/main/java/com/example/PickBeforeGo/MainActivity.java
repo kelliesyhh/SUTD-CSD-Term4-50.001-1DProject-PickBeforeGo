@@ -11,7 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.PickBeforeGo.activities.ProductScreen;
+import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(MainActivity.this, ProductScreen.class));
+                    startActivity(new Intent(MainActivity.this, ProductScreenActivity.class));
                 }
             });
         }
