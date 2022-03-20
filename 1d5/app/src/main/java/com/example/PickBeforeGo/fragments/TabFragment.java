@@ -5,15 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.adapters.ProductRVAdapter;
-import com.example.PickBeforeGo.components.Product;
-
-import java.util.ArrayList;
+import com.example.PickBeforeGo.adapters.ViewPageAdapter;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,48 +21,25 @@ import java.util.ArrayList;
  */
 public class TabFragment extends Fragment {
 
-    private final int position;
-    private RecyclerView productRV;
-    private ArrayList<Product> productArrayList;
-
-    public TabFragment(int position){
-        this.position = position;
-    }
+    private String tabTitles[] = new String[]{"All", "Favourites"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tab,null);
 
-        ArrayList<Product> productArrayList = new ArrayList<Product>();
+        TabLayout tabLayout = rootView.findViewById(R.id.tabs);
+        ViewPager2 viewPager2 = rootView.findViewById(R.id.viewPager);
 
-        productRV = rootView.findViewById(R.id.product_rv);
+        ViewPageAdapter adapter = new ViewPageAdapter(getActivity());
+        viewPager2.setAdapter(adapter);
 
-        //All Tab
-        if (position == 0){
-            //get data from database and populate catalogue here
-            productArrayList.add(new Product("White Bread", "500g", "Gardenia", R.drawable.milk_soap));
-            productArrayList.add(new Product("Tissue", "light", "Kleenex", R.drawable.tissue));
-            productArrayList.add(new Product("Soap", "200g", "Meril", R.drawable.milk_soap));
-            productArrayList.add(new Product("BOY", "TALL", "HUMAN", R.drawable.bread));
-            productArrayList.add(new Product("BOY", "TALL", "HUMAN", R.drawable.bread));
-            productArrayList.add(new Product("BOY", "TALL", "HUMAN", R.drawable.bread));
-            productArrayList.add(new Product("BOY", "TALL", "HUMAN", R.drawable.bread));
-        }
-        // Favourites Tab
-        else if (position == 1){
-            //get data from database and populate catalogue here
-            productArrayList.add(new Product("White Bread", "500g", "Gardenia", R.drawable.milk_soap));
-            productArrayList.add(new Product("Tissue", "light", "Kleenex", R.drawable.milk_soap));
-            productArrayList.add(new Product("Soap", "200g", "Meril", R.drawable.milk_soap));
-        }
-
-        ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);
-
-        int numOfColumns = 2;
-        productRV.setLayoutManager(new GridLayoutManager(getActivity(), numOfColumns));
-
-        productRV.setAdapter(productRVAdapter);
+        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy(){
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                tab.setText(tabTitles[position]);
+            }
+        }).attach();
 
         // Inflate the layout for this fragment
         return rootView;

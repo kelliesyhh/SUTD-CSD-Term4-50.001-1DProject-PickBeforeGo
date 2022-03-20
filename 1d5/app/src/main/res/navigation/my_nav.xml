@@ -10,23 +10,16 @@
         android:name="com.example.PickBeforeGo.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_home2_to_promotion_detail"
-            app:destination="@id/promotion_detail" />
     </fragment>
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.PickBeforeGo.fragments.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        android:name="com.example.PickBeforeGo.fragments.TabFragment"
+        android:label="fragment_tab"
+        tools:layout="@layout/fragment_tab" />
     <fragment
         android:id="@+id/fav"
-        android:name="com.example.PickBeforeGo.fragments.FavFragment"
-        android:label="fragment_fav"
-        tools:layout="@layout/fragment_fav" />
-    <fragment
-        android:id="@+id/promotion_detail"
-        android:name="com.example.PickBeforeGo.fragments.PromotionDetailFragment"
-        android:label="fragment_promotion_detail"
-        tools:layout="@layout/fragment_promotion_detail" />
+        android:name="com.example.PickBeforeGo.fragments.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
+
 </navigation>

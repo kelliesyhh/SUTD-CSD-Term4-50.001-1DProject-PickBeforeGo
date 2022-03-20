@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.PickBeforeGo.fragments.TabFragment;
+import com.example.PickBeforeGo.fragments.CatalogueFragment;
 
 public class ViewPageAdapter extends FragmentStateAdapter {
 
@@ -17,17 +17,20 @@ public class ViewPageAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
 
-    //actually need Bundle for what sia
-//        Bundle info = new Bundle();
-
         if(position == 0){
-            return new TabFragment(0);
+            return new CatalogueFragment(0);
         }
         if (position == 1) {
-            return new TabFragment(1);
+            return new CatalogueFragment(1);
         }
-        return new TabFragment(0);
+        return new CatalogueFragment(0);
     }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
     @Override
     public int getItemCount() {
         return 2;
