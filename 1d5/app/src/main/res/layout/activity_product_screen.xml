@@ -31,7 +31,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/btnBack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -65,7 +65,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_productCard"
-                android:name="com.example.PickBeforeGo.fragments.ProductCardFragment"
+                android:name="com.example.PickBeforeGo.fragments.InStockProductCardFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -89,7 +89,7 @@
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/fragment_availability"
-                    android:name="com.example.PickBeforeGo.fragments.AvailabilityFragment"
+                    android:name="com.example.PickBeforeGo.fragments.InStockAvailabilityFragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:outlineAmbientShadowColor="@android:color/transparent"

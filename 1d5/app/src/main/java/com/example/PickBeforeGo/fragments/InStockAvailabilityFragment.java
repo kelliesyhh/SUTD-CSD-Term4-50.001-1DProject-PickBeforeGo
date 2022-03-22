@@ -11,10 +11,10 @@ import com.example.PickBeforeGo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AvailabilityFragment#newInstance} factory method to
+ * Use the {@link InStockAvailabilityFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AvailabilityFragment extends Fragment {
+public class InStockAvailabilityFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +25,7 @@ public class AvailabilityFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AvailabilityFragment() {
+    public InStockAvailabilityFragment() {
         // Required empty public constructor
     }
 
@@ -38,10 +38,8 @@ public class AvailabilityFragment extends Fragment {
      * @return A new instance of fragment Availability.
      */
     // TODO: Rename and change types and number of parameters
-    public static AvailabilityFragment newInstance(String param1, String param2) {
-
-        // TODO: BRAINSTORMING ONLY. BUT I THINK HERE CAN ADD IN BOOLEAN TO SAY WHETHER IN STOCK/NO STOCK. FROM THERE, CHANGE THE INFLATE USING IFELSE?
-        AvailabilityFragment fragment = new AvailabilityFragment();
+    public static InStockAvailabilityFragment newInstance(String param1, String param2) {
+        InStockAvailabilityFragment fragment = new InStockAvailabilityFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

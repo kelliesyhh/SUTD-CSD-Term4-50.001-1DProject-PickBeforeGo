@@ -11,10 +11,10 @@ import com.example.PickBeforeGo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProductCardFragment#newInstance} factory method to
+ * Use the {@link NoStockProductCardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProductCardFragment extends Fragment {
+public class NoStockProductCardFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +25,7 @@ public class ProductCardFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProductCardFragment() {
+    public NoStockProductCardFragment() {
         // Required empty public constructor
     }
 
@@ -38,10 +38,8 @@ public class ProductCardFragment extends Fragment {
      * @return A new instance of fragment ProductCard.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProductCardFragment newInstance(String param1, String param2) {
-
-        // TODO: BRAINSTORMING ONLY. BUT I THINK HERE CAN ADD IN BOOLEAN TO SAY WHETHER IN STOCK/NO STOCK. FROM THERE, CHANGE THE INFLATE USING IFELSE?
-        ProductCardFragment fragment = new ProductCardFragment();
+    public static NoStockProductCardFragment newInstance(String param1, String param2) {
+        NoStockProductCardFragment fragment = new NoStockProductCardFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,6 +62,6 @@ public class ProductCardFragment extends Fragment {
         // Inflate the layout for this fragment
 
         // TODO: if pass in info that there is no stock, use this return inflater.inflate(R.layout.fragment_product_card_no_stock, container, false);
-        return inflater.inflate(R.layout.fragment_product_card, container, false);
+        return inflater.inflate(R.layout.fragment_inner_product_card_no_stock, container, false);
     }
 }
