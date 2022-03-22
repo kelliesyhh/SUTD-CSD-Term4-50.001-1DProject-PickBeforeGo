@@ -10,10 +10,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.fragment.Availability;
-import com.example.PickBeforeGo.fragment.ProductCard;
+import com.example.PickBeforeGo.fragments.AvailabilityFragment;
+import com.example.PickBeforeGo.fragments.ProductCardFragment;
 
-public class ProductScreen extends AppCompatActivity {
+public class ProductScreenActivity extends AppCompatActivity {
 
     FragmentTransaction transaction;
 
@@ -26,8 +26,8 @@ public class ProductScreen extends AppCompatActivity {
         // set up top bar
 
         // set up fragments
-        Fragment availability = new Availability();
-        Fragment productCard = new ProductCard();
+        Fragment availability = new AvailabilityFragment();
+        Fragment productCard = new ProductCardFragment();
         FragmentManager manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
         transaction.add(R.id.fragment_productCard, productCard, "Product_Card");

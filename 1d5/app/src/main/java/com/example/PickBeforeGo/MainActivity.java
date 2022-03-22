@@ -11,7 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.PickBeforeGo.activities.ProductScreen;
+import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        topbar = findViewById(R.id.top_bar);
-        setSupportActionBar(topbar);
+//        topbar = findViewById(R.id.top_bar);
+//        setSupportActionBar(topbar);
 
+        //set up the bottom navigation bar
         bottom_bar = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this,R.id.my_nav);
         NavigationUI.setupWithNavController(bottom_bar,navController);
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(MainActivity.this, ProductScreen.class));
+                    startActivity(new Intent(MainActivity.this, ProductScreenActivity.class));
                 }
             });
         }

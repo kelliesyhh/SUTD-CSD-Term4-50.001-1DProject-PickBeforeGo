@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.items;
+package com.example.PickBeforeGo.components;
 
 public class Product {
 

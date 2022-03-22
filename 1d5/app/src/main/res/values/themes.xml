@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.1d5" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@color/teal_200</item>
+        <item name="colorPrimary">@color/brandOrange</item>
+        <item name="colorPrimaryDark">@color/brandOrangeDark</item>
+        <item name="colorAccent">@color/brandOrange</item>
         <!-- Customize your theme here. -->
     </style>
     
