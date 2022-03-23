@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar topbar;
     private BottomNavigationView bottom_bar;
 
-//    img for homepage
+//    img for homepage Should be included in the HomeFragment instead
     private Integer[] imgId = {R.id.img1,R.id.img2,R.id.img3,R.id.img4,R.id.img5};
     private ArrayList<View> arr1 = new ArrayList<>();
 
@@ -49,11 +49,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.top_bar,menu);
-        return true;
     }
 }
