@@ -54,6 +54,7 @@ public class UserFragment extends Fragment {
         userslist.add(new Userpg("Terms & Conditions"));
     }
 
+
     private void setAdapter(){
         UserRVAdapter adapter = new UserRVAdapter(userslist, (UserRVAdapter.OnNoteListener) getActivity());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
