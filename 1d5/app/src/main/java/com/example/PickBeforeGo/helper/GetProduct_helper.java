@@ -13,7 +13,7 @@ public class GetProduct_helper {
 
     //SAMPLE TESTING DATA FOR PRODUCTS
     public GetProduct_helper(){
-        //TODO pull data from database
+        //TODO Tianqin can help put the code to pull data from database for all products here??
         allProductArrayList = new ArrayList<Product>();
         allProductArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
         allProductArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
