@@ -10,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.adapters.ViewPageAdapter;
+import com.example.PickBeforeGo.helper.GetProduct_helper;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -28,10 +30,13 @@ public class TabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tab,null);
-
         TabLayout tabLayout = rootView.findViewById(R.id.tabs);
         ViewPager2 viewPager2 = rootView.findViewById(R.id.viewPager);
         SearchView searchText = rootView.findViewById(R.id.searchBar);
+
+        MainActivity main_activity = (MainActivity) getActivity();
+//        System.out.println(dataFromAct);
+
 
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -67,4 +72,6 @@ public class TabFragment extends Fragment {
     public void filter(String newText) {
 
     }
+
+
 }
