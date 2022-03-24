@@ -3,24 +3,21 @@ package com.example.PickBeforeGo.activities;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.CalendarPicker;
-import com.example.PickBeforeGo.helperclass.Promotion_helper;
+import com.example.PickBeforeGo.helper.Promotion_helper;
 
 public class AdminFormActivity extends AppCompatActivity {
     private static final String TAG = "admin";

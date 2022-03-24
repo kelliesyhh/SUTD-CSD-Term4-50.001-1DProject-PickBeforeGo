@@ -26,6 +26,12 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         this.productArrayList = productArrayList;
     }
 
+    //filter results base on search
+    public void filterProducts (ArrayList<Product> filterproducts) {
+
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ProductRVAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,10 +44,10 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     public void onBindViewHolder(@NonNull ProductRVAdapter.Viewholder holder, int position) {
         //set data to textview, imageview of each card layout
         Product product = productArrayList.get(position);
-        holder.productImg.setImageResource(product.getImageId());
+//        holder.productImg.setImageResource(product.getImageURL());
         holder.product.setText(product.getProductName());
-        holder.brand.setText(product.getBrandName());
-        holder.weight.setText(product.getWeightName());
+        holder.brand.setText(product.getDescription());
+        holder.weight.setText(product.getWeight());
     }
     
     @Override

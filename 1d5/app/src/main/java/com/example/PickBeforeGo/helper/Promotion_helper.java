@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.helperclass;
+package com.example.PickBeforeGo.helper;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

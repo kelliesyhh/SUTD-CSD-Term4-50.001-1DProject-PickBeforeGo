@@ -35,21 +35,24 @@ public class CatalogueFragment extends Fragment {
 
         //All Tab
         if (position == 0){
-            //get data from database and populate catalogue here
-            productArrayList.add(new Product("White Bread", "500g", "Gardenia", R.drawable.milk_soap));
-            productArrayList.add(new Product("Tissue", "light", "Kleenex", R.drawable.tissue));
-            productArrayList.add(new Product("Soap", "200g", "Meril", R.drawable.milk_soap));
-            productArrayList.add(new Product("BOY", "TALL", "HUMAN", R.drawable.bread));
-            productArrayList.add(new Product("BOY", "TALL", "HUMAN", R.drawable.bread));
-            productArrayList.add(new Product("BOY", "TALL", "HUMAN", R.drawable.bread));
-            productArrayList.add(new Product("BOY", "TALL", "HUMAN", R.drawable.bread));
+
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
         }
+
         // Favourites Tab
         else if (position == 1){
             //get data from database and populate catalogue here
-            productArrayList.add(new Product("White Bread", "500g", "Gardenia", R.drawable.milk_soap));
-            productArrayList.add(new Product("Tissue", "light", "Kleenex", R.drawable.milk_soap));
-            productArrayList.add(new Product("Soap", "200g", "Meril", R.drawable.milk_soap));
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+            productArrayList.add(new Product.ProductBuilder().setProductName("White Bread").setDescription("Gardenia").setWeight("500g").build());
+
+
         }
 
         ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);

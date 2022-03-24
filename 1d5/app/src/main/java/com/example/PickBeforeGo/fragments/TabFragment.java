@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,23 @@ public class TabFragment extends Fragment {
 
         TabLayout tabLayout = rootView.findViewById(R.id.tabs);
         ViewPager2 viewPager2 = rootView.findViewById(R.id.viewPager);
+        SearchView searchText = rootView.findViewById(R.id.searchBar);
+
+        searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                System.out.println(newText);
+                //do filtering based on textchange of searchbar
+                filter(newText);
+
+                return false;
+            }
+        });
 
         ViewPageAdapter adapter = new ViewPageAdapter(getActivity());
         viewPager2.setAdapter(adapter);
@@ -43,5 +61,10 @@ public class TabFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    // TODO need to implement some sort of filter
+    public void filter(String newText) {
+
     }
 }
