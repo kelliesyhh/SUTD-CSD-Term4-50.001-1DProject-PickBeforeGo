@@ -2,6 +2,7 @@ package com.example.PickBeforeGo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -11,15 +12,18 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.PickBeforeGo.activities.AdminFormActivity;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
+import com.example.PickBeforeGo.adapters.UserRVAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  UserRVAdapter.OnNoteListener {
     private Toolbar topbar;
     private BottomNavigationView bottom_bar;
+    private static final String TAG = "Main activity";
 
 //    img for homepage Should be included in the HomeFragment instead
     private Integer[] imgId = {R.id.img1,R.id.img2,R.id.img3,R.id.img4,R.id.img5};
@@ -47,6 +51,17 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, ProductScreenActivity.class));
                 }
             });
+        }
+
+
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+        Log.d(TAG, "onNoteClick: clicked."+ position);
+        if (position == 0){
+            Intent intent = new Intent(MainActivity.this, AdminFormActivity.class);
+            startActivity(intent);
         }
     }
 }
