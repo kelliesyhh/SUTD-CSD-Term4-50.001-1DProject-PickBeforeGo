@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../../../layout/custom_preview.xml" value="0.39814814814814814" />
         <entry key="..\:/java/android/1d5/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/drawable/background.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/drawable/background_catalogue.xml" value="0.1" />
@@ -28,39 +27,11 @@
         <entry key="..\:/java/android/1d5/app/src/main/res/layout/promotion_detail.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/menu/bottom_bar.xml" value="0.125" />
         <entry key="..\:/java/android/1d5/app/src/main/res/menu/top_bar.xml" value="0.1796875" />
-        <entry key="app/src/main/res/drawable/background.xml" value="0.42256410256410254" />
-        <entry key="app/src/main/res/drawable/background_catalogue.xml" value="0.42256410256410254" />
-        <entry key="app/src/main/res/drawable/background_searchbar.xml" value="0.42256410256410254" />
-        <entry key="app/src/main/res/drawable/bg_header.xml" value="0.42256410256410254" />
-        <entry key="app/src/main/res/drawable/bg_searchbar.xml" value="0.42256410256410254" />
-        <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.490625" />
-        <entry key="app/src/main/res/layout/activity_catalogue.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.34375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.307518115942029" />
-        <entry key="app/src/main/res/layout/activity_product_screen.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/activity_test.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_all.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_availability.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_availability_no_stock.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_catalogue.xml" value="0.34375" />
-        <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.307518115942029" />
-        <entry key="app/src/main/res/layout/fragment_product_card.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_product_card_no_stock.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_promotion_detail.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/fragment_tab.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.34375" />
-        <entry key="app/src/main/res/layout/individual_product.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/product_card.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/layout/promotion_detail.xml" value="0.3305471124620061" />
-        <entry key="app/src/main/res/menu/bottom_bar.xml" value="0.40989583333333335" />
-        <entry key="app/src/main/res/menu/top_bar.xml" value="0.41302083333333334" />
+
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
