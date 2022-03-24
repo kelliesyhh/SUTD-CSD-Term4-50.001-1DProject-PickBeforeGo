@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.PickBeforeGo.activities.ProductScreen"
+            android:name="com.example.PickBeforeGo.activities.ProductScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
