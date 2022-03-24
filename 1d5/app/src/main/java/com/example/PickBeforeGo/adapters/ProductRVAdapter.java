@@ -43,7 +43,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         holder.brand.setText(product.getBrandName());
         holder.weight.setText(product.getWeightName());
     }
-
+    
     @Override
     public int getItemCount() {
         return productArrayList.size();

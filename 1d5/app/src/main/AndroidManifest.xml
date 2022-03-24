@@ -23,6 +23,13 @@
             android:name="com.example.PickBeforeGo.activities.ProductScreenActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name="com.example.PickBeforeGo.activities.AdminFormActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

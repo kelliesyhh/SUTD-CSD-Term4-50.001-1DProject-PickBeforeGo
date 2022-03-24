@@ -2,6 +2,7 @@ package com.example.PickBeforeGo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -11,17 +12,20 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.PickBeforeGo.activities.AdminFormActivity;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
+import com.example.PickBeforeGo.adapters.UserRVAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  UserRVAdapter.OnNoteListener {
     private Toolbar topbar;
     private BottomNavigationView bottom_bar;
+    private static final String TAG = "Main activity";
 
-//    img for homepage
+//    img for homepage Should be included in the HomeFragment instead
     private Integer[] imgId = {R.id.img1,R.id.img2,R.id.img3,R.id.img4,R.id.img5};
     private ArrayList<View> arr1 = new ArrayList<>();
 
@@ -29,14 +33,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        topbar = findViewById(R.id.top_bar);
-//        setSupportActionBar(topbar);
 
         //set up the bottom navigation bar
         bottom_bar = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this,R.id.my_nav);
         NavigationUI.setupWithNavController(bottom_bar,navController);
 
+        //set up images and on click on images to ProductScreenActivity
         for (int i=0;i<5;i++){
             View imgView = findViewById(imgId[i]);
             arr1.add(imgView);
@@ -49,11 +52,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.top_bar,menu);
-        return true;
+    public void onNoteClick(int position) {
+        Log.d(TAG, "onNoteClick: clicked."+ position);
+        if (position == 0){
+            Intent intent = new Intent(MainActivity.this, AdminFormActivity.class);
+            startActivity(intent);
+        }
     }
 }
