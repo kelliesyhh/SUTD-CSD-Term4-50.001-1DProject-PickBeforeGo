@@ -37,7 +37,6 @@ public class TabFragment extends Fragment {
         MainActivity main_activity = (MainActivity) getActivity();
 //        System.out.println(dataFromAct);
 
-
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
