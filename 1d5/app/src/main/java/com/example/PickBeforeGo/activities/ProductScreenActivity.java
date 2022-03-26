@@ -24,13 +24,14 @@ public class ProductScreenActivity extends AppCompatActivity {
     private static final String PRICE = "price";
     private static final String IMAGE_URL = "image_url";
     private static final String FAVOURITE = "favourite";
+    private static final String DESCRIPTION = "description";
     private static final String PROMOTION = "promotion";
 
     private String name;
     private String price;
     private String image_url;
     private boolean favourite;
-    private String promotion;
+    private String description;
 
 
     FragmentTransaction fragmentTransaction;
@@ -43,10 +44,17 @@ public class ProductScreenActivity extends AppCompatActivity {
         ImageView btnBack = findViewById(R.id.btnBack);
 
         // TODO: get name, imageURL, price, favourite from previous page's intent to use as fragment arguments
-       name = "Gardenia Bread";
-       price = "$2.30";
-       image_url = "www.google.com/images";
-       favourite = false;
+        // name corresponds to 'pname' in db
+        // price corresponds to 'price' in db (need to add '$')
+        // image_url corresponds to 'image' in db
+        // favourite corresponds to 'favourite' in db
+        // description corresponds to 'description' in db
+
+        name = "Meiji Fresh Milk - Regular";
+        price = "$5.95";
+        image_url = "https://firebasestorage.googleapis.com/v0/b/pickbeforegop.appspot.com/o/Product%20Images%2Facc%3D1%3Bdoc%3Dencoded%3DzLuAgyLP5ExYVDAUvRGTWYl%2Bc%2Ffz06hHcWDZs9OwwlHY5XaOrtuoNls%3DMar%2026%2C%20202202%3A19%3A36%20AM.jpg?alt=media&token=0e70df68-5ac1-4cae-a876-9c8df9a35d9c";
+        favourite = false;
+        description = "500g | Brand: Gardenia";
 
         // set up fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -59,16 +67,22 @@ public class ProductScreenActivity extends AppCompatActivity {
         productCardArgs.putString(PRICE, price);
         productCardArgs.putString(IMAGE_URL, image_url);
         productCardArgs.putBoolean(FAVOURITE, favourite);
+        productCardArgs.putString(DESCRIPTION, description);
         productCardFragment.setArguments(productCardArgs);
 
         Fragment availabilityFragment = new InStockAvailabilityFragment();
         fragmentTransaction.add(R.id.fragment_availability, availabilityFragment, "Availability");
 
         //TODO: retrieve inStock, onPromo, promotion amount, restock timing from database
+        // inStock corresponds to 'stock' in db
+        // onPromo corresponds to 'discount' in db
+        // discPercentage corresponds to 'DiscountPercent' in db
+
         boolean inStock = true;
         boolean onPromo = true;
+        int discPercentage = 0;
         String restockTiming = "Next Restock Time - 10:00 28 Feb 2021";
-        String promotion = "Promo 20%";
+        String promotion = "Promo " + discPercentage + "%";
 
         // replace fragments (if necessary) based on boolean values
         if (onPromo) {;
