@@ -85,18 +85,18 @@
                     android:textStyle="bold"
                     android:typeface="normal"></TextView>
 
-                <ImageButton
+
+                <ToggleButton
                     android:id="@+id/btnFavourite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="36dp"
                     android:layout_alignParentRight="true"
                     android:layout_gravity="right|end"
-                    android:backgroundTint="#FFFFFF"
+                    android:background="@drawable/toggle_fav"
                     android:clickable="true"
-                    android:contentDescription="Add to Favourites"
                     android:contextClickable="true"
-                    android:focusable="true"
-                    app:srcCompat="@drawable/favourites" />
+                    android:textOff=""
+                    android:textOn="" />
             </RelativeLayout>
 
             <TextView
