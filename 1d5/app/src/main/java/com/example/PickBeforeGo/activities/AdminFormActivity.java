@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.CalendarPicker;
-import com.example.PickBeforeGo.helper.Promotion_helper;
+import com.example.PickBeforeGo.helper.PromotionHelper;
 
 public class AdminFormActivity extends AppCompatActivity {
     private static final String TAG = "admin";
@@ -87,7 +87,7 @@ public class AdminFormActivity extends AppCompatActivity {
                 promotionChoice[0] = spinnerPromotion.getSelectedItem().toString();
 
                 if (!priceChoice[0].isEmpty()) {
-                    String newPromotedValue = new Promotion_helper(priceChoice[0], promotionChoice[0]).promoChange();
+                    String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
                     PriceAfterPromotion.setText(newPromotedValue);
                 } else {
                     PriceAfterPromotion.setText(priceChoice[0]);
@@ -114,7 +114,7 @@ public class AdminFormActivity extends AppCompatActivity {
                 priceChoice[0] = editable.toString();
 
                 if (!priceChoice[0].isEmpty()) {
-                    String newPromotedValue = new Promotion_helper(priceChoice[0], promotionChoice[0]).promoChange();
+                    String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
                     PriceAfterPromotion.setText(newPromotedValue);
                 } else {
                     PriceAfterPromotion.setText("0.00");

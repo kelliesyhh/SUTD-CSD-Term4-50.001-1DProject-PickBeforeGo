@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-public class Promotion_helper {
+public class PromotionHelper {
 
     private final String price;
     private final String promotion;
 
-    public Promotion_helper(String price, String promotion){
+    public PromotionHelper(String price, String promotion){
         StringBuffer priceSB= new StringBuffer(price);
         StringBuffer promotionSB= new StringBuffer(promotion);
 

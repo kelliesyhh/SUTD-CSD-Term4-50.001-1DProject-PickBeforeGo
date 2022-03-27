@@ -7,22 +7,34 @@ public class Product {
     private String date = null;
     private String description = null;
     private String imageURL = null;
-    private String pid = null;
+    private String productID = null;
     private String productName = null;
     private String price = null;
     private String time = null;
     private String weight = null;
+    private String nextRestockTime = null;
+    private Long discountPercent = null;
+    private Boolean isPromo = false;
+    private Boolean isFavourite = false;
+    private Boolean inStock = false;
+
+    public Product(){}
 
     private Product(ProductBuilder productBuilder){
         this.category = productBuilder.category;
         this.date = productBuilder.date;
         this.description = productBuilder.description;
         this.imageURL = productBuilder.imageURL;
-        this.pid = productBuilder.pid;
+        this.productID = productBuilder.productID;
         this.productName = productBuilder.productName;
         this.price = productBuilder.price;
         this.time = productBuilder.time;
         this.weight= productBuilder.weight;
+        this.nextRestockTime = productBuilder.nextRestockTime;
+        this.discountPercent = productBuilder.discountPercent;
+        this.isPromo = productBuilder.isPromo;
+        this.isFavourite = productBuilder.isFavourite;
+        this.inStock = productBuilder.inStock;
     }
 
     //all getter methods
@@ -42,8 +54,8 @@ public class Product {
         return this.imageURL;
     }
 
-    public String getPid(){
-        return this.pid;
+    public String getProductID(){
+        return this.productID;
     }
 
     public String getProductName() {
@@ -60,16 +72,35 @@ public class Product {
 
     public String getWeight() {return this.weight;}
 
+    public String getNextRestockTime(){return this.nextRestockTime;}
+
+    public Long getDiscountPercent(){return this.discountPercent;}
+
+    public Boolean getIsPromo() {return this.isPromo;}
+
+    public Boolean getIsFavorite() {return this.isFavourite;}
+
+    public Boolean getInStock() {return this.inStock;}
+
+    public void setIsFavourite(boolean isFavourite) {
+        this.isFavourite = isFavourite;
+    };
+
     public static class ProductBuilder {
         private String category;
         private String date;
         private String description;
         private String imageURL;
-        private String pid;
+        private String productID;
         private String productName;
         private String price;
         private String time;
         private String weight;
+        private String nextRestockTime;
+        private Long discountPercent;
+        private Boolean isPromo;
+        private Boolean isFavourite;
+        private Boolean inStock;
 
         public ProductBuilder(){}
 
@@ -93,8 +124,8 @@ public class Product {
             return this;
         }
 
-        public ProductBuilder setPid(String pid){
-            this.pid = pid;
+        public ProductBuilder setProductID(String productID){
+            this.productID = productID;
             return this;
         }
 
@@ -116,6 +147,31 @@ public class Product {
 
         public ProductBuilder setWeight(String weight){
             this.weight = weight;
+            return this;
+        }
+
+        public ProductBuilder setNextRestockTime(String nextRestockTime){
+            this.nextRestockTime = nextRestockTime;
+            return this;
+        }
+
+        public ProductBuilder setDiscountPercent(Long discountPercent){
+            this.discountPercent = discountPercent;
+            return this;
+        }
+
+        public ProductBuilder setIsPromo(Boolean isPromo){
+            this.isPromo = isPromo;
+            return this;
+        }
+
+        public ProductBuilder setIsFavourite(Boolean isFavourite){
+            this.isFavourite = isFavourite;
+            return this;
+        }
+
+        public ProductBuilder setInStock(Boolean inStock){
+            this.inStock = inStock;
             return this;
         }
 

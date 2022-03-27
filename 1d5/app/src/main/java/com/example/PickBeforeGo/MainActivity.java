@@ -13,17 +13,16 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.PickBeforeGo.activities.AdminFormActivity;
 import com.example.PickBeforeGo.adapters.UserRVAdapter;
 import com.example.PickBeforeGo.components.Product;
-import com.example.PickBeforeGo.helper.GetProduct_helper;
+import com.example.PickBeforeGo.helper.GetProductHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements  UserRVAdapter.OnNoteListener{
-    private Toolbar topbar;
-    private BottomNavigationView bottom_bar;
     private static final String TAG = "Main activity";
-
     private ArrayList<Product> allProductArrayList;
     private ArrayList<Product> favouriteProductArrayList;
     private ArrayList<Product> promoProductArrayList;
@@ -32,19 +31,22 @@ public class MainActivity extends AppCompatActivity implements  UserRVAdapter.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
         //set up the bottom navigation bar
-        bottom_bar = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView btmNavBar = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this,R.id.my_nav);
-        NavigationUI.setupWithNavController(bottom_bar,navController);
+        NavigationUI.setupWithNavController(btmNavBar,navController);
 
-        //get data from database using helper function
-        GetProduct_helper getProduct = new GetProduct_helper();
-        allProductArrayList = getProduct.getAllProducts();
-        favouriteProductArrayList = getProduct.getFavouriteProducts();
-        promoProductArrayList = getProduct.getPromotionProducts();
-        noStockProductArrayList = getProduct.getNoStockProducts();
+        //Call database if product empty
+        if (allProductArrayList == null){
+            GetProductHelper getProduct = new GetProductHelper();
+            allProductArrayList = getProduct.getAllProducts();
+            favouriteProductArrayList = getProduct.getFavouriteProducts();
+            promoProductArrayList = getProduct.getPromotionProducts();
+            noStockProductArrayList = getProduct.getNoStockProducts();
+        }
 
     }
 

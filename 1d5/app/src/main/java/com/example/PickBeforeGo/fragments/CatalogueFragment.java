@@ -1,6 +1,7 @@
 package com.example.PickBeforeGo.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
-import com.example.PickBeforeGo.helper.GetProduct_helper;
 
 import java.util.ArrayList;
 
@@ -35,19 +35,25 @@ public class CatalogueFragment extends Fragment {
 
         RecyclerView productRV = rootView.findViewById(R.id.product_rv);
 
-        //TODO to get All products and can do sorting uh
-        MainActivity main_activity = (MainActivity) getActivity();
+        MainActivity mainActivity = (MainActivity) getActivity();
+
+        //TODO change favourite status and update the below code for testing only
+        if (mainActivity.getFavouriteProducts().isEmpty()) {
+            mainActivity.getAllProducts().get(0).setIsFavourite(true);
+            mainActivity.getFavouriteProducts().add(mainActivity.getAllProducts().get(0));
+            System.out.println(mainActivity.getAllProducts().get(0).getIsFavorite());
+            System.out.println(mainActivity.getFavouriteProducts().size());
+        }
 
 
         //All Tab
         if (position == 0){
-//            assert main_activity != null;
-            productArrayList = main_activity.getAllProducts();
+            productArrayList = mainActivity.getAllProducts();
         }
 
         // Favourites Tab
         else if (position == 1){
-            productArrayList = main_activity.getFavouriteProducts();
+            productArrayList = mainActivity.getFavouriteProducts();
         }
 
         ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);

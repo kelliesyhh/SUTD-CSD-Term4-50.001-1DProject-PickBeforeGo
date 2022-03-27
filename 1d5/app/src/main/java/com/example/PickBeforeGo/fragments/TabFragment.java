@@ -13,7 +13,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.adapters.ViewPageAdapter;
-import com.example.PickBeforeGo.helper.GetProduct_helper;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
