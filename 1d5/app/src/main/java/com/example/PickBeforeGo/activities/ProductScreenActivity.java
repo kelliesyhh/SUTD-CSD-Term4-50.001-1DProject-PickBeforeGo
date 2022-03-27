@@ -20,6 +20,7 @@ import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
 
 public class ProductScreenActivity extends AppCompatActivity {
 
+    private static final String PRODUCT_ID = "product_id";
     private static final String NAME = "name";
     private static final String PRICE = "price";
     private static final String IMAGE_URL = "image_url";
@@ -27,6 +28,7 @@ public class ProductScreenActivity extends AppCompatActivity {
     private static final String DESCRIPTION = "description";
     private static final String PROMOTION = "promotion";
 
+    private String product_id;
     private String name;
     private String price;
     private String image_url;
@@ -49,12 +51,14 @@ public class ProductScreenActivity extends AppCompatActivity {
         // image_url corresponds to 'image' in db
         // favourite corresponds to 'favourite' in db
         // description corresponds to 'description' in db
+        // product_id corresponds to 'pid' in db
 
         name = "Meiji Fresh Milk - Regular";
         price = "$5.95";
         image_url = "https://firebasestorage.googleapis.com/v0/b/pickbeforegop.appspot.com/o/Product%20Images%2Facc%3D1%3Bdoc%3Dencoded%3DzLuAgyLP5ExYVDAUvRGTWYl%2Bc%2Ffz06hHcWDZs9OwwlHY5XaOrtuoNls%3DMar%2026%2C%20202202%3A19%3A36%20AM.jpg?alt=media&token=0e70df68-5ac1-4cae-a876-9c8df9a35d9c";
         favourite = false;
         description = "500g | Brand: Gardenia";
+        product_id = "Mar 26, 202202:19:36 AM";
 
         // set up fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -67,6 +71,7 @@ public class ProductScreenActivity extends AppCompatActivity {
         productCardArgs.putString(PRICE, price);
         productCardArgs.putString(IMAGE_URL, image_url);
         productCardArgs.putBoolean(FAVOURITE, favourite);
+        productCardArgs.putString(PRODUCT_ID, product_id);
         productCardArgs.putString(DESCRIPTION, description);
         productCardFragment.setArguments(productCardArgs);
 
@@ -79,8 +84,8 @@ public class ProductScreenActivity extends AppCompatActivity {
         // discPercentage corresponds to 'DiscountPercent' in db
 
         boolean inStock = true;
-        boolean onPromo = true;
-        int discPercentage = 0;
+        boolean onPromo = false;
+        int discPercentage = 20;
         String restockTiming = "Next Restock Time - 10:00 28 Feb 2021";
         String promotion = "Promo " + discPercentage + "%";
 
@@ -95,6 +100,7 @@ public class ProductScreenActivity extends AppCompatActivity {
             productCardArgs.putString(PRICE, price);
             productCardArgs.putString(IMAGE_URL, image_url);
             productCardArgs.putBoolean(FAVOURITE, favourite);
+            productCardArgs.putString(PRODUCT_ID, product_id);
             productCardArgs.putString(PROMOTION, promotion);
             productCardFragment.setArguments(productCardArgs);
 
@@ -117,7 +123,6 @@ public class ProductScreenActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.fragment_productCard, productCardFragment);
             fragmentTransaction.replace(R.id.fragment_availability, availabilityFragment);
         }
-
 
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

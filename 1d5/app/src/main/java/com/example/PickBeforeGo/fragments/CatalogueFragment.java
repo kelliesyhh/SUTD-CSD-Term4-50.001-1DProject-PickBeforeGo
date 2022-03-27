@@ -1,5 +1,6 @@
 package com.example.PickBeforeGo.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.helper.GetProduct_helper;
@@ -50,7 +52,22 @@ public class CatalogueFragment extends Fragment {
             productArrayList = main_activity.getFavouriteProducts();
         }
 
-        ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);
+        // onclick for RV
+        ProductRVAdapter.ClickListener clickListener = new ProductRVAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
+                // TODO: insert putExtra for intents
+                // putExtra(pname)
+                // putExtra(price)
+                // putExtra(image)
+                // putExtra(favourite)
+                // putExtra(description)
+                startActivity(intent);
+            }
+        };
+
+        ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
 
         int numOfColumns = 2;
         productRV.setLayoutManager(new GridLayoutManager(getActivity(), numOfColumns));

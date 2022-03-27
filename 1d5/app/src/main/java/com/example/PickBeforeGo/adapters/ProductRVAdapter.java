@@ -19,11 +19,13 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
 
     private Context context;
     private ArrayList<Product> productArrayList;
+    private final ClickListener clickListener;
 
     //constructor
-    public ProductRVAdapter(@NonNull Context context, ArrayList<Product> productArrayList) {
+    public ProductRVAdapter(@NonNull Context context, ArrayList<Product> productArrayList, ClickListener clickListener) {
         this.context = context;
         this.productArrayList = productArrayList;
+        this.clickListener = clickListener;
     }
 
     //filter results base on search
@@ -37,7 +39,17 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     public ProductRVAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //to inflate layout for each item of recycler view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_card,parent,false);
-        return new Viewholder(view);
+        Viewholder viewholder = new Viewholder(view);
+        viewholder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = viewholder.getAdapterPosition();
+                if (clickListener != null) {
+                    clickListener.onItemClick(position);
+                }
+            }
+        });
+        return viewholder;
     }
 
     @Override
@@ -66,5 +78,9 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
             brand = itemView.findViewById(R.id.brand_text);
             weight = itemView.findViewById(R.id.weight_text);
         }
+    }
+
+    public interface ClickListener {
+        void onItemClick(int position);
     }
 }

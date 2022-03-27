@@ -27,7 +27,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imgPicture"
+                android:id="@+id/imgProduct"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|top"
@@ -47,7 +47,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txtName"
+                    android:id="@+id/txtProductName"
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -87,7 +87,7 @@
                                             </RelativeLayout>
 
                                                             <TextView
-                                                                android:id="@+id/txtPrice"
+                                                                android:id="@+id/txtProductPrice"
                                                                 android:layout_width="175dp"
                                                                 android:layout_height="wrap_content"
                                                                 android:layout_gravity="bottom"
