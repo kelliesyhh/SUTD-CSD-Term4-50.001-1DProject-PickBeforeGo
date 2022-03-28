@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.PickBeforeGo.R;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.io.InputStream;
 
 public class InStockProductCardFragment extends Fragment {
 
@@ -66,14 +57,6 @@ public class InStockProductCardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (getArguments() != null) {
-            name = getArguments().getString(NAME);
-            price = getArguments().getString(PRICE);
-            image_url = getArguments().getString(IMAGE_URL);
-            favourite = getArguments().getBoolean(FAVOURITE);
-            product_id = getArguments().getString(PRODUCT_ID);
-        }
-
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_inner_product_card_in_stock, container, false);
 
@@ -93,32 +76,32 @@ public class InStockProductCardFragment extends Fragment {
             public void onClick(View view) {
                 // toggle value of favourite: if favourite was originally true, then set it to false. if favourite was originally false, then set it to true.
                 favourite = !favourite;
-                // update database with new value of favourite
-                addingToFavorite(product_id);
+                // update database with new value of favourite. commenting out cuz doesn't work
+                // TODO: update database
+                // addingToFavorite(product_id);
             }
         });
         return rootView;
     }
-
-    private void addingToFavorite(String productID) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Products");
-        reference.child(productID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean favorite = (boolean) snapshot.child("favourite").getValue();
-                System.out.println(favorite);
-                if (favorite) {
-                    reference.child(productID).child("favourite").setValue(false);
-
-                } else if (!favorite) {
-                    reference.child(productID).child("favourite").setValue(true);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                throw error.toException();
-            }
-        });
-    }
+//    private void addingToFavorite(String productID) {
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Products");
+//        reference.child(productID).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                boolean favorite = (boolean) snapshot.child("favourite").getValue();
+//                System.out.println(favorite);
+//                if (favorite) {
+//                    reference.child(productID).child("favourite").setValue(false);
+//
+//                } else if (!favorite) {
+//                    reference.child(productID).child("favourite").setValue(true);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                throw error.toException();
+//            }
+//        });
+//    }
+//}
 }
-

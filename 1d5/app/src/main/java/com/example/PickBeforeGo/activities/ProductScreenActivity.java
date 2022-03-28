@@ -34,6 +34,7 @@ public class ProductScreenActivity extends AppCompatActivity {
     private String image_url;
     private boolean favourite;
     private String description;
+    private String product_id;
 
 
     FragmentTransaction fragmentTransaction;
@@ -73,6 +74,7 @@ public class ProductScreenActivity extends AppCompatActivity {
         productCardArgs.putBoolean(FAVOURITE, favourite);
         productCardArgs.putString(PRODUCT_ID, product_id);
         productCardArgs.putString(DESCRIPTION, description);
+        productCardArgs.putString(PRODUCT_ID, product_id);
         productCardFragment.setArguments(productCardArgs);
 
         Fragment availabilityFragment = new InStockAvailabilityFragment();
@@ -102,6 +104,7 @@ public class ProductScreenActivity extends AppCompatActivity {
             productCardArgs.putBoolean(FAVOURITE, favourite);
             productCardArgs.putString(PRODUCT_ID, product_id);
             productCardArgs.putString(PROMOTION, promotion);
+            productCardArgs.putString(PRODUCT_ID, product_id);
             productCardFragment.setArguments(productCardArgs);
 
             fragmentTransaction.replace(R.id.fragment_productCard, productCardFragment);
