@@ -24,6 +24,9 @@ public class CalendarPicker {
                 String date = makeDateString(year, month, day);
                 System.out.println("i was called" + day + month + year);
                 dateButton.setText(date);
+                AdminFormActivity.dayy = String.valueOf(year);
+                AdminFormActivity.monthh = String.valueOf(month);
+                AdminFormActivity.yearr = String.valueOf(day);
             }
         };
 

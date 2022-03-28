@@ -42,7 +42,9 @@
         android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:background="#CC1010"
         android:text="Log Out"
+        android:textColor="#FFE0B2"
         app:layout_constraintTop_toBottomOf="@+id/userslist"
         tools:layout_editor_absoluteX="0dp" />
 

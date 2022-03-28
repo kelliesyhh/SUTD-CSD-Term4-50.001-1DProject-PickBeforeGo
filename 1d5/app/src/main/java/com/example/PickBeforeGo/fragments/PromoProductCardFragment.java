@@ -62,6 +62,6 @@ public class PromoProductCardFragment extends Fragment {
         // Inflate the layout for this fragment
 
         // TODO: if pass in info that there is no stock, use this return inflater.inflate(R.layout.fragment_product_card_no_stock, container, false);
-        return inflater.inflate(R.layout.fragment_inner_product_card_promo, container, false);
+        return inflater.inflate(R.layout.fragment_inner_product_card_no_stock, container, false);
     }
 }
