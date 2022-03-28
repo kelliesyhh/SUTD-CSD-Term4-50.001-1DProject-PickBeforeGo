@@ -84,7 +84,6 @@
                     android:textStyle="bold"
                     android:typeface="normal"></TextView>
 
-
                 <ToggleButton
                     android:id="@+id/btnFavourite"
                     android:layout_width="40dp"
@@ -92,10 +91,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_gravity="right|end"
                     android:background="@drawable/toggle_fav"
-                    android:clickable="true"
-                    android:contextClickable="true"
-                    android:textOff=""
-                    android:textOn="" />
+                    android:textOn=''
+                    android:textOff='' />
             </RelativeLayout>
 
             <TextView

@@ -74,19 +74,18 @@
 <!--                    android:textOn="" />-->
 
 
-                <Button
+                <ToggleButton
                     android:id="@+id/btnFavourite"
                     android:layout_width="40dp"
                     android:layout_height="36dp"
                     android:layout_alignParentRight="true"
                     android:layout_gravity="right|end"
-                    android:background="@drawable/ic_favourite_unselected" />
+                    android:background="@drawable/toggle_fav"
+                    android:textOn=''
+                    android:textOff='' />
+            </RelativeLayout>
 
-
-
-                                            </RelativeLayout>
-
-                                                            <TextView
+            <TextView
                                                                 android:id="@+id/txtProductPrice"
                                                                 android:layout_width="175dp"
                                                                 android:layout_height="wrap_content"
