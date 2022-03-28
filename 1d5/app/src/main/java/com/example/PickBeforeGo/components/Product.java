@@ -13,7 +13,7 @@ public class Product {
     private String time = null;
     private String weight = null;
     private String nextRestockTime = null;
-    private Long discountPercent = null;
+    private Double discountPercent = null;
     private Boolean isPromo = false;
     private Boolean isFavourite = false;
     private Boolean inStock = false;
@@ -37,7 +37,6 @@ public class Product {
         this.inStock = productBuilder.inStock;
     }
 
-    //all getter methods
     public String getCategory(){
         return this.category;
     }
@@ -74,7 +73,7 @@ public class Product {
 
     public String getNextRestockTime(){return this.nextRestockTime;}
 
-    public Long getDiscountPercent(){return this.discountPercent;}
+    public Double getDiscountPercent(){return this.discountPercent;}
 
     public Boolean getIsPromo() {return this.isPromo;}
 
@@ -82,9 +81,38 @@ public class Product {
 
     public Boolean getInStock() {return this.inStock;}
 
+    public void setCategory(String category) {this.category = category;}
+
+    public void setDate(String date) {this.date = date;}
+
+    public void setDescription(String description) {this.description = description;}
+
+    public void setImageURL(String imageURL) {this.imageURL = imageURL;}
+
+    public void setProductID(String productID) {this.productID = productID;}
+
+    public void setProductName(String productName) {this.productName = productName;}
+
+    public void setPrice(String price) {this.price = price;}
+
+    public void setTime(String time) {this.time = time;}
+
+    public void setWeight(String weight) {this.weight = weight;}
+
+    public void setNextRestockTime(String nextRestockTime) {this.nextRestockTime = nextRestockTime;}
+
+    public void setDiscountPercent(Double discountPercent) {this.discountPercent = discountPercent;}
+
+    public void setIsPromo(Boolean isPromo) {this.isPromo = isPromo;}
+
+    public void setIsFavourite(Boolean isFavourite) {this.isFavourite = isFavourite;}
+
+    public void setInStock(Boolean inStock) {this.inStock = inStock;}
+
+
     public void setIsFavourite(boolean isFavourite) {
         this.isFavourite = isFavourite;
-    };
+    }
 
     public static class ProductBuilder {
         private String category;
@@ -97,7 +125,7 @@ public class Product {
         private String time;
         private String weight;
         private String nextRestockTime;
-        private Long discountPercent;
+        private Double discountPercent;
         private Boolean isPromo;
         private Boolean isFavourite;
         private Boolean inStock;
@@ -155,7 +183,7 @@ public class Product {
             return this;
         }
 
-        public ProductBuilder setDiscountPercent(Long discountPercent){
+        public ProductBuilder setDiscountPercent(Double discountPercent){
             this.discountPercent = discountPercent;
             return this;
         }

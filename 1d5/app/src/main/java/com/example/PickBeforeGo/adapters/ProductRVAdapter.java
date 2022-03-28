@@ -26,12 +26,6 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         this.productArrayList = productArrayList;
     }
 
-    //filter results base on search
-    public void filterProducts (ArrayList<Product> filterproducts) {
-
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public ProductRVAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

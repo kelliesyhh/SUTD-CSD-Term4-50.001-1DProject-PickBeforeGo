@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -22,8 +23,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
  * create an instance of this fragment.
  */
 public class TabFragment extends Fragment {
-
     private String tabTitles[] = new String[]{"All", "Favourites"};
+    MainActivity mainActivity = (MainActivity) getActivity();
+    Integer tabPosition = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,9 +35,8 @@ public class TabFragment extends Fragment {
         ViewPager2 viewPager2 = rootView.findViewById(R.id.viewPager);
         SearchView searchText = rootView.findViewById(R.id.searchBar);
 
-        MainActivity main_activity = (MainActivity) getActivity();
-//        System.out.println(dataFromAct);
-
+        ViewPageAdapter adapter = new ViewPageAdapter(getActivity());
+        viewPager2.setAdapter(adapter);
 
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -45,16 +46,14 @@ public class TabFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                System.out.println(newText);
-                //do filtering based on textchange of searchbar
-                filter(newText);
+                Bundle result = new Bundle();
+                result.putString("searchQueryKey", newText);
+                result.putInt("tabPositionKey", tabPosition);
+                requireActivity().getSupportFragmentManager().setFragmentResult("requestTextKey", result);
 
                 return false;
             }
         });
-
-        ViewPageAdapter adapter = new ViewPageAdapter(getActivity());
-        viewPager2.setAdapter(adapter);
 
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy(){
             @Override
@@ -66,11 +65,5 @@ public class TabFragment extends Fragment {
         // Inflate the layout for this fragment
         return rootView;
     }
-
-    // TODO need to implement some sort of filter
-    public void filter(String newText) {
-
-    }
-
 
 }

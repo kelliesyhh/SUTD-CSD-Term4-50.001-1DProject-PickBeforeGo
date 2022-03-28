@@ -35,39 +35,43 @@ public class GetProductHelper {
                 // get all of the children at this level.
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
-
                 //need to extract out the attributes of the firebase brnaches
                 for (DataSnapshot childSnapshot : children) {
-                    String category = (String) childSnapshot.child("category").getValue();
-                    String date = (String) childSnapshot.child("date").getValue();
-                    String description = (String) childSnapshot.child("description").getValue();
-                    String imageURL = (String) childSnapshot.child("image").getValue();
-                    String productID = (String) childSnapshot.child("pid").getValue();
-                    String productName = (String) childSnapshot.child("pname").getValue();
-                    String price = (String) childSnapshot.child("price").getValue();
-                    String time = (String) childSnapshot.child("time").getValue();
-                    String weight = (String) childSnapshot.child("weight").getValue();
-                    String nextRestockTime = (String) childSnapshot.child("nextRestockTime").getValue();
-                    Long discountPercent = (Long) childSnapshot.child("DiscountPercent").getValue();
-                    Boolean isPromo = (Boolean) childSnapshot.child("discount").getValue();
-                    Boolean isFavourite = (Boolean) childSnapshot.child("favourite").getValue();
-                    Boolean inStock = (Boolean) childSnapshot.child("stock").getValue();
-
-                    allProductArrayList.add(new Product.ProductBuilder().setCategory(category).setDate(date).setDescription(description)
-                            .setImageURL(imageURL).setProductID(productID).setProductName(productName).setPrice(price)
-                            .setTime(time).setWeight(weight).setNextRestockTime(nextRestockTime).setDiscountPercent(discountPercent)
-                            .setIsPromo(isPromo).setIsFavourite(isFavourite).setInStock(inStock).build());
+//                    String category = (String) childSnapshot.child("category").getValue();
+//                    String date = (String) childSnapshot.child("date").getValue();
+//                    String description = (String) childSnapshot.child("description").getValue();
+//                    String imageURL = (String) childSnapshot.child("image").getValue();
+//                    String productID = (String) childSnapshot.child("pid").getValue();
+//                    String productName = (String) childSnapshot.child("pname").getValue();
+//                    String price = (String) childSnapshot.child("price").getValue();
+//                    String time = (String) childSnapshot.child("time").getValue();
+//                    String weight = (String) childSnapshot.child("weight").getValue();
+//                    String nextRestockTime = (String) childSnapshot.child("nextRestockTime").getValue();
+//                    Long discountPercent = (Long) childSnapshot.child("DiscountPercent").getValue();
+//                    Boolean isPromo = (Boolean) childSnapshot.child("discount").getValue();
+//                    Boolean isFavourite = (Boolean) childSnapshot.child("favourite").getValue();
+//                    Boolean inStock = (Boolean) childSnapshot.child("stock").getValue();
+//
+//                    allProductArrayList.add(new Product.ProductBuilder().setCategory(category).setDate(date).setDescription(description)
+//                            .setImageURL(imageURL).setProductID(productID).setProductName(productName).setPrice(price)
+//                            .setTime(time).setWeight(weight).setNextRestockTime(nextRestockTime).setDiscountPercent(discountPercent.doubleValue())
+//                            .setIsPromo(isPromo).setIsFavourite(isFavourite).setInStock(inStock).build());
 
                     Product product = childSnapshot.getValue(Product.class);
                     // can just add in automatically without builder class
-//                    allProductArrayList.add(product);
+                    allProductArrayList.add(product);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("GetProductHelper", "error in calling database");
             }
+
         });
+        System.out.println(allProductArrayList.size());
+//        System.out.println(allProductArrayList.get(0).getCategory());
+//        System.out.println(allProductArrayList.get(0).getProductName());
     }
 
     public ArrayList<Product> getAllProducts() {
