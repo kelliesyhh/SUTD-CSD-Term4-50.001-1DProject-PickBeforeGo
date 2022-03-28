@@ -28,6 +28,9 @@ public class CatalogueFragment extends Fragment {
     private int position;
     private String searchQuery;
     ArrayList<Product> filteredProductsArrayList;
+
+    public CatalogueFragment(){}
+
     public CatalogueFragment(int position){this.position = position;}
 
     @Override
