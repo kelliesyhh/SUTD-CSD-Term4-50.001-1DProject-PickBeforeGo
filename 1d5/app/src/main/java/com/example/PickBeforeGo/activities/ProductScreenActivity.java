@@ -34,7 +34,6 @@ public class ProductScreenActivity extends AppCompatActivity {
     private String image_url;
     private boolean favourite;
     private String description;
-    private String product_id;
 
 
     FragmentTransaction fragmentTransaction;

@@ -15,7 +15,6 @@ import com.example.PickBeforeGo.adapters.UserRVAdapter;
 import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.helper.GetProduct_helper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.FirebaseApp;
 
 import java.util.ArrayList;
 
@@ -47,8 +46,7 @@ public class MainActivity extends AppCompatActivity implements  UserRVAdapter.On
         promoProductArrayList = getProduct.getPromotionProducts();
         noStockProductArrayList = getProduct.getNoStockProducts();
 
-        // initialise firebase
-        FirebaseApp.initializeApp(getApplicationContext());
+        // TODO initialise firebase
     }
 
     //TODO shift this to UserFragment
