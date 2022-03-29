@@ -1,6 +1,8 @@
 package com.example.PickBeforeGo.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +54,13 @@ public class FavouriteFragment extends Fragment {
             }
         });
 
-        productRVAdapter.notifyDataSetChanged();
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            public void run() {
+                productRVAdapter.notifyDataSetChanged();
+            }
+        });
+
+//        productRVAdapter.notifyDataSetChanged();
 
         return rootView;
     }

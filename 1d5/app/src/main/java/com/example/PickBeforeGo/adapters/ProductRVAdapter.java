@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,14 +37,13 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ProductRVAdapter.Viewholder holder, int position) {
-        //set data to textview, imageview of each card layout
         Product product = productArrayList.get(position);
-//        holder.productImg.setImageResource(product.getImageURL());
+        Picasso.get().load(product.getImageURL()).into(holder.productImg);
         holder.product.setText(product.getProductName());
         holder.brand.setText(product.getDescription());
         holder.weight.setText(product.getWeight());
     }
-    
+
     @Override
     public int getItemCount() {
         return productArrayList.size();

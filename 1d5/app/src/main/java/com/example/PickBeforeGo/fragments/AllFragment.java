@@ -1,6 +1,8 @@
 package com.example.PickBeforeGo.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ public class AllFragment extends Fragment {
     private String searchQuery;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
+    int tabPosition;
 
     @Nullable
     @Override
@@ -35,6 +38,13 @@ public class AllFragment extends Fragment {
         productArrayList = mainActivity.getAllProducts();
         productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);
         setRecyclerView(productRV, productArrayList);
+
+        requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTabPositionKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                tabPosition = bundle.getInt("tabPositionKey");
+            }
+        });
 
         requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTextKey", this, new FragmentResultListener() {
 
@@ -49,10 +59,17 @@ public class AllFragment extends Fragment {
                 filteredProductsArrayList = filterProducts(productArrayList, searchQuery);
 
                 setRecyclerView(productRV, filteredProductsArrayList);
+                productRVAdapter.notifyDataSetChanged();
             }
         });
 
-        productRVAdapter.notifyDataSetChanged();
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            public void run() {
+                productRVAdapter.notifyDataSetChanged();
+            }
+        });
+
+//        productRVAdapter.notifyDataSetChanged();
 
         return rootView;
     }
