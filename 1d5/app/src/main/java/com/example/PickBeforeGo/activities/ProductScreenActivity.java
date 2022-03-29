@@ -54,11 +54,14 @@ public class ProductScreenActivity extends AppCompatActivity {
         // description corresponds to 'description' in db
         // product_id corresponds to 'pid' in db
 
-        name = "Meiji Fresh Milk - Regular";
+        Bundle args = getIntent().getExtras();
+        name = args.getString(NAME);
         price = "$5.95";
-        image_url = "https://firebasestorage.googleapis.com/v0/b/pickbeforegop.appspot.com/o/Product%20Images%2Facc%3D1%3Bdoc%3Dencoded%3DzLuAgyLP5ExYVDAUvRGTWYl%2Bc%2Ffz06hHcWDZs9OwwlHY5XaOrtuoNls%3DMar%2026%2C%20202202%3A19%3A36%20AM.jpg?alt=media&token=0e70df68-5ac1-4cae-a876-9c8df9a35d9c";
+        image_url = args.getString(IMAGE_URL);
         favourite = false;
-        description = "500g | Brand: Gardenia";
+        description = args.getString(DESCRIPTION);
+
+        // currently pid is unused
         product_id = "Mar 26, 202202:19:36 AM";
 
         // set up fragments
@@ -80,7 +83,7 @@ public class ProductScreenActivity extends AppCompatActivity {
         Fragment availabilityFragment = new InStockAvailabilityFragment();
         fragmentTransaction.add(R.id.fragment_availability, availabilityFragment, "Availability");
 
-        // TODO: retrieve inStock, onPromo, promotion amount from previous page's intent
+        // TODO: retrieve inStock, onPromo, promotion amount from previous page's intent / from database based on product id
         // TODO: retrieve restock timing from database
         // inStock corresponds to 'stock' in db
         // onPromo corresponds to 'discount' in db
