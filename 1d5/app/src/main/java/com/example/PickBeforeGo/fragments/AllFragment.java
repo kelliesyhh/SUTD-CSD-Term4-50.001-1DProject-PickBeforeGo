@@ -31,8 +31,6 @@ public class AllFragment extends Fragment {
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
-    int tabPosition;
-
 
     @Nullable
     @Override
@@ -59,13 +57,6 @@ public class AllFragment extends Fragment {
 
         productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         setRecyclerView(productRV, productArrayList, clickListener);
-
-        requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTabPositionKey", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                tabPosition = bundle.getInt("tabPositionKey");
-            }
-        });
 
         requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTextKey", this, new FragmentResultListener() {
 
