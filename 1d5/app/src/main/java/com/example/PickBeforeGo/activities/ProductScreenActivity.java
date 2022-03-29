@@ -13,11 +13,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.fragments.InStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.InStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.NoStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.NoStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
+import com.example.PickBeforeGo.helper.GetProductHelper;
+
+import java.util.ArrayList;
 
 public class ProductScreenActivity extends AppCompatActivity {
 
@@ -37,6 +41,7 @@ public class ProductScreenActivity extends AppCompatActivity {
     private String description;
 
     FragmentTransaction fragmentTransaction;
+    private MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,25 +50,23 @@ public class ProductScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_screen);
         ImageView btnBack = findViewById(R.id.btnBack);
         TextView txtDescription = findViewById(R.id.txtDescriptionFull);
+        ArrayList<Product> productArrayList = new ArrayList<Product>();
 
-        // TODO: get name, imageURL from previous page's intent to use as fragment arguments
-        // TODO: get price, favourite from db
-        // name corresponds to 'pname' in db
-        // price corresponds to 'price' in db (need to add '$')
-        // image_url corresponds to 'image' in db
-        // favourite corresponds to 'favourite' in db
-        // description corresponds to 'description' in db
-        // product_id corresponds to 'pid' in db
 
+        // get arguments from previous intent
         Bundle args = getIntent().getExtras();
         name = args.getString(NAME);
-        price = "$5.95";
         image_url = args.getString(IMAGE_URL);
-        favourite = false;
         description = args.getString(DESCRIPTION);
+        product_id = args.getString(PRODUCT_ID);
 
-        // currently pid is unused
-        product_id = "Mar 26, 202202:19:36 AM";
+        // TODO get price and fav from database
+//        productArrayList = mainActivity.getAllProducts();
+//        int product_index = productArrayList.indexOf(product_id);
+//        price = "$" + productArrayList.get(product_index).getPrice();
+//        favourite = productArrayList.get(product_index).getIsFavorite();
+        price = "$5.95";
+        favourite = false;
 
         // set up fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -78,7 +81,6 @@ public class ProductScreenActivity extends AppCompatActivity {
         productCardArgs.putBoolean(FAVOURITE, favourite);
         productCardArgs.putString(PRODUCT_ID, product_id);
         productCardArgs.putString(DESCRIPTION, description);
-        productCardArgs.putString(PRODUCT_ID, product_id);
         productCardFragment.setArguments(productCardArgs);
 
         Fragment availabilityFragment = new InStockAvailabilityFragment();
@@ -109,7 +111,6 @@ public class ProductScreenActivity extends AppCompatActivity {
             productCardArgs.putBoolean(FAVOURITE, favourite);
             productCardArgs.putString(PRODUCT_ID, product_id);
             productCardArgs.putString(PROMOTION, promotion);
-            productCardArgs.putString(PRODUCT_ID, product_id);
             productCardFragment.setArguments(productCardArgs);
 
             fragmentTransaction.replace(R.id.fragment_productCard, productCardFragment);

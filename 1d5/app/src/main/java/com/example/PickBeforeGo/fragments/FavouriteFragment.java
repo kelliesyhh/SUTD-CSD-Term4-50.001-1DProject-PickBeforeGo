@@ -27,6 +27,7 @@ public class FavouriteFragment extends Fragment {
     private static final String NAME = "name";
     private static final String IMAGE_URL = "image_url";
     private static final String DESCRIPTION = "description";
+    private static final String PRODUCT_ID = "product_id";
     private String searchQuery;
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
@@ -45,11 +46,12 @@ public class FavouriteFragment extends Fragment {
         // onclick for RV
         clickListener = new ProductRVAdapter.ClickListener() {
             @Override
-            public void onItemClick(int position, String productName, String imageUrl, String description) {
+            public void onItemClick(int position, String productName, String imageUrl, String description, String product_id) {
                 Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
                 intent.putExtra(NAME, productName);
                 intent.putExtra(IMAGE_URL, imageUrl);
                 intent.putExtra(DESCRIPTION, description);
+                intent.putExtra(PRODUCT_ID, product_id);
                 startActivity(intent);
             }
         };

@@ -1,6 +1,7 @@
 package com.example.PickBeforeGo.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
             public void onClick(View view) {
                 int position = viewholder.getAdapterPosition();
                 if (clickListener != null) {
-                    clickListener.onItemClick(position, viewholder.productName, viewholder.imageUrl, viewholder.productDescription);
+                    clickListener.onItemClick(position, viewholder.productName, viewholder.imageUrl, viewholder.productDescription, viewholder.productID);
                 }
             }
         });
@@ -57,9 +58,11 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     public void onBindViewHolder(@NonNull ProductRVAdapter.Viewholder holder, int position) {
         //set data to textview, imageview of each card layout
         Product product = productArrayList.get(position);
+        Log.i("product", product.getProductName());
         holder.productName = product.getProductName();
         holder.productWeight = product.getWeight();
         holder.productDescription = product.getDescription();
+        holder.productID = product.getProductID();
         holder.imageUrl = product.getImageURL();
         Picasso.get().load(holder.imageUrl).placeholder(R.drawable.placeholder_product_pic).into(holder.imgProduct);
         holder.txtProductName.setText(holder.productName);
@@ -74,7 +77,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     public class Viewholder extends RecyclerView.ViewHolder{
         private ImageView imgProduct;
         private TextView txtProductName, txtProductWeight;
-        private String productName, productWeight, imageUrl, productDescription;
+        private String productName, productWeight, imageUrl, productDescription, productID;
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
@@ -85,6 +88,6 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     }
 
     public interface ClickListener {
-        void onItemClick(int position, String productName, String imageUrl, String description);
+        void onItemClick(int position, String productName, String imageUrl, String description, String productID);
     }
 }
