@@ -31,12 +31,6 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         this.clickListener = clickListener;
     }
 
-    //filter results base on search
-    public void filterProducts (ArrayList<Product> filterproducts) {
-
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public ProductRVAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,15 +54,14 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         //set data to textview, imageview of each card layout
         Product product = productArrayList.get(position);
         holder.productName = product.getProductName();
-        BigDecimal bd = new BigDecimal(product.getPrice()).setScale(2, RoundingMode.HALF_UP);
-        holder.productPrice = bd.doubleValue();
+        holder.productPrice = product.getPrice();
         holder.productDescription = product.getDescription();
         holder.productID = product.getProductID();
         holder.imageUrl = product.getImageURL();
         Picasso.get().load(holder.imageUrl).placeholder(R.drawable.placeholder_product_pic).into(holder.imgProduct);
         holder.txtProductName.setText(holder.productName);
         holder.txtPrice.setText("$" + holder.productPrice);
-        holder.isFavourite = product.getIsFavorite();
+        holder.isFavourite = product.getIsFavourite();
         holder.isPromo = product.getIsPromo();
         holder.inStock = product.getInStock();
         holder.discountPercent = product.getDiscountPercent();
@@ -88,7 +81,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         private String imageUrl;
         private String productDescription;
         private String productID;
-        private double productPrice;
+        private String productPrice;
         private Boolean isFavourite, inStock, isPromo;
         private Double discountPercent;
         private String restockTime;

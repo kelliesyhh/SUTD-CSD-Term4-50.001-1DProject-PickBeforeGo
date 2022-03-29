@@ -81,6 +81,9 @@ public class NoStockProductCardFragment extends Fragment {
         itemPrice.setText(price);
 
         Button btnFav = rootView.findViewById(R.id.btnFavourite);
+        if (favourite) {
+            btnFav.setBackgroundResource(R.drawable.ic_favourite_selected);
+        }
         btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +91,12 @@ public class NoStockProductCardFragment extends Fragment {
                 favourite = !favourite;
                 // update database with new value of favourite
                 addingToFavorite(product_id);
+                if(favourite){
+                    btnFav.setBackgroundResource(R.drawable.ic_favourite_selected);
+                }
+                else {
+                    btnFav.setBackgroundResource(R.drawable.ic_favourite_unselected);
+                }
             }
         });
         return rootView;
