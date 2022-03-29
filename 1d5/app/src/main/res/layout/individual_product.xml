@@ -48,6 +48,7 @@
         app:layout_constraintTop_toTopOf="@id/product_main_img"></TextView>
 
     <TextView
+        android:id="@+id/nameTxt"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -56,6 +57,7 @@
         android:textColor="@color/black"
         android:textSize="12.5dp"
         android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="@id/product_main_img"
         app:layout_constraintTop_toBottomOf="@id/product_main_img"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

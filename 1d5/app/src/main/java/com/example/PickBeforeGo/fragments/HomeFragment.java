@@ -85,9 +85,11 @@ public class HomeFragment extends Fragment {
                 TextView promodetail = productLayout.findViewById(R.id.promodetail);
                 promodetail.setText("Promo "+ discountPercent + "%");
             }
+            TextView name = productLayout.findViewById(R.id.nameTxt);
+            name.setText(product.getProductName());
             int resID = View.generateViewId();
             productLayout.setId(resID);
-            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(380, 500);
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(380, 530);
             params.setMargins(50, 0, 20, 0);
             productLayout.setLayoutParams(params);
             productLayout.setOnClickListener(new View.OnClickListener() {
