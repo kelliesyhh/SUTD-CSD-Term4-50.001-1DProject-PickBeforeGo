@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
 
                     // TODO: set productname properly based on whatever was in the array of products?
                     // for now, it will pass in the productname that was clicked
-                    TextView txtProductName = img.findViewById(R.id.txtProductName);
+                    TextView txtProductName = itemView.findViewById(R.id.txtProductName);
                     intent.putExtra(NAME, txtProductName.getText().toString());
 
                     // TODO: set img.findViewById(R.id.img) to imageurl (use picasso)
