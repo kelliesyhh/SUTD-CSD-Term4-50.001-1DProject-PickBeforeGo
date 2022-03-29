@@ -16,7 +16,7 @@
     </ImageView>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/img"
+        android:id="@+id/imgProductPromoScroll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -30,6 +30,7 @@
         app:shapeAppearanceOverlay="@style/roundSnack" />
 
     <TextView
+        android:id="@+id/txtPromo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
@@ -41,18 +42,19 @@
         android:textColor="@color/white"
         android:textSize="13dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/img"
-        app:layout_constraintTop_toTopOf="@id/img"></TextView>
+        app:layout_constraintStart_toStartOf="@id/imgProductPromoScroll"
+        app:layout_constraintTop_toTopOf="@id/imgProductPromoScroll"></TextView>
 
     <TextView
+        android:id="@+id/txtProductName"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:text="Hokkiado Milk Bread Gardenia 400g"
+        android:text="@string/placeholder_product_name"
         android:textColor="@color/black"
         android:textSize="12.5dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/img"
-        app:layout_constraintTop_toBottomOf="@id/img"></TextView>
+        app:layout_constraintStart_toStartOf="@id/imgProductPromoScroll"
+        app:layout_constraintTop_toBottomOf="@id/imgProductPromoScroll"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

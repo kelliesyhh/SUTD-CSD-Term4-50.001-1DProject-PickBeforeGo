@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -35,7 +36,6 @@ public class ProductScreenActivity extends AppCompatActivity {
     private boolean favourite;
     private String description;
 
-
     FragmentTransaction fragmentTransaction;
 
     @Override
@@ -44,6 +44,7 @@ public class ProductScreenActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_product_screen);
         ImageView btnBack = findViewById(R.id.btnBack);
+        TextView txtDescription = findViewById(R.id.txtDescriptionFull);
 
         // TODO: get name, imageURL from previous page's intent to use as fragment arguments
         // TODO: get price, favourite from db
@@ -142,5 +143,7 @@ public class ProductScreenActivity extends AppCompatActivity {
             }
         });
 
+        // set up product description below availability
+        txtDescription.setText("Product Description: " + description);
     }
 }

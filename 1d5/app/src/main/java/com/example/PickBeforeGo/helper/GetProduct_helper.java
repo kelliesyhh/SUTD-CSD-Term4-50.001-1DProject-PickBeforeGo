@@ -34,17 +34,17 @@ public class GetProduct_helper {
         favouriteProductArrayList = new ArrayList<Product>();
 
 
-        return this.allProductArrayList;
+        return this.favouriteProductArrayList;
     }
     public ArrayList<Product> getPromotionProducts() {
         promotionProductArrayList = new ArrayList<Product>();
 
-        return this.allProductArrayList;
+        return this.promotionProductArrayList;
     }
     public ArrayList<Product> getNoStockProducts() {
         noStockProductArrayList = new ArrayList<Product>();
 
-        return this.allProductArrayList;
+        return this.noStockProductArrayList;
     }
 
 }
