@@ -18,7 +18,7 @@ public class PromotionHelper {
 
 //        // Testing //
 //        System.out.println("this price is: " + this.price);
-//        System.out.println("this promotion is: " + this.promotion);
+//        System.out.println("this promotion is: " + this.promotion); sth else
     }
 
     public String promoChange() {
