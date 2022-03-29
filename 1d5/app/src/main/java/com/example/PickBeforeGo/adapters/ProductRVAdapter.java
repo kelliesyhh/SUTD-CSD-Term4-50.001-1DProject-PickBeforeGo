@@ -46,7 +46,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
             public void onClick(View view) {
                 int position = viewholder.getAdapterPosition();
                 if (clickListener != null) {
-                    clickListener.onItemClick(position);
+                    clickListener.onItemClick(position, viewholder.productName, viewholder.imageUrl, viewholder.productDescription);
                 }
             }
         });
@@ -57,9 +57,13 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     public void onBindViewHolder(@NonNull ProductRVAdapter.Viewholder holder, int position) {
         //set data to textview, imageview of each card layout
         Product product = productArrayList.get(position);
-        Picasso.get().load(product.getImageURL()).placeholder(R.drawable.placeholder_product_pic).into(holder.productImg);
-        holder.productName.setText(product.getProductName());
-        holder.productWeight.setText(product.getWeight());
+        holder.productName = product.getProductName();
+        holder.productWeight = product.getWeight();
+        holder.productDescription = product.getDescription();
+        holder.imageUrl = product.getImageURL();
+        Picasso.get().load(holder.imageUrl).placeholder(R.drawable.placeholder_product_pic).into(holder.imgProduct);
+        holder.txtProductName.setText(holder.productName);
+        holder.txtProductWeight.setText(holder.productWeight);
     }
     
     @Override
@@ -68,18 +72,19 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     }
 
     public class Viewholder extends RecyclerView.ViewHolder{
-        private ImageView productImg;
-        private TextView productName, productWeight;
+        private ImageView imgProduct;
+        private TextView txtProductName, txtProductWeight;
+        private String productName, productWeight, imageUrl, productDescription;
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
-            productImg = itemView.findViewById(R.id.imgProduct);
-            productName = itemView.findViewById(R.id.txtProductName);
-            productWeight = itemView.findViewById(R.id.txtProductWeight);
+            imgProduct = itemView.findViewById(R.id.imgProduct);
+            txtProductName = itemView.findViewById(R.id.txtProductName);
+            txtProductWeight = itemView.findViewById(R.id.txtProductWeight);
         }
     }
 
     public interface ClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position, String productName, String imageUrl, String description);
     }
 }

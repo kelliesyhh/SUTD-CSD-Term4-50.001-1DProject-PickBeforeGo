@@ -23,6 +23,10 @@ public class CatalogueFragment extends Fragment {
     private final int position;
     private ArrayList<Product> productArrayList = new ArrayList<Product>();
 
+    private static final String NAME = "name";
+    private static final String IMAGE_URL = "image_url";
+    private static final String DESCRIPTION = "description";
+
     public CatalogueFragment(int position){
         this.position = position;
     }
@@ -55,14 +59,11 @@ public class CatalogueFragment extends Fragment {
         // onclick for RV
         ProductRVAdapter.ClickListener clickListener = new ProductRVAdapter.ClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position, String productName, String imageUrl, String description) {
                 Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
-                // TODO: insert putExtra for intents
-                // putExtra(pname)
-                // putExtra(price)
-                // putExtra(image)
-                // putExtra(favourite)
-                // putExtra(description)
+                intent.putExtra(NAME, productName);
+                intent.putExtra(IMAGE_URL, imageUrl);
+                intent.putExtra(DESCRIPTION, description);
                 startActivity(intent);
             }
         };
