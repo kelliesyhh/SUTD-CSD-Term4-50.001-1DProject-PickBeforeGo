@@ -28,6 +28,13 @@ public class AllFragment extends Fragment {
     private static final String IMAGE_URL = "image_url";
     private static final String DESCRIPTION = "description";
     private static final String PRODUCT_ID = "product_id";
+    private static final String PRICE = "price";
+    private static final String FAVOURITE = "favourite";
+    private static final String STOCK = "in_stock";
+    private static final String PROMOTION = "promotion";
+    private static final String DISCOUNT = "discount";
+    private static final String RESTOCK_TIME = "restock_time";
+
     private String searchQuery;
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
@@ -46,12 +53,18 @@ public class AllFragment extends Fragment {
         // onclick for RV
         clickListener = new ProductRVAdapter.ClickListener() {
             @Override
-            public void onItemClick(int position, String productName, String imageUrl, String description, String productID) {
+            public void onItemClick(int position, String productName, String imageUrl, String description, String productID, String productPrice, Boolean isFavourite, Boolean inStock, Boolean isPromo, Double discountPercent, String restock_time) {
                 Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
                 intent.putExtra(NAME, productName);
                 intent.putExtra(IMAGE_URL, imageUrl);
                 intent.putExtra(DESCRIPTION, description);
                 intent.putExtra(PRODUCT_ID, productID);
+                intent.putExtra(PRICE, productPrice);
+                intent.putExtra(FAVOURITE, isFavourite);
+                intent.putExtra(STOCK, inStock);
+                intent.putExtra(PROMOTION, isPromo);
+                intent.putExtra(DISCOUNT, discountPercent);
+                intent.putExtra(RESTOCK_TIME, restock_time);
                 startActivity(intent);
             }
         };

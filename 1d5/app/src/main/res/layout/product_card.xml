@@ -55,13 +55,12 @@
                     android:typeface="normal"></TextView>
 
                 <TextView
-                    android:id="@+id/txtProductWeight"
+                    android:id="@+id/txtPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:clickable="false"
                     android:contextClickable="true"
-                    android:text="@string/placeholder_weight"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/darkgrey"
                     android:textSize="14sp"

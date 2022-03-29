@@ -31,14 +31,19 @@ public class ProductScreenActivity extends AppCompatActivity {
     private static final String IMAGE_URL = "image_url";
     private static final String FAVOURITE = "favourite";
     private static final String DESCRIPTION = "description";
+    private static final String STOCK = "in_stock";
     private static final String PROMOTION = "promotion";
+    private static final String DISCOUNT = "discount";
+    private static final String RESTOCK_TIME = "restock_time";
 
     private String product_id;
     private String name;
     private String price;
     private String image_url;
-    private boolean favourite;
+    private Boolean favourite, inStock, isPromo;
     private String description;
+    private Double discountPercent;
+    private String restockTime;
 
     FragmentTransaction fragmentTransaction;
     private MainActivity mainActivity;
@@ -52,21 +57,14 @@ public class ProductScreenActivity extends AppCompatActivity {
         TextView txtDescription = findViewById(R.id.txtDescriptionFull);
         ArrayList<Product> productArrayList = new ArrayList<Product>();
 
-
         // get arguments from previous intent
         Bundle args = getIntent().getExtras();
         name = args.getString(NAME);
         image_url = args.getString(IMAGE_URL);
         description = args.getString(DESCRIPTION);
         product_id = args.getString(PRODUCT_ID);
-
-        // TODO get price and fav from database
-//        productArrayList = mainActivity.getAllProducts();
-//        int product_index = productArrayList.indexOf(product_id);
-//        price = "$" + productArrayList.get(product_index).getPrice();
-//        favourite = productArrayList.get(product_index).getIsFavorite();
-        price = "$5.95";
-        favourite = false;
+        price = "$" + args.getString(PRICE);
+        favourite = args.getBoolean(FAVOURITE);
 
         // set up fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -86,20 +84,14 @@ public class ProductScreenActivity extends AppCompatActivity {
         Fragment availabilityFragment = new InStockAvailabilityFragment();
         fragmentTransaction.add(R.id.fragment_availability, availabilityFragment, "Availability");
 
-        // TODO: retrieve inStock, onPromo, promotion amount from previous page's intent / from database based on product id
-        // TODO: retrieve restock timing from database
-        // inStock corresponds to 'stock' in db
-        // onPromo corresponds to 'discount' in db
-        // discPercentage corresponds to 'DiscountPercent' in db
-
-        boolean inStock = true;
-        boolean onPromo = false;
-        int discPercentage = 20;
-        String restockTiming = "Next Restock Time - 10:00 28 Feb 2021";
-        String promotion = "Promo " + discPercentage + "%";
+        inStock = args.getBoolean(STOCK);
+        isPromo = args.getBoolean(PROMOTION);
+        discountPercent = args.getDouble(DISCOUNT);
+        restockTime = args.getString(RESTOCK_TIME);
+        String promotion = "Promo " + discountPercent + "%";
 
         // replace fragments (if necessary) based on boolean values
-        if (onPromo) {;
+        if (isPromo) {;
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -126,7 +118,7 @@ public class ProductScreenActivity extends AppCompatActivity {
 
             availabilityFragment = new NoStockAvailabilityFragment();
             Bundle availabilityArgs = new Bundle();
-            availabilityArgs.putString("restock_timing", restockTiming);
+            availabilityArgs.putString(RESTOCK_TIME, restockTime);
             availabilityFragment.setArguments(availabilityArgs);
 
             fragmentTransaction.replace(R.id.fragment_productCard, productCardFragment);

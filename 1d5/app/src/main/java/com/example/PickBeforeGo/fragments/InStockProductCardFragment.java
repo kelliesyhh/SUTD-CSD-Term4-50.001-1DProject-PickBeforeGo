@@ -53,8 +53,6 @@ public class InStockProductCardFragment extends Fragment {
             image_url = getArguments().getString(IMAGE_URL);
             favourite = getArguments().getBoolean(FAVOURITE);
             product_id = getArguments().getString(PRODUCT_ID);
-
-            Log.i("product_id", product_id);
         }
     }
 
@@ -90,8 +88,7 @@ public class InStockProductCardFragment extends Fragment {
             public void onClick(View view) {
                 // toggle value of favourite: if favourite was originally true, then set it to false. if favourite was originally false, then set it to true.
                 favourite = !favourite;
-                // update database with new value of favourite. commenting out cuz doesn't work
-                // TODO: update database
+                // update database with new value of favourite
                  addingToFavorite(product_id);
             }
         });

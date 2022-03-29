@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     private static final String NAME = "name";
     private static final String IMAGE_URL = "image_url";
     private static final String DESCRIPTION = "description";
+    private static final String PRICE = "price";
 
     private BottomNavigationView bottom_bar;
 
@@ -82,7 +83,7 @@ public class HomeFragment extends Fragment {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 int discountPercent = (int) Math.round(product.getDiscountPercent());
                 TextView promodetail = productLayout.findViewById(R.id.promodetail);
-                promodetail.setText("Promo "+discountPercent);
+                promodetail.setText("Promo "+ discountPercent + "%");
             }
             int resID = View.generateViewId();
             productLayout.setId(resID);
@@ -93,7 +94,7 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getActivity(),ProductScreenActivity.class);
-
+                    intent.putExtra(PRICE, product.getPrice());
                     intent.putExtra(NAME, product.getProductName());
                     intent.putExtra(IMAGE_URL, product.getImageURL());
                     intent.putExtra(DESCRIPTION, product.getDescription());

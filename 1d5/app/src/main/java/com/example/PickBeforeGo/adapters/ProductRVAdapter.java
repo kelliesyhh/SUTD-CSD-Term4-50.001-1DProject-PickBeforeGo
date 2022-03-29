@@ -1,7 +1,6 @@
 package com.example.PickBeforeGo.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,14 @@ import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.Product;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.Viewholder> {
 
-    private Context context;
-    private ArrayList<Product> productArrayList;
+    private final Context context;
+    private final ArrayList<Product> productArrayList;
     private final ClickListener clickListener;
 
     //constructor
@@ -47,7 +48,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
             public void onClick(View view) {
                 int position = viewholder.getAdapterPosition();
                 if (clickListener != null) {
-                    clickListener.onItemClick(position, viewholder.productName, viewholder.imageUrl, viewholder.productDescription, viewholder.productID);
+                    clickListener.onItemClick(position, viewholder.productName, viewholder.imageUrl, viewholder.productDescription, viewholder.productID, String.valueOf(viewholder.productPrice), viewholder.isFavourite, viewholder.inStock, viewholder.isPromo, viewholder.discountPercent, viewholder.restockTime);
                 }
             }
         });
@@ -58,15 +59,20 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     public void onBindViewHolder(@NonNull ProductRVAdapter.Viewholder holder, int position) {
         //set data to textview, imageview of each card layout
         Product product = productArrayList.get(position);
-        Log.i("product", product.getProductName());
         holder.productName = product.getProductName();
-        holder.productWeight = product.getWeight();
+        BigDecimal bd = new BigDecimal(product.getPrice()).setScale(2, RoundingMode.HALF_UP);
+        holder.productPrice = bd.doubleValue();
         holder.productDescription = product.getDescription();
         holder.productID = product.getProductID();
         holder.imageUrl = product.getImageURL();
         Picasso.get().load(holder.imageUrl).placeholder(R.drawable.placeholder_product_pic).into(holder.imgProduct);
         holder.txtProductName.setText(holder.productName);
-        holder.txtProductWeight.setText(holder.productWeight);
+        holder.txtPrice.setText("$" + holder.productPrice);
+        holder.isFavourite = product.getIsFavorite();
+        holder.isPromo = product.getIsPromo();
+        holder.inStock = product.getInStock();
+        holder.discountPercent = product.getDiscountPercent();
+        holder.restockTime = product.getNextRestockTime();
     }
     
     @Override
@@ -75,19 +81,28 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     }
 
     public class Viewholder extends RecyclerView.ViewHolder{
-        private ImageView imgProduct;
-        private TextView txtProductName, txtProductWeight;
-        private String productName, productWeight, imageUrl, productDescription, productID;
+        private final ImageView imgProduct;
+        private final TextView txtProductName;
+        private final TextView txtPrice;
+        private String productName;
+        private String imageUrl;
+        private String productDescription;
+        private String productID;
+        private double productPrice;
+        private Boolean isFavourite, inStock, isPromo;
+        private Double discountPercent;
+        private String restockTime;
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
             imgProduct = itemView.findViewById(R.id.imgProduct);
             txtProductName = itemView.findViewById(R.id.txtProductName);
-            txtProductWeight = itemView.findViewById(R.id.txtProductWeight);
+            txtPrice = itemView.findViewById(R.id.txtPrice);
         }
     }
 
     public interface ClickListener {
-        void onItemClick(int position, String productName, String imageUrl, String description, String productID);
-    }
+       void onItemClick(int position, String productName, String imageUrl, String description, String productID, String productPrice, Boolean isFavourite, Boolean inStock, Boolean isPromo, Double discountPercent, String restockTime);
+
+        }
 }
