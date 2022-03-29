@@ -45,7 +45,8 @@ public class ProductScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_screen);
         ImageView btnBack = findViewById(R.id.btnBack);
 
-        // TODO: get name, imageURL, price, favourite from previous page's intent to use as fragment arguments
+        // TODO: get name, imageURL from previous page's intent to use as fragment arguments
+        // TODO: get price, favourite from db
         // name corresponds to 'pname' in db
         // price corresponds to 'price' in db (need to add '$')
         // image_url corresponds to 'image' in db
@@ -79,7 +80,8 @@ public class ProductScreenActivity extends AppCompatActivity {
         Fragment availabilityFragment = new InStockAvailabilityFragment();
         fragmentTransaction.add(R.id.fragment_availability, availabilityFragment, "Availability");
 
-        //TODO: retrieve inStock, onPromo, promotion amount, restock timing from database
+        // TODO: retrieve inStock, onPromo, promotion amount from previous page's intent
+        // TODO: retrieve restock timing from database
         // inStock corresponds to 'stock' in db
         // onPromo corresponds to 'discount' in db
         // discPercentage corresponds to 'DiscountPercent' in db
@@ -133,8 +135,7 @@ public class ProductScreenActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProductScreenActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

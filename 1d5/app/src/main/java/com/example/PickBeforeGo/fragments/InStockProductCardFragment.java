@@ -62,7 +62,7 @@ public class InStockProductCardFragment extends Fragment {
 
         // set the different things on the product card
         ImageView itemImage = rootView.findViewById(R.id.imgProduct);
-        Picasso.get().load(image_url).into(itemImage);
+        Picasso.get().load(image_url).placeholder(R.drawable.placeholder_product_pic).into(itemImage);
 
         TextView itemName = rootView.findViewById(R.id.txtProductName);
         itemName.setText(name);
