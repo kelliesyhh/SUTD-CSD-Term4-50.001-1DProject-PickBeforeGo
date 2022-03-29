@@ -16,9 +16,9 @@ public class PromotionHelper {
         this.price = priceSB.toString();
         this.promotion = promotionSB.deleteCharAt(promotionSB.length()-1).toString();
 
-        // Testing //
-        System.out.println("this price is: " + this.price);
-        System.out.println("this promotion is: " + this.promotion);
+//        // Testing //
+//        System.out.println("this price is: " + this.price);
+//        System.out.println("this promotion is: " + this.promotion);
     }
 
     public String promoChange() {
