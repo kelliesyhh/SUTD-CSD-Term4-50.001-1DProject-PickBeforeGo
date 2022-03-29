@@ -28,14 +28,10 @@ public class GetProductHelper {
         prodDatabaseReference.child("Product_List").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // get all of the children at this level.
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
-                //need to extract out the attributes of the firebase brnaches
                 for (DataSnapshot childSnapshot : children) {
                     Product product = childSnapshot.getValue(Product.class);
-                    System.out.println(product.getProductID());
-                    // can just add in automatically without builder class
                     allProductArrayList.add(product);
                 }
             }
@@ -46,9 +42,6 @@ public class GetProductHelper {
             }
 
         });
-        System.out.println(allProductArrayList.size());
-//        System.out.println(allProductArrayList.get(0).getCategory());
-//        System.out.println(allProductArrayList.get(0).getProductName());
     }
 
     public ArrayList<Product> getAllProducts() {

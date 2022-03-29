@@ -17,11 +17,6 @@ import com.example.PickBeforeGo.adapters.ViewPageAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TabFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TabFragment extends Fragment {
     private String tabTitles[] = new String[]{"All", "Favourites"};
     MainActivity mainActivity = (MainActivity) getActivity();
@@ -38,6 +33,26 @@ public class TabFragment extends Fragment {
         ViewPageAdapter adapter = new ViewPageAdapter(getActivity());
         viewPager2.setAdapter(adapter);
 
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                System.out.println("inside ontabselectedlistener " + tab.getPosition());
+                Bundle bundle = new Bundle();
+                bundle.putInt("tabPositionKey", tab.getPosition());
+                requireActivity().getSupportFragmentManager().setFragmentResult("requestTabPositionKey", bundle);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -48,7 +63,6 @@ public class TabFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 Bundle result = new Bundle();
                 result.putString("searchQueryKey", newText);
-                result.putInt("tabPositionKey", tabPosition);
                 requireActivity().getSupportFragmentManager().setFragmentResult("requestTextKey", result);
 
                 return false;

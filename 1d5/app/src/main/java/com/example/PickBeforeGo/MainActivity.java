@@ -4,11 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -16,13 +12,10 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.PickBeforeGo.activities.AdminFormActivity;
 import com.example.PickBeforeGo.adapters.UserRVAdapter;
 import com.example.PickBeforeGo.components.Product;
-import com.example.PickBeforeGo.fragments.CatalogueFragment;
-import com.example.PickBeforeGo.fragments.TabFragment;
 import com.example.PickBeforeGo.helper.GetProductHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
