@@ -106,6 +106,17 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnAdminEditProductDetails"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/brandOrange"
+                android:text="Edit Product Details"
+                android:textColor="@color/white"
+                android:visibility="invisible" />
+
         </LinearLayout>
     </ScrollView>
 

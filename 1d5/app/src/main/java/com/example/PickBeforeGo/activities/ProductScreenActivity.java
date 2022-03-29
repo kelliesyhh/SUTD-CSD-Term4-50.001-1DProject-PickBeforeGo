@@ -3,6 +3,7 @@ package com.example.PickBeforeGo.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +57,7 @@ public class ProductScreenActivity extends AppCompatActivity {
         ImageView btnBack = findViewById(R.id.btnBack);
         TextView txtDescription = findViewById(R.id.txtDescriptionFull);
         ArrayList<Product> productArrayList = new ArrayList<Product>();
+        Button btnAdminEditProductDetails = findViewById(R.id.btnAdminEditProductDetails);
 
         // get arguments from previous intent
         Bundle args = getIntent().getExtras();
@@ -138,5 +140,19 @@ public class ProductScreenActivity extends AppCompatActivity {
 
         // set up product description below availability
         txtDescription.setText("Product Description: " + description);
+
+        // TODO: get isAdmin property from other screens
+        boolean isAdmin = true;
+        if (isAdmin) {
+            btnAdminEditProductDetails.setVisibility(View.VISIBLE);
+            btnAdminEditProductDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // TODO: add in intent putExtras if needed, to populate the various fields for editing
+                    Intent intent = new Intent(ProductScreenActivity.this, AdminFormActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }
