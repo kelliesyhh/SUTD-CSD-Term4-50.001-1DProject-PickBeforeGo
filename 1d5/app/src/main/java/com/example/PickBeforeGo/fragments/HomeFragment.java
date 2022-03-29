@@ -1,47 +1,111 @@
 package com.example.PickBeforeGo.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
+import com.example.PickBeforeGo.components.Product;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
-    private Integer[] imgId = {R.id.img1,R.id.img2,R.id.img3,R.id.img4,R.id.img5};
-    private ArrayList<View> arr1 = new ArrayList<>();
+    private static final String NAME = "name";
+    private static final String IMAGE_URL = "image_url";
+    private static final String DESCRIPTION = "description";
+    private static final String PRICE = "price";
+
+    private BottomNavigationView bottom_bar;
+
+    public HomeFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View homeView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        for (int i=0;i<5;i++){
-            View imgView = homeView.findViewById(imgId[i]);
-            arr1.add(imgView);
-        }
-        for (View img:arr1){
-            img.setOnClickListener(new View.OnClickListener() {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        ArrayList productList = new ArrayList<Product>();
+        ArrayList promoList = new ArrayList<Product>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbRef = database.getReference();
+        dbRef.child("Product_List").addListenerForSingleValueEvent(new ValueEventListener() {
+              @Override
+              public void onDataChange(DataSnapshot dataSnapshot) {
+                  productList.clear();
+                  for (DataSnapshot child : dataSnapshot.getChildren()) {
+                      Product product = child.getValue(Product.class);
+                      if (product.getIsPromo()){
+                          promoList.add(product);
+                      }
+                      productList.add(product);
+                  }
+                  int l = promoList.size();
+                  System.out.println(l);
+                  addBox(view,inflater,l,promoList);
+              }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                    Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
+            }
+          });
+        return view;
+    }
+
+    public void addBox(View view, LayoutInflater inflater, int length, ArrayList<Product> productlist){
+//         promotion
+        ConstraintLayout home_layout = view.findViewById(R.id.main_home);
+        LinearLayout promotion = home_layout.findViewById(R.id.promoLayout);
+        for (int i=0; i<length; i++){
+            Product product = productlist.get(i);
+            View productLayout = inflater.inflate(R.layout.individual_product,null);
+            ShapeableImageView prod_main = productLayout.findViewById(R.id.product_main_img);
+            Picasso.get().load(product.getImageURL()).into(prod_main);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                int discountPercent = (int) Math.round(product.getDiscountPercent());
+                TextView promodetail = productLayout.findViewById(R.id.promodetail);
+                promodetail.setText("Promo "+ discountPercent + "%");
+            }
+            TextView name = productLayout.findViewById(R.id.nameTxt);
+            name.setText(product.getProductName());
+            int resID = View.generateViewId();
+            productLayout.setId(resID);
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(380, 530);
+            params.setMargins(50, 0, 20, 0);
+            productLayout.setLayoutParams(params);
+            productLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(getActivity(), ProductScreenActivity.class));
+                    Intent intent = new Intent(getActivity(),ProductScreenActivity.class);
+                    intent.putExtra(PRICE, product.getPrice());
+                    intent.putExtra(NAME, product.getProductName());
+                    intent.putExtra(IMAGE_URL, product.getImageURL());
+                    intent.putExtra(DESCRIPTION, product.getDescription());
+                    startActivity(intent);
                 }
             });
+            promotion.addView(productLayout);
         }
-
-        return homeView;
     }
 }
+
+

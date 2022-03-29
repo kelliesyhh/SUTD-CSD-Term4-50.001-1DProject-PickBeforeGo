@@ -19,7 +19,7 @@ import com.google.firebase.FirebaseApp;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements  UserRVAdapter.OnNoteListener{
+public class MainActivity extends AppCompatActivity{
     private static final String TAG = "Main activity";
     private ArrayList<Product> allProductArrayList;
     private ArrayList<Product> favouriteProductArrayList;
@@ -41,20 +41,13 @@ public class MainActivity extends AppCompatActivity implements  UserRVAdapter.On
         if (allProductArrayList == null){
             GetProductHelper getProduct = new GetProductHelper();
             allProductArrayList = getProduct.getAllProducts();
+//            System.out.println("in main activity all size: " + allProductArrayList.size());
             favouriteProductArrayList = getProduct.getFavouriteProducts();
             promoProductArrayList = getProduct.getPromotionProducts();
+//            System.out.println("in main activity promo size: " + promoProductArrayList.size());
             noStockProductArrayList = getProduct.getNoStockProducts();
         }
 
-    }
-
-    //TODO shift this to UserFragment
-    public void onNoteClick(int position) {
-        Log.d(TAG, "onNoteClick: clicked."+ position);
-        if (position == 0){
-            Intent intent = new Intent(MainActivity.this, AdminFormActivity.class);
-            startActivity(intent);
-        }
     }
 
     //get methods for fragment to access activity products

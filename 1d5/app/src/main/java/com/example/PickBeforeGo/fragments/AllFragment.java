@@ -1,11 +1,13 @@
 package com.example.PickBeforeGo.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,66 +18,85 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
 
 import java.util.ArrayList;
 
 public class AllFragment extends Fragment {
-    private String searchQuery;
+    private static final String NAME = "name";
+    private static final String IMAGE_URL = "image_url";
+    private static final String DESCRIPTION = "description";
+    private static final String PRODUCT_ID = "product_id";
+    private static final String PRICE = "price";
+    private static final String FAVOURITE = "favourite";
+    private static final String STOCK = "in_stock";
+    private static final String PROMOTION = "promotion";
+    private static final String DISCOUNT = "discount";
+    private static final String RESTOCK_TIME = "restock_time";
+
+    ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
-    int tabPosition;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_catalogue,null);
         ArrayList<Product> productArrayList = new ArrayList<Product>();
+        SearchView searchView = rootView.findViewById(R.id.searchBar);
         RecyclerView productRV = rootView.findViewById(R.id.product_rv);
         MainActivity mainActivity = (MainActivity) getActivity();
 
+
         productArrayList = mainActivity.getAllProducts();
-        productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);
-        setRecyclerView(productRV, productArrayList);
 
-        requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTabPositionKey", this, new FragmentResultListener() {
+        // onclick for RV
+        clickListener = new ProductRVAdapter.ClickListener() {
             @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                tabPosition = bundle.getInt("tabPositionKey");
+            public void onItemClick(int position, String productName, String imageUrl, String description, String productID, String productPrice, Boolean isFavourite, Boolean inStock, Boolean isPromo, Double discountPercent, String restock_time) {
+                Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
+                intent.putExtra(NAME, productName);
+                intent.putExtra(IMAGE_URL, imageUrl);
+                intent.putExtra(DESCRIPTION, description);
+                intent.putExtra(PRODUCT_ID, productID);
+                intent.putExtra(PRICE, productPrice);
+                intent.putExtra(FAVOURITE, isFavourite);
+                intent.putExtra(STOCK, inStock);
+                intent.putExtra(PROMOTION, isPromo);
+                intent.putExtra(DISCOUNT, discountPercent);
+                intent.putExtra(RESTOCK_TIME, restock_time);
+                startActivity(intent);
             }
-        });
+        };
+        productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
+        setRecyclerView(productRV, productArrayList, clickListener);
 
-        requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTextKey", this, new FragmentResultListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
             @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                searchQuery = bundle.getString("searchQueryKey");
-
+            public boolean onQueryTextChange(String newText) {
                 ArrayList<Product> productArrayList = new ArrayList<Product>();
-
-
                 productArrayList = mainActivity.getAllProducts();
-                filteredProductsArrayList = filterProducts(productArrayList, searchQuery);
+                filteredProductsArrayList = filterProducts(productArrayList, newText);
+                setRecyclerView(productRV, filteredProductsArrayList, clickListener);
 
-                setRecyclerView(productRV, filteredProductsArrayList);
-                productRVAdapter.notifyDataSetChanged();
+                return false;
             }
         });
 
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            public void run() {
-                productRVAdapter.notifyDataSetChanged();
-            }
-        });
-
-//        productRVAdapter.notifyDataSetChanged();
+        productRVAdapter.notifyDataSetChanged();
 
         return rootView;
     }
 
-    private void setRecyclerView(RecyclerView productRV, ArrayList<Product> productArrayList){
-        ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);
+    private void setRecyclerView(RecyclerView productRV, ArrayList<Product> productArrayList, ProductRVAdapter.ClickListener clickListener){
+        ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         int numOfColumns = 2;
         productRV.setLayoutManager(new GridLayoutManager(getActivity(), numOfColumns));
         productRV.setAdapter(productRVAdapter);

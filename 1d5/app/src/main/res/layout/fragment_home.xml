@@ -1,143 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-<!--    <ImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:background="@drawable/background_searchbar"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"></ImageView>-->
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="250dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="20dp"
-                android:src="@drawable/qr_home" />
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="317dp"
-        android:text="Promotion"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/see_all1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="332dp"
-        android:layout_marginTop="317dp"
-        android:text="see all"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </TextView>
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="7dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <include
-                android:id="@+id/img1"
-                layout="@layout/individual_product"
-                android:layout_width="140dp"
-                android:layout_height="180dp"
-                android:layout_marginStart="20dp"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_header"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></include>
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
 
-            <include
-                android:id="@+id/img2"
-                layout="@layout/individual_product"
-                android:layout_width="140dp"
-                android:layout_height="180dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                app:layout_constraintStart_toEndOf="@id/img1"
-                app:layout_constraintTop_toTopOf="parent"></include>
+                android:layout_marginTop="15dp"
+                android:text="Welcome Back!"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
 
-            <include
-                android:id="@+id/img3"
-                layout="@layout/individual_product"
-                android:layout_width="140dp"
-                android:layout_height="180dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintStart_toEndOf="@id/img2"
-                app:layout_constraintTop_toTopOf="parent"></include>
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <include
-                android:id="@+id/img4"
-                layout="@layout/individual_product"
-                android:layout_width="140dp"
-                android:layout_height="180dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintStart_toEndOf="@id/img3"
-                app:layout_constraintTop_toTopOf="parent"></include>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/QR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="32dp"
+                    app:cardCornerRadius="15dp">
 
-            <include
-                android:id="@+id/img5"
-                layout="@layout/individual_product"
-                android:layout_width="140dp"
-                android:layout_height="180dp"
-                android:layout_marginStart="20dp"
-                app:layout_constraintStart_toEndOf="@id/img4"
-                app:layout_constraintTop_toTopOf="parent"></include>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="285dp"
+                        android:paddingBottom="20dp"
+                        android:src="@drawable/qr_home"
+                        app:contentPaddingTop="10dp"
+                        app:shapeAppearanceOverlay="@style/roundSnack" />
 
-            <include
-                android:id="@+id/img6"
-                layout="@layout/individual_product"
-                android:layout_width="140dp"
-                android:layout_height="180dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="40dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img5"
-                app:layout_constraintTop_toTopOf="parent"></include>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/promotion1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="360dp"
+                android:text="Promotions"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="7dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/promotion1">
+
+                <LinearLayout
+                    android:id="@+id/promoLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+<!--                    <include-->
+<!--                        android:id="@+id/img1"-->
+<!--                        layout="@layout/individual_product"-->
+<!--                        android:layout_width="140dp"-->
+<!--                        android:layout_height="180dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"></include>-->
+
+<!--                    <include-->
+<!--                        android:id="@+id/img2"-->
+<!--                        layout="@layout/individual_product"-->
+<!--                        android:layout_width="140dp"-->
+<!--                        android:layout_height="180dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/img1"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"></include>-->
+
+<!--                    <include-->
+<!--                        android:id="@+id/img3"-->
+<!--                        layout="@layout/individual_product"-->
+<!--                        android:layout_width="140dp"-->
+<!--                        android:layout_height="180dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/img2"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"></include>-->
+
+<!--                    <include-->
+<!--                        android:id="@+id/img4"-->
+<!--                        layout="@layout/individual_product"-->
+<!--                        android:layout_width="140dp"-->
+<!--                        android:layout_height="180dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/img3"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"></include>-->
+
+<!--                    <include-->
+<!--                        android:id="@+id/img5"-->
+<!--                        layout="@layout/individual_product"-->
+<!--                        android:layout_width="140dp"-->
+<!--                        android:layout_height="180dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/img4"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"></include>-->
+
+<!--                    <include-->
+<!--                        android:id="@+id/img6"-->
+<!--                        layout="@layout/individual_product"-->
+<!--                        android:layout_width="140dp"-->
+<!--                        android:layout_height="180dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginEnd="40dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/img5"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"></include>-->
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </HorizontalScrollView>
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
