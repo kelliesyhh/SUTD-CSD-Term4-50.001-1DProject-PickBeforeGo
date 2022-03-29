@@ -1,5 +1,6 @@
 package com.example.PickBeforeGo.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,16 +17,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
 
 import java.util.ArrayList;
 
 public class AllFragment extends Fragment {
+    private static final String NAME = "name";
+    private static final String IMAGE_URL = "image_url";
+    private static final String DESCRIPTION = "description";
     private String searchQuery;
+    ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
     int tabPosition;
+
 
     @Nullable
     @Override
@@ -36,8 +43,22 @@ public class AllFragment extends Fragment {
         MainActivity mainActivity = (MainActivity) getActivity();
 
         productArrayList = mainActivity.getAllProducts();
-        productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);
-        setRecyclerView(productRV, productArrayList);
+
+        // onclick for RV
+        clickListener = new ProductRVAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, String productName, String imageUrl, String description) {
+                Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
+                intent.putExtra(NAME, productName);
+                intent.putExtra(IMAGE_URL, imageUrl);
+                intent.putExtra(DESCRIPTION, description);
+                startActivity(intent);
+            }
+        };
+
+
+        productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
+        setRecyclerView(productRV, productArrayList, clickListener);
 
         requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTabPositionKey", this, new FragmentResultListener() {
             @Override
@@ -58,8 +79,7 @@ public class AllFragment extends Fragment {
                 productArrayList = mainActivity.getAllProducts();
                 filteredProductsArrayList = filterProducts(productArrayList, searchQuery);
 
-                setRecyclerView(productRV, filteredProductsArrayList);
-                productRVAdapter.notifyDataSetChanged();
+                setRecyclerView(productRV, filteredProductsArrayList, clickListener);
             }
         });
 
@@ -69,13 +89,11 @@ public class AllFragment extends Fragment {
             }
         });
 
-//        productRVAdapter.notifyDataSetChanged();
-
         return rootView;
     }
 
-    private void setRecyclerView(RecyclerView productRV, ArrayList<Product> productArrayList){
-        ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList);
+    private void setRecyclerView(RecyclerView productRV, ArrayList<Product> productArrayList, ProductRVAdapter.ClickListener clickListener){
+        ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         int numOfColumns = 2;
         productRV.setLayoutManager(new GridLayoutManager(getActivity(), numOfColumns));
         productRV.setAdapter(productRVAdapter);

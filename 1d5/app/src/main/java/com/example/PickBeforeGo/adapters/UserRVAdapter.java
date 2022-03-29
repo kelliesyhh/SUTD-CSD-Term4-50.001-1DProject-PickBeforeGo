@@ -9,15 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.components.Userpg;
-
-import java.util.ArrayList;
 
 public class UserRVAdapter extends RecyclerView.Adapter<UserRVAdapter.MyViewHolder>{
-    private ArrayList<Userpg> userslist;
+    private String[] userslist;
     private OnNoteListener mOnNoteListener;
 
-    public UserRVAdapter(ArrayList<Userpg> userslist, OnNoteListener onNoteListener){
+    public UserRVAdapter(String[] userslist, OnNoteListener onNoteListener){
         this.userslist = userslist;
         this.mOnNoteListener = onNoteListener;
 
@@ -36,19 +33,18 @@ public class UserRVAdapter extends RecyclerView.Adapter<UserRVAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String name = userslist.get(position).getUsername();
+        String name = userslist[position];
         holder.nametxt.setText(name);
     }
 
     @Override
     public int getItemCount() {
 
-        return userslist.size();
+        return userslist.length;
     }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        //    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView nametxt;
         OnNoteListener onNoteListener;
 

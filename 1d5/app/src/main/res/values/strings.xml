@@ -2,7 +2,8 @@
     <string name="app_name">Pick before Go</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="availability">Availability</string>
-    <string name="placeholder_product_name">Hokkaido Milk Bread Gardenia 400g</string>
+    <string name="placeholder_product_name">Hokkaido Milk Bread Gardenia</string>
+    <string name="placeholder_weight">400g</string>
     <string name="placeholder_price">$2.90</string>
     <string name="placeholder_address">8 Somapah Rd, #01-201 Building 2, Singapore 487372</string>
     <string name="placeholder_location"><![CDATA[Pick & Go @ SUTD]]></string>
@@ -19,7 +20,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="promo_placeholder">Promo 20%</string>
 
-<!--    for the AdminFormActivity-->
+    <!--    for the AdminFormActivity-->
     <string-array name="StockAvailability">
         <item>No Stock</item>
         <item>Running Out</item>
@@ -59,5 +60,7 @@
         <item>20%</item>
         <item>50%</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

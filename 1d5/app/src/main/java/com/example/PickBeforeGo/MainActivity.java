@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements  UserRVAdapter.On
             noStockProductArrayList = getProduct.getNoStockProducts();
         }
 
+        // TODO initialise firebase
     }
 
     //TODO shift this to UserFragment
