@@ -61,7 +61,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         Picasso.get().load(holder.imageUrl).placeholder(R.drawable.placeholder_product_pic).into(holder.imgProduct);
         holder.txtProductName.setText(holder.productName);
         holder.txtPrice.setText("$" + holder.productPrice);
-        holder.isFavourite = product.getIsFavorite();
+        holder.isFavourite = product.getIsFavourite();
         holder.isPromo = product.getIsPromo();
         holder.inStock = product.getInStock();
         holder.discountPercent = product.getDiscountPercent();

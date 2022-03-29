@@ -81,29 +81,29 @@
                     android:layout_alignParentRight="true"
                     android:layout_gravity="right|end"
                     android:background="@drawable/toggle_fav"
-                    android:textOn=''
-                    android:textOff='' />
+                    android:textOff=''
+                    android:textOn='' />
             </RelativeLayout>
 
             <TextView
-                                                                android:id="@+id/txtProductPrice"
-                                                                android:layout_width="175dp"
-                                                                android:layout_height="wrap_content"
-                                                                android:layout_gravity="bottom"
-                                                                android:layout_marginLeft="30dp"
-                                                                android:layout_marginTop="4dp"
-                                                                android:layout_marginRight="30dp"
-                                                                android:clickable="false"
-                                                                android:contextClickable="true"
-                                                                android:text="@string/placeholder_price"
-                                                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                                                                android:textColor="@color/darkgrey"
-                                                                android:textSize="14sp"
-                                                                android:textStyle="bold"
-                                                                android:typeface="normal" />
+                android:id="@+id/txtProductPrice"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="30dp"
+                android:clickable="false"
+                android:contextClickable="true"
+                android:text="@string/placeholder_price"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/darkgrey"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
 
-                                                        </LinearLayout>
+        </LinearLayout>
 
-                                                    </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-                                                </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

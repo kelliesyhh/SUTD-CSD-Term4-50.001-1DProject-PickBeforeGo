@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
+import com.example.PickBeforeGo.helper.GetProductHelper;
 
 import java.util.ArrayList;
 
@@ -35,22 +37,33 @@ public class FavouriteFragment extends Fragment {
     private static final String DISCOUNT = "discount";
     private static final String RESTOCK_TIME = "restock_time";
 
-    private String searchQuery;
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
+    ArrayList<Product> productArrayList = new ArrayList<Product>();
+    RecyclerView productRV;
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        MainActivity mainActivity = (MainActivity) getActivity();
+        productArrayList = mainActivity.getFavouriteProducts();
+        productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
+        setRecyclerView(productRV, productArrayList, clickListener);
+        productRVAdapter.notifyDataSetChanged();
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_catalogue,null);
-        ArrayList<Product> productArrayList = new ArrayList<Product>();
-        RecyclerView productRV = rootView.findViewById(R.id.product_rv);
+        productRV = rootView.findViewById(R.id.product_rv);
+        SearchView searchView = rootView.findViewById(R.id.searchBar);
         MainActivity mainActivity = (MainActivity) getActivity();
 
-        productArrayList = mainActivity.getFavouriteProducts();
+//        productArrayList = mainActivity.getFavouriteProducts();
 
-        // onclick for RV
         clickListener = new ProductRVAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, String productName, String imageUrl, String description, String productID, String productPrice, Boolean isFavourite, Boolean inStock, Boolean isPromo, Double discountPercent, String restock_time) {
@@ -68,34 +81,27 @@ public class FavouriteFragment extends Fragment {
                 startActivity(intent);
             }
         };
-//        System.out.println("inside all fragment: " + productArrayList.size());
 
         productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         setRecyclerView(productRV, productArrayList, clickListener);
 
-        requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTextKey", this, new FragmentResultListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
             @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                searchQuery = bundle.getString("searchQueryKey");
-
+            public boolean onQueryTextChange(String newText) {
                 ArrayList<Product> productArrayList = new ArrayList<Product>();
-
-
                 productArrayList = mainActivity.getFavouriteProducts();
-                filteredProductsArrayList = filterProducts(productArrayList, searchQuery);
-
+                filteredProductsArrayList = filterProducts(productArrayList, newText);
                 setRecyclerView(productRV, filteredProductsArrayList, clickListener);
+                return false;
             }
         });
 
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            public void run() {
-                productRVAdapter.notifyDataSetChanged();
-            }
-        });
-
-//        productRVAdapter.notifyDataSetChanged();
+        productRVAdapter.notifyDataSetChanged();
 
         return rootView;
     }

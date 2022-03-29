@@ -41,8 +41,10 @@ public class MainActivity extends AppCompatActivity{
         if (allProductArrayList == null){
             GetProductHelper getProduct = new GetProductHelper();
             allProductArrayList = getProduct.getAllProducts();
+//            System.out.println("in main activity all size: " + allProductArrayList.size());
             favouriteProductArrayList = getProduct.getFavouriteProducts();
             promoProductArrayList = getProduct.getPromotionProducts();
+//            System.out.println("in main activity promo size: " + promoProductArrayList.size());
             noStockProductArrayList = getProduct.getNoStockProducts();
         }
 

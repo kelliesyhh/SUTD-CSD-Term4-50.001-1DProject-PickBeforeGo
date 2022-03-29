@@ -77,7 +77,7 @@ public class Product {
 
     public Boolean getIsPromo() {return this.isPromo;}
 
-    public Boolean getIsFavorite() {return this.isFavourite;}
+    public Boolean getIsFavourite() {return this.isFavourite;}
 
     public Boolean getInStock() {return this.inStock;}
 
@@ -108,11 +108,6 @@ public class Product {
     public void setIsFavourite(Boolean isFavourite) {this.isFavourite = isFavourite;}
 
     public void setInStock(Boolean inStock) {this.inStock = inStock;}
-
-
-    public void setIsFavourite(boolean isFavourite) {
-        this.isFavourite = isFavourite;
-    }
 
     public static class ProductBuilder {
         private String category;

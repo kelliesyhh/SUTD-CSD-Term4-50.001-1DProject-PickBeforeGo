@@ -49,6 +49,7 @@ public class AllFragment extends Fragment {
         RecyclerView productRV = rootView.findViewById(R.id.product_rv);
         MainActivity mainActivity = (MainActivity) getActivity();
 
+
         productArrayList = mainActivity.getAllProducts();
 
         // onclick for RV
@@ -69,7 +70,6 @@ public class AllFragment extends Fragment {
                 startActivity(intent);
             }
         };
-//        System.out.println("inside all fragment: " + productArrayList.size());
         productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         setRecyclerView(productRV, productArrayList, clickListener);
 
@@ -84,7 +84,6 @@ public class AllFragment extends Fragment {
                 ArrayList<Product> productArrayList = new ArrayList<Product>();
                 productArrayList = mainActivity.getAllProducts();
                 filteredProductsArrayList = filterProducts(productArrayList, newText);
-
                 setRecyclerView(productRV, filteredProductsArrayList, clickListener);
 
                 return false;
