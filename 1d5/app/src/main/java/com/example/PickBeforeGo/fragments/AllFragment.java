@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +36,6 @@ public class AllFragment extends Fragment {
     private static final String DISCOUNT = "discount";
     private static final String RESTOCK_TIME = "restock_time";
 
-    private String searchQuery;
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
@@ -45,6 +45,7 @@ public class AllFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_catalogue,null);
         ArrayList<Product> productArrayList = new ArrayList<Product>();
+        SearchView searchView = rootView.findViewById(R.id.searchBar);
         RecyclerView productRV = rootView.findViewById(R.id.product_rv);
         MainActivity mainActivity = (MainActivity) getActivity();
 
@@ -68,32 +69,29 @@ public class AllFragment extends Fragment {
                 startActivity(intent);
             }
         };
-
-
+//        System.out.println("inside all fragment: " + productArrayList.size());
         productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         setRecyclerView(productRV, productArrayList, clickListener);
 
-        requireActivity().getSupportFragmentManager().setFragmentResultListener("requestTextKey", this, new FragmentResultListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
             @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                searchQuery = bundle.getString("searchQueryKey");
-
+            public boolean onQueryTextChange(String newText) {
                 ArrayList<Product> productArrayList = new ArrayList<Product>();
-
-
                 productArrayList = mainActivity.getAllProducts();
-                filteredProductsArrayList = filterProducts(productArrayList, searchQuery);
+                filteredProductsArrayList = filterProducts(productArrayList, newText);
 
                 setRecyclerView(productRV, filteredProductsArrayList, clickListener);
+
+                return false;
             }
         });
 
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            public void run() {
-                productRVAdapter.notifyDataSetChanged();
-            }
-        });
+        productRVAdapter.notifyDataSetChanged();
 
         return rootView;
     }

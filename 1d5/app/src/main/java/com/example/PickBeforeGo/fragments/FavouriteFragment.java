@@ -68,6 +68,7 @@ public class FavouriteFragment extends Fragment {
                 startActivity(intent);
             }
         };
+//        System.out.println("inside all fragment: " + productArrayList.size());
 
         productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         setRecyclerView(productRV, productArrayList, clickListener);

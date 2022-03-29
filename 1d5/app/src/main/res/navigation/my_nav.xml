@@ -13,13 +13,13 @@
     </fragment>
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.PickBeforeGo.fragments.TabFragment"
-        android:label="fragment_tab"
-        tools:layout="@layout/fragment_tab" />
+        android:name="com.example.PickBeforeGo.fragments.AllFragment"
+        android:label="fragment_all"
+        tools:layout="@layout/fragment_catalogue" />
     <fragment
         android:id="@+id/fav"
-        android:name="com.example.PickBeforeGo.fragments.UserFragment"
-        android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        android:name="com.example.PickBeforeGo.fragments.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_catalogue" />
 
 </navigation>
