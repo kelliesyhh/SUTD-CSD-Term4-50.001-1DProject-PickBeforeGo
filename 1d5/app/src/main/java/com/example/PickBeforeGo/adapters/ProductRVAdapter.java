@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -56,10 +57,9 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     public void onBindViewHolder(@NonNull ProductRVAdapter.Viewholder holder, int position) {
         //set data to textview, imageview of each card layout
         Product product = productArrayList.get(position);
-//        holder.productImg.setImageResource(product.getImageURL());
-        holder.product.setText(product.getProductName());
-        holder.brand.setText(product.getDescription());
-        holder.weight.setText(product.getWeight());
+        Picasso.get().load(product.getImageURL()).placeholder(R.drawable.placeholder_product_pic).into(holder.productImg);
+        holder.productName.setText(product.getProductName());
+        holder.productWeight.setText(product.getWeight());
     }
     
     @Override
@@ -69,14 +69,13 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
 
     public class Viewholder extends RecyclerView.ViewHolder{
         private ImageView productImg;
-        private TextView product, brand, weight;
+        private TextView productName, productWeight;
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
-            productImg = itemView.findViewById(R.id.product_img);
-            product = itemView.findViewById(R.id.name_text);
-            brand = itemView.findViewById(R.id.brand_text);
-            weight = itemView.findViewById(R.id.weight_text);
+            productImg = itemView.findViewById(R.id.imgProduct);
+            productName = itemView.findViewById(R.id.txtProductName);
+            productWeight = itemView.findViewById(R.id.txtProductWeight);
         }
     }
 
