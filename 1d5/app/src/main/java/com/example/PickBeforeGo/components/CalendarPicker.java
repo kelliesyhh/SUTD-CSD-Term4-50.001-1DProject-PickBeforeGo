@@ -13,7 +13,6 @@ import java.util.Calendar;
 
 public class CalendarPicker {
     public static DatePickerDialog datePickerDialog;
-//    Button dateButton = (Button) findViewById(R.id.dateButton);
 
     public static void initDatePicker(AdminFormActivity mainActivity, Button dateButton) {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -24,13 +23,16 @@ public class CalendarPicker {
                 String date = makeDateString(year, month, day);
                 System.out.println("i was called" + day + month + year);
                 dateButton.setText(date);
+                AdminFormActivity.dayy = String.valueOf(year);
+                AdminFormActivity.monthh = String.valueOf(month);
+                AdminFormActivity.yearr = String.valueOf(day);
             }
         };
 
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
+        Calendar calanderr = Calendar.getInstance();
+        int year = calanderr.get(Calendar.YEAR);
+        int month = calanderr.get(Calendar.MONTH);
+        int day = calanderr.get(Calendar.DAY_OF_MONTH);
         int style = AlertDialog.THEME_DEVICE_DEFAULT_DARK;
         datePickerDialog = new DatePickerDialog(mainActivity ,style, dateSetListener, year, month, day);
 //        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -78,5 +80,14 @@ public class CalendarPicker {
         month = month + 1;
         int year = cal.get(Calendar.YEAR);
         return makeDateString(day, month, year);
+    }
+
+    public static String[] getTodayInit() {
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int year = cal.get(Calendar.YEAR);
+        return new String[]{String.valueOf(day), getMonthFormat(month), String.valueOf(year)};
     }
 }
