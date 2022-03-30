@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.activities.AdminFormActivity;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,7 @@ public class AllFragment extends Fragment {
         ArrayList<Product> productArrayList = new ArrayList<Product>();
         SearchView searchView = rootView.findViewById(R.id.searchBar);
         RecyclerView productRV = rootView.findViewById(R.id.product_rv);
+        FloatingActionButton adminFloatingButton = rootView.findViewById(R.id.admin_fab);
         MainActivity mainActivity = (MainActivity) getActivity();
 
 
@@ -91,6 +94,20 @@ public class AllFragment extends Fragment {
         });
 
         productRVAdapter.notifyDataSetChanged();
+
+        //TODO: get isAdmin property from other screens/activity
+        boolean isAdmin = true;
+        if (isAdmin) {
+            adminFloatingButton.setVisibility(View.VISIBLE);
+            adminFloatingButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // TODO: add in intent putExtras if needed, to populate the various fields for editing
+                    Intent intent = new Intent(getActivity(), AdminFormActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         return rootView;
     }

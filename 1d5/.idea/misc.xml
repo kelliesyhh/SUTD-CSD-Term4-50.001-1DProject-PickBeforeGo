@@ -37,6 +37,8 @@
         <entry key="app/src/main/res/drawable/bg_searchbar.xml" value="0.42256410256410254" />
         <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.490625" />
         <entry key="app/src/main/res/drawable/ic_favourite_selected.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/ic_nav_account.xml" value="0.37037037037037035" />
+        <entry key="app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.37037037037037035" />
         <entry key="app/src/main/res/drawable/image_rounded_corner.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/toggle_fav.xml" value="0.3828125" />
         <entry key="app/src/main/res/layout/activity_admin_form.xml" value="0.2671875" />
