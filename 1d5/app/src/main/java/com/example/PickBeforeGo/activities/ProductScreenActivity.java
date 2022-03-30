@@ -43,7 +43,7 @@ public class ProductScreenActivity extends AppCompatActivity {
     private String image_url;
     private Boolean favourite, inStock, isPromo;
     private String description;
-    private Double discountPercent;
+    private int discountPercent;
     private String restockTime;
 
     FragmentTransaction fragmentTransaction;
@@ -88,7 +88,7 @@ public class ProductScreenActivity extends AppCompatActivity {
 
         inStock = args.getBoolean(STOCK);
         isPromo = args.getBoolean(PROMOTION);
-        discountPercent = args.getDouble(DISCOUNT);
+        discountPercent = args.getInt(DISCOUNT);
         restockTime = args.getString(RESTOCK_TIME);
         String promotion = "Promo " + discountPercent + "%";
 
@@ -149,8 +149,28 @@ public class ProductScreenActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     // TODO: add in intent putExtras if needed, to populate the various fields for editing
-                    Intent intent = new Intent(ProductScreenActivity.this, AdminFormActivity.class);
-                    startActivity(intent);
+                    Intent intentAdmin = new Intent(ProductScreenActivity.this, AdminFormActivity.class);
+
+                    // Filling intents
+                    intentAdmin.putExtra("name",name);
+                    intentAdmin.putExtra("price",price);
+                    intentAdmin.putExtra("promotion",isPromo);
+                    intentAdmin.putExtra("inStock",inStock);
+                    intentAdmin.putExtra("promoValue", discountPercent+"%");
+                    intentAdmin.putExtra("isNewProduct", false);
+                    startActivity(intentAdmin);
+
+
+
+                    // dembird testing zone
+                    System.out.println("name is: " + name);
+                    System.out.println("price is: "  + price);
+                    System.out.println("promotion is: " + discountPercent+"%");
+                    System.out.println("product id: " + product_id);
+                    System.out.println("is promo: " + isPromo);
+                    System.out.println("is inStock?" + inStock);
+
+
                 }
             });
         }

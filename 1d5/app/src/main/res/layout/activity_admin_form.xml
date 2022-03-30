@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <Spinner
-        android:id="@+id/promotion"
+        android:id="@+id/promotionn"
         android:layout_width="185dp"
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
@@ -139,7 +139,7 @@
         android:inputType="none|numberDecimal"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/promotion" />
+        app:layout_constraintTop_toBottomOf="@+id/promotionn" />
 
     <TextView
         android:id="@+id/dollarSign"
@@ -149,7 +149,7 @@
         android:layout_marginEnd="10dp"
         android:text="$"
         app:layout_constraintEnd_toStartOf="@+id/texteditPrice"
-        app:layout_constraintTop_toBottomOf="@+id/promotion" />
+        app:layout_constraintTop_toBottomOf="@+id/promotionn" />
 
     <TextView
         android:id="@+id/dollarSign2"
