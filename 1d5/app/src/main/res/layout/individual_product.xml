@@ -26,7 +26,6 @@
         android:maxWidth="140dp"
         android:scaleType="fitCenter"
         android:background="@drawable/rectangle"
-        android:src="@drawable/cake"
         app:layout_constraintStart_toStartOf="@+id/back"
         app:layout_constraintTop_toTopOf="@id/back"
         app:shapeAppearanceOverlay="@style/roundSnack" />
