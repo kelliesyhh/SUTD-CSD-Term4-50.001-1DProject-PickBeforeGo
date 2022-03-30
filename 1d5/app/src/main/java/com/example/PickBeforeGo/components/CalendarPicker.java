@@ -81,4 +81,13 @@ public class CalendarPicker {
         int year = cal.get(Calendar.YEAR);
         return makeDateString(day, month, year);
     }
+
+    public static String[] getTodayInit() {
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int year = cal.get(Calendar.YEAR);
+        return new String[]{String.valueOf(day), getMonthFormat(month), String.valueOf(year)};
+    }
 }

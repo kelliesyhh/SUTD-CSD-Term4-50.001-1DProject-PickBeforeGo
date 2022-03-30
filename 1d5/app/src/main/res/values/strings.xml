@@ -23,10 +23,8 @@
     <!--    for the AdminFormActivity-->
     <string-array name="StockAvailability">
         <item>No Stock</item>
-        <item>Running Out</item>
         <item>Promotion</item>
         <item>Available</item>
-        <item>DemeritBird Special Wahoo</item>
     </string-array>
     <string-array name="NextRestockTime">
         <item>00:00</item>
@@ -55,6 +53,7 @@
         <item>23:00</item>
     </string-array>
     <string-array name="promotion">
+        <item>0%</item>
         <item>5%</item>
         <item>15%</item>
         <item>20%</item>
