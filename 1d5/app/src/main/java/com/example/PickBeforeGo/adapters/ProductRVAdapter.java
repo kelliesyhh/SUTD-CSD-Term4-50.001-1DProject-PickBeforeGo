@@ -67,7 +67,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         holder.discountPercent = product.getDiscountPercent();
         holder.restockTime = product.getNextRestockTime();
     }
-    
+    //testi
     @Override
     public int getItemCount() {
         return productArrayList.size();
