@@ -32,7 +32,13 @@ public class HomeFragment extends Fragment {
     private static final String NAME = "name";
     private static final String IMAGE_URL = "image_url";
     private static final String DESCRIPTION = "description";
+    private static final String PRODUCT_ID = "product_id";
     private static final String PRICE = "price";
+    private static final String FAVOURITE = "favourite";
+    private static final String STOCK = "in_stock";
+    private static final String PROMOTION = "promotion";
+    private static final String DISCOUNT = "discount";
+    private static final String RESTOCK_TIME = "restock_time";
 
     private BottomNavigationView bottom_bar;
 
@@ -99,6 +105,12 @@ public class HomeFragment extends Fragment {
                     intent.putExtra(NAME, product.getProductName());
                     intent.putExtra(IMAGE_URL, product.getImageURL());
                     intent.putExtra(DESCRIPTION, product.getDescription());
+                    intent.putExtra(FAVOURITE, product.getIsFavourite());
+                    intent.putExtra(PRODUCT_ID, product.getProductID());
+                    intent.putExtra(STOCK, product.getInStock());
+                    intent.putExtra(PROMOTION, product.getIsPromo());
+                    intent.putExtra(DISCOUNT, product.getDiscountPercent());
+                    intent.putExtra(RESTOCK_TIME, product.getNextRestockTime());
                     startActivity(intent);
                 }
             });
