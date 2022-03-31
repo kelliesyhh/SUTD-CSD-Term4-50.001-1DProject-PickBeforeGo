@@ -22,11 +22,6 @@ import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.CalendarPicker;
 import com.example.PickBeforeGo.helper.PromotionHelper;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Calendar;
-
 public class AdminFormActivity extends AppCompatActivity {
     private static final String TAG = "admin";
     private static final String IMAGE_URL = "image_url";
@@ -80,7 +75,7 @@ public class AdminFormActivity extends AppCompatActivity {
             yearr = "null";
             setContentView(R.layout.activity_admin_form_add);
         } else {
-            setContentView(R.layout.activity_admin_form);
+            setContentView(R.layout.activity_admin_form_edit);
         }
 
         // calling the action bar
