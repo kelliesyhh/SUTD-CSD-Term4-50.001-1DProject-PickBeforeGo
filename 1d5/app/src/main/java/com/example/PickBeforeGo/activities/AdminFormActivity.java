@@ -32,10 +32,10 @@ public class AdminFormActivity extends AppCompatActivity {
     private static final String IMAGE_URL = "image_url";
     private String image_url;
 
-    static String[] todayDate = CalendarPicker.getTodayInit();
-    public static String dayy = todayDate[0];
-    public static String monthh = todayDate[1];
-    public static String yearr = todayDate[2];
+
+    public static String dayy;
+    public static String monthh;
+    public static String yearr;
 
     String intentName;
     String intentPrice;
@@ -49,11 +49,6 @@ public class AdminFormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_form);
-
-        // calling the action bar
-        ActionBar actionBar = getSupportActionBar();
-
 
         ///// Receiving Intents /////
         Bundle resultIntent = getIntent().getExtras();
@@ -65,20 +60,33 @@ public class AdminFormActivity extends AppCompatActivity {
             intentPromoValue = resultIntent.getString("promoValue", "0%");
             intentPromo = resultIntent.getBoolean("promotion",false);
             intentStock = resultIntent.getBoolean("inStock",false);
-            intentIsNew = resultIntent.getBoolean("isNewProduct", false);
+            intentIsNew = resultIntent.getBoolean("isNewProduct", true);
             image_url = resultIntent.getString(IMAGE_URL);
         } else {
             intentName = "null";
             intentPrice = "null";
             intentPromoValue = "0%";
+            intentIsNew = true;
         }
 
+        String[] todayDate = CalendarPicker.getTodayInit();
+        dayy = todayDate[0];
+        monthh = todayDate[1];
+        yearr = todayDate[2];
 
-        //// Testing Values Here: ////
-//        System.out.println("adasd" + intentPromoValue);
-//         intentPromoValue = "50%";
+        if (intentIsNew) {
+            dayy = "null";
+            monthh = "null";
+            yearr = "null";
+            setContentView(R.layout.activity_admin_form_add);
+        } else {
+            setContentView(R.layout.activity_admin_form);
+        }
 
-        System.out.println("testetestt");
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+
 
         /*----------------------------------------------------------------------------*/
 
@@ -94,33 +102,15 @@ public class AdminFormActivity extends AppCompatActivity {
         Button dateButton;
         ImageView placeImage = findViewById(R.id.placeImage);
 
-        ///'
-        System.out.println(image_url);
-//        URL url = null;
-//        try {
-//            url = new URL(image_url);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        Bitmap image = null;
-//        try {
-//            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        placeImage.setImageBitmap(image);
-        Picasso.get().load(image_url).placeholder(R.drawable.placeholder_product_pic).into(placeImage);
-        ////
 
         //////////// INIT COMPONENTS ///////////////
 
-        // Init Item Image
-            // TODO: to config user image.
-
-        // Init Item Name
-            // TODO: On load, edit item name here.
+        // Get Item Name
         String itemNameValue = intentName;
         itemName.setText(itemNameValue);
+
+        // Get Item Image
+        Picasso.get().load(image_url).placeholder(R.drawable.placeholder_product_pic).into(placeImage);
 
 
         //// Init Spinner -> Stock Availability ////
@@ -149,17 +139,44 @@ public class AdminFormActivity extends AppCompatActivity {
             System.out.println("There exist an error in Selecting the Spinner for Stock Avail!");
         }
 
+            // New Stock Availability Position //
+        final String[] sbmtStockAvailability = new String[1];
+        spinnerStockAvailability.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                sbmtStockAvailability[0] = spinnerStockAvailability.getSelectedItem().toString();
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+                sbmtStockAvailability[0] = "null";
+            }
+        });
 
-        //// Init Spinner -> Next Restock Timing ////
-        Spinner spinnerRestockTime = findViewById(R.id.NextRestockTime);
-        ArrayAdapter<CharSequence> adapterRestockTime = ArrayAdapter.createFromResource(this, R.array.NextRestockTime, android.R.layout.simple_spinner_item);
-        adapterRestockTime.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinnerRestockTime.setAdapter(adapterRestockTime);
 
-        //// Init Calendar Selector -> Next Restock Date ////
-        dateButton = findViewById(R.id.dateButton);
-        CalendarPicker.initDatePicker(this, dateButton);
-        dateButton.setText(CalendarPicker.getTodaysDate());
+        final String[] sbmtRestockTime = new String[1];
+        if (!intentIsNew) {
+            //// Init Spinner -> Next Restock Timing ////
+            Spinner spinnerRestockTime = findViewById(R.id.NextRestockTime);
+            ArrayAdapter<CharSequence> adapterRestockTime = ArrayAdapter.createFromResource(this, R.array.NextRestockTime, android.R.layout.simple_spinner_item);
+            adapterRestockTime.setDropDownViewResource(android.R.layout.simple_spinner_item);
+            spinnerRestockTime.setAdapter(adapterRestockTime);
+
+            //// Init Calendar Selector -> Next Restock Date ////
+            dateButton = findViewById(R.id.dateButton);
+            CalendarPicker.initDatePicker(this, dateButton);
+            dateButton.setText(CalendarPicker.getTodaysDate());
+
+            //// Next Restock time ////
+
+            spinnerRestockTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    Object item = parent.getItemAtPosition(position);
+                    sbmtRestockTime[0] = spinnerRestockTime.getSelectedItem().toString();
+                }
+                public void onNothingSelected(AdapterView<?> parent) {
+                    sbmtRestockTime[0] = "null";
+                }
+            });
+        }
 
         //// Init Spinner -> Promotion ////
         Spinner spinnerPromotion = findViewById(R.id.promotionn);
@@ -175,9 +192,7 @@ public class AdminFormActivity extends AppCompatActivity {
                 int chosenPromo = SelectorPromoAdaptor.getPosition(spinnerPromoOptions[i]);
                 spinnerPromotion.setSelection(chosenPromo);
                 promotionChoice[0] = intentPromoValue;
-                System.out.println("hehehe" + promotionChoice[0]);
                 String test = spinnerPromotion.getSelectedItem().toString();
-                System.out.println("asdasdsaasdsdsa" + test);
             }
         }
 
@@ -198,7 +213,6 @@ public class AdminFormActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 promotionChoice[0] = spinnerPromotion.getSelectedItem().toString();
-                System.out.println("helloooo");
 
                 if (!priceChoice[0].isEmpty()) {
                     String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
@@ -247,29 +261,9 @@ public class AdminFormActivity extends AppCompatActivity {
 
         ///////// Storing NEW VARIABLES ///////////
 
-        //// New Stock Availability Position ////
-        final String[] sbmtStockAvailability = new String[1];
-        spinnerStockAvailability.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Object item = parent.getItemAtPosition(position);
-                sbmtStockAvailability[0] = spinnerStockAvailability.getSelectedItem().toString();
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-                sbmtStockAvailability[0] = "null";
-            }
-        });
 
-        //// Next Restock time ////
-        final String[] sbmtRestockTime = new String[1];
-        spinnerRestockTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Object item = parent.getItemAtPosition(position);
-                sbmtRestockTime[0] = spinnerRestockTime.getSelectedItem().toString();
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-                sbmtRestockTime[0] = "null";
-            }
-        });
+
+
 
         /*----------------------------------------------------------------*/
 

@@ -161,18 +161,6 @@ public class ProductScreenActivity extends AppCompatActivity {
                     intentAdmin.putExtra("isNewProduct", false);
                     intentAdmin.putExtra(IMAGE_URL, image_url);
                     startActivity(intentAdmin);
-
-
-
-                    // dembird testing zone
-                    System.out.println("name is: " + name);
-                    System.out.println("price is: "  + price);
-                    System.out.println("promotion is: " + discountPercent+"%");
-                    System.out.println("product id: " + product_id);
-                    System.out.println("is promo: " + isPromo);
-                    System.out.println("is inStock?" + inStock);
-
-
                 }
             });
         }
