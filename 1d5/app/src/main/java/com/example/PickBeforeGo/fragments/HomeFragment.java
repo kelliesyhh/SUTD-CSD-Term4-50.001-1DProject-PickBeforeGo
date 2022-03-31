@@ -40,8 +40,6 @@ public class HomeFragment extends Fragment {
     private static final String DISCOUNT = "discount";
     private static final String RESTOCK_TIME = "restock_time";
 
-    private BottomNavigationView bottom_bar;
-
     public HomeFragment() {}
 
     @Override
@@ -82,7 +80,7 @@ public class HomeFragment extends Fragment {
         LinearLayout promotion = home_layout.findViewById(R.id.promoLayout);
         for (int i=0; i<length; i++){
             Product product = productlist.get(i);
-            View productLayout = inflater.inflate(R.layout.individual_product,null);
+            View productLayout = inflater.inflate(R.layout.individual_product, null);
             ShapeableImageView prod_main = productLayout.findViewById(R.id.product_main_img);
             Picasso.get().load(product.getImageURL()).into(prod_main);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -94,7 +92,7 @@ public class HomeFragment extends Fragment {
             name.setText(product.getProductName());
             int resID = View.generateViewId();
             productLayout.setId(resID);
-            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(380, 530);
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(450, 700);
             params.setMargins(50, 0, 20, 0);
             productLayout.setLayoutParams(params);
             productLayout.setOnClickListener(new View.OnClickListener() {

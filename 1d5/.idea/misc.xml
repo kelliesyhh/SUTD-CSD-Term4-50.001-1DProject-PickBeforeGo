@@ -62,11 +62,9 @@
         <entry key="app/src/main/res/drawable/bg_header.xml" value="0.42256410256410254" />
         <entry key="app/src/main/res/drawable/bg_searchbar.xml" value="0.42256410256410254" />
         <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.490625" />
-
         <entry key="app/src/main/res/drawable/ic_favourite_selected.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/ic_nav_account.xml" value="0.37037037037037035" />
         <entry key="app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.37037037037037035" />
-
         <entry key="app/src/main/res/drawable/image_rounded_corner.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/activity_admin_form.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/activity_catalogue.xml" value="0.3305471124620061" />
@@ -86,6 +84,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.307518115942029" />
         <entry key="app/src/main/res/layout/fragment_inner_product_card_in_stock.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_inner_product_card_no_stock.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/fragment_inner_product_card_promo.xml" value="0.3040687682805106" />
         <entry key="app/src/main/res/layout/fragment_product_card.xml" value="0.3305471124620061" />
         <entry key="app/src/main/res/layout/fragment_product_card_no_stock.xml" value="0.3305471124620061" />
         <entry key="app/src/main/res/layout/fragment_promotion_detail.xml" value="0.3305471124620061" />
