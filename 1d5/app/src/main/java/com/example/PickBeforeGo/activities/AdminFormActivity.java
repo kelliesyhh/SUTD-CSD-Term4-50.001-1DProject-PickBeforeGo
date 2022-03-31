@@ -78,7 +78,7 @@ public class AdminFormActivity extends AppCompatActivity {
 //        System.out.println("adasd" + intentPromoValue);
 //         intentPromoValue = "50%";
 
-
+        System.out.println("testetestt");
 
         /*----------------------------------------------------------------------------*/
 
