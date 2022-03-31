@@ -1,5 +1,6 @@
 package com.example.PickBeforeGo.activities;
 
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,8 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +22,15 @@ import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.CalendarPicker;
 import com.example.PickBeforeGo.helper.PromotionHelper;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 
 public class AdminFormActivity extends AppCompatActivity {
     private static final String TAG = "admin";
+    private static final String IMAGE_URL = "image_url";
+    private String image_url;
 
     static String[] todayDate = CalendarPicker.getTodayInit();
     public static String dayy = todayDate[0];
@@ -58,6 +66,7 @@ public class AdminFormActivity extends AppCompatActivity {
             intentPromo = resultIntent.getBoolean("promotion",false);
             intentStock = resultIntent.getBoolean("inStock",false);
             intentIsNew = resultIntent.getBoolean("isNewProduct", false);
+            image_url = resultIntent.getString(IMAGE_URL);
         } else {
             intentName = "null";
             intentPrice = "null";
@@ -83,7 +92,25 @@ public class AdminFormActivity extends AppCompatActivity {
         Button btnSubmit = findViewById(R.id.btnSubmit);
         EditText editPriceText = findViewById(R.id.texteditPrice);
         Button dateButton;
+        ImageView placeImage = findViewById(R.id.placeImage);
 
+        ///'
+        System.out.println(image_url);
+//        URL url = null;
+//        try {
+//            url = new URL(image_url);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        Bitmap image = null;
+//        try {
+//            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        placeImage.setImageBitmap(image);
+        Picasso.get().load(image_url).placeholder(R.drawable.placeholder_product_pic).into(placeImage);
+        ////
 
         //////////// INIT COMPONENTS ///////////////
 

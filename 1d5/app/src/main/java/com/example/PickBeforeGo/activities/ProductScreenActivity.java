@@ -158,6 +158,7 @@ public class ProductScreenActivity extends AppCompatActivity {
                     intentAdmin.putExtra("inStock",inStock);
                     intentAdmin.putExtra("promoValue", discountPercent+"%");
                     intentAdmin.putExtra("isNewProduct", false);
+                    intentAdmin.putExtra(IMAGE_URL, image_url);
                     startActivity(intentAdmin);
 
 
