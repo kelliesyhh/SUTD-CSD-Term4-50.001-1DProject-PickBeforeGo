@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 public class PromoProductCardFragment extends Fragment {
     // declaration of parameter arguments
     private static final String PRODUCT_ID = "product_id";
@@ -26,14 +28,15 @@ public class PromoProductCardFragment extends Fragment {
     private static final String PRICE = "price";
     private static final String IMAGE_URL = "image_url";
     private static final String FAVOURITE = "favourite";
-    private static final String PROMOTION = "promotion";
+    private static final String DISCOUNT = "discount";
+    private static final String PROMOTION_FULL = "promotion_text";
 
     private String product_id;
     private String name;
     private String price;
     private String image_url;
     private boolean favourite;
-    private String promotion;
+    private int discountPercent;
 
     public PromoProductCardFragment() {
         // Required empty public constructor
@@ -54,7 +57,7 @@ public class PromoProductCardFragment extends Fragment {
             image_url = getArguments().getString(IMAGE_URL);
             favourite = getArguments().getBoolean(FAVOURITE);
             product_id = getArguments().getString(PRODUCT_ID);
-            promotion = getArguments().getString(PROMOTION);
+            discountPercent = getArguments().getInt(DISCOUNT);
         }
     }
 
@@ -67,6 +70,8 @@ public class PromoProductCardFragment extends Fragment {
             image_url = getArguments().getString(IMAGE_URL);
             favourite = getArguments().getBoolean(FAVOURITE);
             product_id = getArguments().getString(PRODUCT_ID);
+            discountPercent = getArguments().getInt(DISCOUNT);
+
         }
 
         // Inflate the layout for this fragment
@@ -81,6 +86,10 @@ public class PromoProductCardFragment extends Fragment {
 
         TextView itemPrice = rootView.findViewById(R.id.txtProductPrice);
         itemPrice.setText(price);
+
+        TextView itemPromotion = rootView.findViewById(R.id.txtProductPromo);
+        String promotion = "Promo " + String.valueOf(discountPercent) + "%";
+        itemPromotion.setText(promotion);
 
         Button btnFav = rootView.findViewById(R.id.btnFavourite);
         if (favourite) {

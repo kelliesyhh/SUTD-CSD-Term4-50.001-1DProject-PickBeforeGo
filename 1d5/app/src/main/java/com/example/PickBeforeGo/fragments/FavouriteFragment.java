@@ -36,6 +36,7 @@ public class FavouriteFragment extends Fragment {
     private static final String PROMOTION = "promotion";
     private static final String DISCOUNT = "discount";
     private static final String RESTOCK_TIME = "restock_time";
+    private static final String PROMOTION_FULL = "promotion_text";
 
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
@@ -76,7 +77,7 @@ public class FavouriteFragment extends Fragment {
                 intent.putExtra(FAVOURITE, isFavourite);
                 intent.putExtra(STOCK, inStock);
                 intent.putExtra(PROMOTION, isPromo);
-                intent.putExtra(DISCOUNT, discountPercent);
+                intent.putExtra(DISCOUNT, (int) Math.round(discountPercent));
                 intent.putExtra(RESTOCK_TIME, restock_time);
                 startActivity(intent);
             }

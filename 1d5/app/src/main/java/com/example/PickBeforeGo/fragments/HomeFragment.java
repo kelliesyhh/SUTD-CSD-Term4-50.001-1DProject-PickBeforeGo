@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment {
                     intent.putExtra(PRODUCT_ID, product.getProductID());
                     intent.putExtra(STOCK, product.getInStock());
                     intent.putExtra(PROMOTION, product.getIsPromo());
-                    intent.putExtra(DISCOUNT, product.getDiscountPercent());
+                    intent.putExtra(DISCOUNT, (int) Math.round(product.getDiscountPercent()));
                     intent.putExtra(RESTOCK_TIME, product.getNextRestockTime());
                     startActivity(intent);
                 }

@@ -68,7 +68,7 @@ public class AllFragment extends Fragment {
                 intent.putExtra(FAVOURITE, isFavourite);
                 intent.putExtra(STOCK, inStock);
                 intent.putExtra(PROMOTION, isPromo);
-                intent.putExtra(DISCOUNT, discountPercent);
+                intent.putExtra(DISCOUNT, (int) Math.round(discountPercent));
                 intent.putExtra(RESTOCK_TIME, restock_time);
                 startActivity(intent);
             }

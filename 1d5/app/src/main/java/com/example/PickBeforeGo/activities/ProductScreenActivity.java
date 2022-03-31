@@ -2,6 +2,7 @@ package com.example.PickBeforeGo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ public class ProductScreenActivity extends AppCompatActivity {
     private static final String PROMOTION = "promotion";
     private static final String DISCOUNT = "discount";
     private static final String RESTOCK_TIME = "restock_time";
+    private static final String PROMOTION_FULL = "promotion_text";
 
     private String product_id;
     private String name;
@@ -90,10 +92,9 @@ public class ProductScreenActivity extends AppCompatActivity {
         isPromo = args.getBoolean(PROMOTION);
         discountPercent = args.getInt(DISCOUNT);
         restockTime = args.getString(RESTOCK_TIME);
-        String promotion = "Promo " + discountPercent + "%";
 
         // replace fragments (if necessary) based on boolean values
-        if (isPromo) {;
+        if (isPromo) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -104,7 +105,7 @@ public class ProductScreenActivity extends AppCompatActivity {
             productCardArgs.putString(IMAGE_URL, image_url);
             productCardArgs.putBoolean(FAVOURITE, favourite);
             productCardArgs.putString(PRODUCT_ID, product_id);
-            productCardArgs.putString(PROMOTION, promotion);
+            productCardArgs.putInt(DISCOUNT, discountPercent);
             productCardFragment.setArguments(productCardArgs);
 
             fragmentTransaction.replace(R.id.fragment_productCard, productCardFragment);
