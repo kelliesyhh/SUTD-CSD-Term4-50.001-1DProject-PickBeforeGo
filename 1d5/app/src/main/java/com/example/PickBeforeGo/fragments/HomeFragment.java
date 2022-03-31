@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment {
             Product product = productlist.get(i);
             View productLayout = inflater.inflate(R.layout.individual_product, null);
             ShapeableImageView prod_main = productLayout.findViewById(R.id.product_main_img);
-            Picasso.get().load(product.getImageURL()).into(prod_main);
+            Picasso.get().load(product.getImageURL()).placeholder(R.drawable.placeholder_product_pic).into(prod_main);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 int discountPercent = (int) Math.round(product.getDiscountPercent());
                 TextView promodetail = productLayout.findViewById(R.id.promodetail);
@@ -90,9 +90,11 @@ public class HomeFragment extends Fragment {
             }
             TextView name = productLayout.findViewById(R.id.nameTxt);
             name.setText(product.getProductName());
+            TextView price = productLayout.findViewById(R.id.txtPrice);
+            price.setText("$"+product.getPrice());
             int resID = View.generateViewId();
             productLayout.setId(resID);
-            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(450, 700);
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(450, 830);
             params.setMargins(50, 0, 20, 0);
             productLayout.setLayoutParams(params);
             productLayout.setOnClickListener(new View.OnClickListener() {
