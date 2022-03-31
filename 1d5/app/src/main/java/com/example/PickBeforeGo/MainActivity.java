@@ -1,16 +1,12 @@
 package com.example.PickBeforeGo;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.PickBeforeGo.activities.AdminFormActivity;
-import com.example.PickBeforeGo.adapters.UserRVAdapter;
 import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.helper.GetProductHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

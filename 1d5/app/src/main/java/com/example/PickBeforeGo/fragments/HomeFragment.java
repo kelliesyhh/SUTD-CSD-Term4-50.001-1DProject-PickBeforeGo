@@ -60,7 +60,6 @@ public class HomeFragment extends Fragment {
                       productList.add(product);
                   }
                   int l = promoList.size();
-                  System.out.println(l);
                   addBox(view,inflater,l,promoList);
               }
             @Override
