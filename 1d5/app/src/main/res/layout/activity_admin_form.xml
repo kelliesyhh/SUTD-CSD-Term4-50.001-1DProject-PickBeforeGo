@@ -9,8 +9,8 @@
 
     <View
         android:id="@+id/view3"
-        android:layout_width="410dp"
-        android:layout_height="123dp"
+        android:layout_width="416dp"
+        android:layout_height="101dp"
         android:background="#EBF1A037"
         android:rotationX="0"
         tools:layout_editor_absoluteX="0dp"
@@ -18,15 +18,15 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="236dp"
-        android:layout_height="53dp"
+        android:layout_width="230dp"
+        android:layout_height="49dp"
         android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center_horizontal|center_vertical"
         android:text=" Edit Product Details"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/view3"
-        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
@@ -34,12 +34,12 @@
         android:id="@+id/StockAvailability"
         android:layout_width="210dp"
         android:layout_height="35dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="35dp"
         android:spinnerMode="dropdown"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintTop_toBottomOf="@+id/editItemName" />
 
     <Spinner
         android:id="@+id/promotionn"
@@ -57,14 +57,14 @@
         android:layout_width="122dp"
         android:layout_height="35dp"
         android:layout_marginStart="18dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-black"
         android:gravity="right|center_horizontal|center_vertical"
         android:text="Stock Availability:"
-        android:textSize="12sp"
 
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintTop_toBottomOf="@+id/editItemName" />
 
     <TextView
         android:id="@+id/textNextRestockTiming"
@@ -208,7 +208,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="45dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="blank item"
@@ -225,5 +225,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PriceAfterPromotion" />
+
+    <ImageView
+        android:id="@+id/placeImage"
+        android:layout_width="98dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/placeholder_product_pic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
