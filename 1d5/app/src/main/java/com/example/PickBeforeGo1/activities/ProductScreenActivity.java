@@ -1,6 +1,5 @@
-package com.example.PickBeforeGo.activities;
+package com.example.PickBeforeGo1.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,13 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.fragments.InStockAvailabilityFragment;
-import com.example.PickBeforeGo.fragments.InStockProductCardFragment;
-import com.example.PickBeforeGo.fragments.NoStockAvailabilityFragment;
-import com.example.PickBeforeGo.fragments.NoStockProductCardFragment;
-import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
+import com.example.PickBeforeGo1.fragments.InStockAvailabilityFragment;
+import com.example.PickBeforeGo1.fragments.InStockProductCardFragment;
+import com.example.PickBeforeGo1.fragments.NoStockAvailabilityFragment;
+import com.example.PickBeforeGo1.fragments.NoStockProductCardFragment;
+import com.example.PickBeforeGo1.fragments.PromoProductCardFragment;
 
 public class ProductScreenActivity extends AppCompatActivity {
 

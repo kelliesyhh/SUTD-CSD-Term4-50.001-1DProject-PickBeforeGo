@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-tools:context=".fragments.TabFragment">
+tools:context="com.example.PickBeforeGo1.fragments.TabFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_rv"

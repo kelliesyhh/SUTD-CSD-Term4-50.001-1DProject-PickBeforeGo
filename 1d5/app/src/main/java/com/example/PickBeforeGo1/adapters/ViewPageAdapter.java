@@ -1,12 +1,12 @@
-package com.example.PickBeforeGo.adapters;
+package com.example.PickBeforeGo1.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.PickBeforeGo.fragments.AllFragment;
-import com.example.PickBeforeGo.fragments.FavouriteFragment;
+import com.example.PickBeforeGo1.fragments.AllFragment;
+import com.example.PickBeforeGo1.fragments.FavouriteFragment;
 
 public class ViewPageAdapter extends FragmentStateAdapter {
 

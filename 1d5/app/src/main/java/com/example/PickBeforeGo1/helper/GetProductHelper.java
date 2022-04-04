@@ -1,8 +1,8 @@
-package com.example.PickBeforeGo.helper;
+package com.example.PickBeforeGo1.helper;
 
 import android.util.Log;
 
-import com.example.PickBeforeGo.components.Product;
+import com.example.PickBeforeGo1.components.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

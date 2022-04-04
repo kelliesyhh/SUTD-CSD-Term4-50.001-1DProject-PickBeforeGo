@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo;
+package com.example.PickBeforeGo1;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,17 +9,18 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.PickBeforeGo.activities.AdminFormActivity;
-import com.example.PickBeforeGo.adapters.UserRVAdapter;
-import com.example.PickBeforeGo.components.Product;
-import com.example.PickBeforeGo.helper.GetProductHelper;
+import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo1.activities.AdminFormActivity;
+import com.example.PickBeforeGo1.adapters.UserRVAdapter;
+import com.example.PickBeforeGo1.components.Product;
+import com.example.PickBeforeGo1.helper.GetProductHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements  UserRVAdapter.OnNoteListener{
+public class MainActivity extends AppCompatActivity implements UserRVAdapter.OnNoteListener {
     private static final String TAG = "Main activity";
     private ArrayList<Product> allProductArrayList;
     private ArrayList<Product> favouriteProductArrayList;

@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.fragments;
+package com.example.PickBeforeGo1.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,15 +15,15 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.PickBeforeGo.MainActivity;
+import com.example.PickBeforeGo1.MainActivity;
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.activities.ProductScreenActivity;
-import com.example.PickBeforeGo.adapters.ProductRVAdapter;
-import com.example.PickBeforeGo.components.Product;
+import com.example.PickBeforeGo1.activities.ProductScreenActivity;
+import com.example.PickBeforeGo1.adapters.ProductRVAdapter;
+import com.example.PickBeforeGo1.components.Product;
 
 import java.util.ArrayList;
 
-public class FavouriteFragment extends Fragment {
+public class AllFragment extends Fragment {
     private static final String NAME = "name";
     private static final String IMAGE_URL = "image_url";
     private static final String DESCRIPTION = "description";
@@ -40,7 +40,7 @@ public class FavouriteFragment extends Fragment {
         RecyclerView productRV = rootView.findViewById(R.id.product_rv);
         MainActivity mainActivity = (MainActivity) getActivity();
 
-        productArrayList = mainActivity.getFavouriteProducts();
+        productArrayList = mainActivity.getAllProducts();
 
         // onclick for RV
         clickListener = new ProductRVAdapter.ClickListener() {
@@ -54,6 +54,7 @@ public class FavouriteFragment extends Fragment {
             }
         };
 
+
         productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         setRecyclerView(productRV, productArrayList, clickListener);
 
@@ -66,7 +67,7 @@ public class FavouriteFragment extends Fragment {
                 ArrayList<Product> productArrayList = new ArrayList<Product>();
 
 
-                productArrayList = mainActivity.getFavouriteProducts();
+                productArrayList = mainActivity.getAllProducts();
                 filteredProductsArrayList = filterProducts(productArrayList, searchQuery);
 
                 setRecyclerView(productRV, filteredProductsArrayList, clickListener);
@@ -78,8 +79,6 @@ public class FavouriteFragment extends Fragment {
                 productRVAdapter.notifyDataSetChanged();
             }
         });
-
-//        productRVAdapter.notifyDataSetChanged();
 
         return rootView;
     }

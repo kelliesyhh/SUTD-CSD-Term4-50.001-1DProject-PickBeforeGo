@@ -42,9 +42,12 @@
         <entry key="app/src/main/res/drawable/toggle_fav.xml" value="0.158" />
         <entry key="app/src/main/res/layout/activity_admin_form.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/activity_catalogue.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.19801867449725113" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.34375" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.16367724383318866" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25903614457831325" />
         <entry key="app/src/main/res/layout/activity_product_screen.xml" value="0.3305471124620061" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.3982933327003762" />
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.33" />
         <entry key="app/src/main/res/layout/adminedit.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/collection_demo_fragment.xml" value="0.26403985507246375" />

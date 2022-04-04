@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.fragments;
+package com.example.PickBeforeGo1.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +9,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.activities.ProductScreenActivity;
+import com.example.PickBeforeGo1.activities.ProductScreenActivity;
 
 import java.util.ArrayList;
 

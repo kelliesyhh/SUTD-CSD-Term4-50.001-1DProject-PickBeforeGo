@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.fragments;
+package com.example.PickBeforeGo1.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.adapters.UserRVAdapter;
+import com.example.PickBeforeGo1.adapters.UserRVAdapter;
 
 /**
  * A simple {@link Fragment} subclass.

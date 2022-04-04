@@ -1,4 +1,5 @@
-package com.example.PickBeforeGo.fragments;
+package com.example.PickBeforeGo1.fragments;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.PickBeforeGo.R;
 import com.squareup.picasso.Picasso;
 
-public class InStockProductCardFragment extends Fragment {
+public class NoStockProductCardFragment extends Fragment {
 
     // declaration of parameter arguments
     private static final String PRODUCT_ID = "product_id";
@@ -27,13 +28,12 @@ public class InStockProductCardFragment extends Fragment {
     private String image_url;
     private boolean favourite;
 
-    public InStockProductCardFragment() {
+    public NoStockProductCardFragment() {
         // Required empty public constructor
     }
 
-
-    public static InStockProductCardFragment newInstance() {
-        InStockProductCardFragment fragment = new InStockProductCardFragment();
+    public static NoStockProductCardFragment newInstance() {
+        NoStockProductCardFragment fragment = new NoStockProductCardFragment();
         return fragment;
     }
 
@@ -53,7 +53,7 @@ public class InStockProductCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_inner_product_card_in_stock, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_inner_product_card_no_stock, container, false);
 
         // set the different things on the product card
         ImageView itemImage = rootView.findViewById(R.id.imgProduct);

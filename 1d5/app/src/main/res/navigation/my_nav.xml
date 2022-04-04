@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/home2"
-        android:name="com.example.PickBeforeGo.fragments.HomeFragment"
+        android:name="com.example.PickBeforeGo1.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
     </fragment>
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.PickBeforeGo.fragments.TabFragment"
+        android:name="com.example.PickBeforeGo1.fragments.TabFragment"
         android:label="fragment_tab"
         tools:layout="@layout/fragment_tab" />
     <fragment
         android:id="@+id/fav"
-        android:name="com.example.PickBeforeGo.fragments.UserFragment"
+        android:name="com.example.PickBeforeGo1.fragments.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
 

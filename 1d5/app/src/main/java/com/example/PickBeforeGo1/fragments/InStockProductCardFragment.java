@@ -1,5 +1,4 @@
-package com.example.PickBeforeGo.fragments;
-
+package com.example.PickBeforeGo1.fragments;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,29 +12,28 @@ import androidx.fragment.app.Fragment;
 import com.example.PickBeforeGo.R;
 import com.squareup.picasso.Picasso;
 
-public class PromoProductCardFragment extends Fragment {
+public class InStockProductCardFragment extends Fragment {
+
     // declaration of parameter arguments
     private static final String PRODUCT_ID = "product_id";
     private static final String NAME = "name";
     private static final String PRICE = "price";
     private static final String IMAGE_URL = "image_url";
     private static final String FAVOURITE = "favourite";
-    private static final String PROMOTION = "promotion";
 
     private String product_id;
     private String name;
     private String price;
     private String image_url;
     private boolean favourite;
-    private String promotion;
 
-    public PromoProductCardFragment() {
+    public InStockProductCardFragment() {
         // Required empty public constructor
     }
 
 
-    public static PromoProductCardFragment newInstance() {
-        PromoProductCardFragment fragment = new PromoProductCardFragment();
+    public static InStockProductCardFragment newInstance() {
+        InStockProductCardFragment fragment = new InStockProductCardFragment();
         return fragment;
     }
 
@@ -48,7 +46,6 @@ public class PromoProductCardFragment extends Fragment {
             image_url = getArguments().getString(IMAGE_URL);
             favourite = getArguments().getBoolean(FAVOURITE);
             product_id = getArguments().getString(PRODUCT_ID);
-            promotion = getArguments().getString(PROMOTION);
         }
     }
 
@@ -56,7 +53,7 @@ public class PromoProductCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_inner_product_card_promo, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_inner_product_card_in_stock, container, false);
 
         // set the different things on the product card
         ImageView itemImage = rootView.findViewById(R.id.imgProduct);
@@ -79,13 +76,8 @@ public class PromoProductCardFragment extends Fragment {
                 // addingToFavorite(product_id);
             }
         });
-
-        TextView itemPromotion = rootView.findViewById(R.id.txtProductPromo);
-        itemPromotion.setText(promotion);
-
         return rootView;
     }
-
 //    private void addingToFavorite(String productID) {
 //        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Products");
 //        reference.child(productID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -99,13 +91,12 @@ public class PromoProductCardFragment extends Fragment {
 //                } else if (!favorite) {
 //                    reference.child(productID).child("favourite").setValue(true);
 //                }
-//
 //            }
-//
 //            @Override
 //            public void onCancelled(@NonNull DatabaseError error) {
 //                throw error.toException();
 //            }
 //        });
 //    }
+//}
 }

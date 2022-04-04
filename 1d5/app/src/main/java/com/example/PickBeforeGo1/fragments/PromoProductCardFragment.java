@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.fragments;
+package com.example.PickBeforeGo1.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,27 +13,29 @@ import androidx.fragment.app.Fragment;
 import com.example.PickBeforeGo.R;
 import com.squareup.picasso.Picasso;
 
-public class NoStockProductCardFragment extends Fragment {
-
+public class PromoProductCardFragment extends Fragment {
     // declaration of parameter arguments
     private static final String PRODUCT_ID = "product_id";
     private static final String NAME = "name";
     private static final String PRICE = "price";
     private static final String IMAGE_URL = "image_url";
     private static final String FAVOURITE = "favourite";
+    private static final String PROMOTION = "promotion";
 
     private String product_id;
     private String name;
     private String price;
     private String image_url;
     private boolean favourite;
+    private String promotion;
 
-    public NoStockProductCardFragment() {
+    public PromoProductCardFragment() {
         // Required empty public constructor
     }
 
-    public static NoStockProductCardFragment newInstance() {
-        NoStockProductCardFragment fragment = new NoStockProductCardFragment();
+
+    public static PromoProductCardFragment newInstance() {
+        PromoProductCardFragment fragment = new PromoProductCardFragment();
         return fragment;
     }
 
@@ -46,6 +48,7 @@ public class NoStockProductCardFragment extends Fragment {
             image_url = getArguments().getString(IMAGE_URL);
             favourite = getArguments().getBoolean(FAVOURITE);
             product_id = getArguments().getString(PRODUCT_ID);
+            promotion = getArguments().getString(PROMOTION);
         }
     }
 
@@ -53,7 +56,7 @@ public class NoStockProductCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_inner_product_card_no_stock, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_inner_product_card_promo, container, false);
 
         // set the different things on the product card
         ImageView itemImage = rootView.findViewById(R.id.imgProduct);
@@ -76,8 +79,13 @@ public class NoStockProductCardFragment extends Fragment {
                 // addingToFavorite(product_id);
             }
         });
+
+        TextView itemPromotion = rootView.findViewById(R.id.txtProductPromo);
+        itemPromotion.setText(promotion);
+
         return rootView;
     }
+
 //    private void addingToFavorite(String productID) {
 //        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Products");
 //        reference.child(productID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -91,12 +99,13 @@ public class NoStockProductCardFragment extends Fragment {
 //                } else if (!favorite) {
 //                    reference.child(productID).child("favourite").setValue(true);
 //                }
+//
 //            }
+//
 //            @Override
 //            public void onCancelled(@NonNull DatabaseError error) {
 //                throw error.toException();
 //            }
 //        });
 //    }
-//}
 }

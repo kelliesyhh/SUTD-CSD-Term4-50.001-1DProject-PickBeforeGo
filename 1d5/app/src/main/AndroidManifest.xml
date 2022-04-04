@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.1d5">
         <activity
-            android:name="com.example.PickBeforeGo.MainActivity"
+            android:name="com.example.PickBeforeGo1.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
@@ -21,11 +21,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.PickBeforeGo.activities.ProductScreenActivity"
+            android:name="com.example.PickBeforeGo1.activities.ProductScreenActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.PickBeforeGo.activities.AdminFormActivity"
+            android:name="com.example.PickBeforeGo1.Login"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.PickBeforeGo1.Signup"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.PickBeforeGo1.activities.AdminFormActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

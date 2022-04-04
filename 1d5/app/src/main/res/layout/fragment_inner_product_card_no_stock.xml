@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.PickBeforeGo.fragments.NoStockProductCardFragment">
+    tools:context="com.example.PickBeforeGo1.fragments.NoStockProductCardFragment">
 
 
     <androidx.cardview.widget.CardView
