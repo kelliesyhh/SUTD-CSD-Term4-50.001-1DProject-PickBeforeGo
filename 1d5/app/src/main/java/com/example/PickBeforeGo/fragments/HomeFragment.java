@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -60,6 +61,16 @@ public class HomeFragment extends Fragment {
                     Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
             }
           });
+
+        // TODO: add in logout logic here
+        Button btnLogout = view.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // @ waishun
+            }
+        });
+
         return view;
     }
 
