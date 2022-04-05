@@ -6,6 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="207dp"
+        android:layout_height="42dp"
+        android:height="100dp"
+        android:text="Description"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="195dp"
+        tools:ignore="MissingConstraints" />
+
 
     <View
         android:id="@+id/view3"

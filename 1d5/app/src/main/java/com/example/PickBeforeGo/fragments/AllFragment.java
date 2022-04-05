@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.activities.AddNewProductActivity;
 import com.example.PickBeforeGo.activities.AdminFormActivity;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
@@ -90,7 +91,7 @@ public class AllFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     // TODO: add in intent putExtras if needed, to populate the various fields for editing
-                    Intent intent = new Intent(getActivity(), AdminFormActivity.class);
+                    Intent intent = new Intent(getActivity(), AddNewProductActivity.class);
                     startActivity(intent);
                 }
             });
