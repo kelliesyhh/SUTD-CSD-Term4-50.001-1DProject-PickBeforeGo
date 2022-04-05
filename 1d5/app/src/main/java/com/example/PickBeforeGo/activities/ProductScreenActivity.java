@@ -2,7 +2,6 @@ package com.example.PickBeforeGo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,29 +15,16 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.Product;
+import com.example.PickBeforeGo.components.ProductAttributes;
 import com.example.PickBeforeGo.fragments.InStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.InStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.NoStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.NoStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
-import com.example.PickBeforeGo.helper.GetProductHelper;
 
 import java.util.ArrayList;
 
 public class ProductScreenActivity extends AppCompatActivity {
-
-    private static final String PRODUCT_ID = "product_id";
-    private static final String NAME = "name";
-    private static final String PRICE = "price";
-    private static final String IMAGE_URL = "image_url";
-    private static final String FAVOURITE = "favourite";
-    private static final String DESCRIPTION = "description";
-    private static final String STOCK = "in_stock";
-    private static final String PROMOTION = "promotion";
-    private static final String DISCOUNT = "discount";
-    private static final String RESTOCK_TIME = "restock_time";
-    private static final String PROMOTION_FULL = "promotion_text";
-
     private String product_id;
     private String name;
     private String price;
@@ -63,12 +49,12 @@ public class ProductScreenActivity extends AppCompatActivity {
 
         // get arguments from previous intent
         Bundle args = getIntent().getExtras();
-        name = args.getString(NAME);
-        image_url = args.getString(IMAGE_URL);
-        description = args.getString(DESCRIPTION);
-        product_id = args.getString(PRODUCT_ID);
-        price = "$" + args.getString(PRICE);
-        favourite = args.getBoolean(FAVOURITE);
+        name = args.getString(ProductAttributes.NAME);
+        image_url = args.getString(ProductAttributes.IMAGE_URL);
+        description = args.getString(ProductAttributes.DESCRIPTION);
+        product_id = args.getString(ProductAttributes.PRODUCT_ID);
+        price = "$" + args.getString(ProductAttributes.PRICE);
+        favourite = args.getBoolean(ProductAttributes.FAVOURITE);
 
         // set up fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -77,21 +63,21 @@ public class ProductScreenActivity extends AppCompatActivity {
         Fragment productCardFragment = new InStockProductCardFragment();
         fragmentTransaction.add(R.id.fragment_productCard, productCardFragment, "Product_Card");
         Bundle productCardArgs = new Bundle();
-        productCardArgs.putString(NAME, name);
-        productCardArgs.putString(PRICE, price);
-        productCardArgs.putString(IMAGE_URL, image_url);
-        productCardArgs.putBoolean(FAVOURITE, favourite);
-        productCardArgs.putString(PRODUCT_ID, product_id);
-        productCardArgs.putString(DESCRIPTION, description);
+        productCardArgs.putString(ProductAttributes.NAME, name);
+        productCardArgs.putString(ProductAttributes.PRICE, price);
+        productCardArgs.putString(ProductAttributes.IMAGE_URL, image_url);
+        productCardArgs.putBoolean(ProductAttributes.FAVOURITE, favourite);
+        productCardArgs.putString(ProductAttributes.PRODUCT_ID, product_id);
+        productCardArgs.putString(ProductAttributes.DESCRIPTION, description);
         productCardFragment.setArguments(productCardArgs);
 
         Fragment availabilityFragment = new InStockAvailabilityFragment();
         fragmentTransaction.add(R.id.fragment_availability, availabilityFragment, "Availability");
 
-        inStock = args.getBoolean(STOCK);
-        isPromo = args.getBoolean(PROMOTION);
-        discountPercent = args.getInt(DISCOUNT);
-        restockTime = args.getString(RESTOCK_TIME);
+        inStock = args.getBoolean(ProductAttributes.STOCK);
+        isPromo = args.getBoolean(ProductAttributes.IS_PROMO);
+        discountPercent = args.getInt(ProductAttributes.DISCOUNT);
+        restockTime = args.getString(ProductAttributes.RESTOCK_TIME);
 
         // replace fragments (if necessary) based on boolean values
         if (isPromo) {
@@ -100,12 +86,12 @@ public class ProductScreenActivity extends AppCompatActivity {
 
             productCardFragment = new PromoProductCardFragment();
             productCardArgs = new Bundle();
-            productCardArgs.putString(NAME, name);
-            productCardArgs.putString(PRICE, price);
-            productCardArgs.putString(IMAGE_URL, image_url);
-            productCardArgs.putBoolean(FAVOURITE, favourite);
-            productCardArgs.putString(PRODUCT_ID, product_id);
-            productCardArgs.putInt(DISCOUNT, discountPercent);
+            productCardArgs.putString(ProductAttributes.NAME, name);
+            productCardArgs.putString(ProductAttributes.PRICE, price);
+            productCardArgs.putString(ProductAttributes.IMAGE_URL, image_url);
+            productCardArgs.putBoolean(ProductAttributes.FAVOURITE, favourite);
+            productCardArgs.putString(ProductAttributes.PRODUCT_ID, product_id);
+            productCardArgs.putInt(ProductAttributes.DISCOUNT, discountPercent);
             productCardFragment.setArguments(productCardArgs);
 
             fragmentTransaction.replace(R.id.fragment_productCard, productCardFragment);
@@ -121,7 +107,7 @@ public class ProductScreenActivity extends AppCompatActivity {
 
             availabilityFragment = new NoStockAvailabilityFragment();
             Bundle availabilityArgs = new Bundle();
-            availabilityArgs.putString(RESTOCK_TIME, restockTime);
+            availabilityArgs.putString(ProductAttributes.RESTOCK_TIME, restockTime);
             availabilityFragment.setArguments(availabilityArgs);
 
             fragmentTransaction.replace(R.id.fragment_productCard, productCardFragment);
@@ -153,14 +139,27 @@ public class ProductScreenActivity extends AppCompatActivity {
                     Intent intentAdmin = new Intent(ProductScreenActivity.this, AdminFormActivity.class);
 
                     // Filling intents
-                    intentAdmin.putExtra("name",name);
-                    intentAdmin.putExtra("price",price);
-                    intentAdmin.putExtra("promotion",isPromo);
-                    intentAdmin.putExtra("inStock",inStock);
-                    intentAdmin.putExtra("promoValue", discountPercent+"%");
-                    intentAdmin.putExtra("isNewProduct", false);
-                    intentAdmin.putExtra(IMAGE_URL, image_url);
+                    intentAdmin.putExtra(ProductAttributes.PRODUCT_ID, product_id);
+                    intentAdmin.putExtra(ProductAttributes.NAME, name);
+                    intentAdmin.putExtra(ProductAttributes.PRICE, price);
+                    intentAdmin.putExtra(ProductAttributes.IS_PROMO, isPromo);
+                    intentAdmin.putExtra(ProductAttributes.STOCK, inStock);
+                    intentAdmin.putExtra(ProductAttributes.DISCOUNT, discountPercent);
+                    intentAdmin.putExtra(ProductAttributes.IS_NEW, false);
+                    intentAdmin.putExtra(ProductAttributes.IMAGE_URL, image_url);
                     startActivity(intentAdmin);
+
+
+
+                    // dembird testing zone
+                    System.out.println("name is: " + name);
+                    System.out.println("price is: "  + price);
+                    System.out.println("promotion is: " + discountPercent+"%");
+                    System.out.println("product id: " + product_id);
+                    System.out.println("is promo: " + isPromo);
+                    System.out.println("is inStock?" + inStock);
+
+
                 }
             });
         }
