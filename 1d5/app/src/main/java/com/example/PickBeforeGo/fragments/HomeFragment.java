@@ -75,12 +75,12 @@ public class HomeFragment extends Fragment {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 int discountPercent = (int) Math.round(product.getDiscountPercent());
                 TextView promodetail = productLayout.findViewById(R.id.promodetail);
-                promodetail.setText("Promo "+ discountPercent + "%");
+                promodetail.setText("Promo " + discountPercent + "%");
             }
             TextView name = productLayout.findViewById(R.id.nameTxt);
             name.setText(product.getProductName());
             TextView price = productLayout.findViewById(R.id.txtPrice);
-            price.setText("$"+product.getPrice());
+            price.setText("$" + product.getPrice() + " (original)");
             int resID = View.generateViewId();
             productLayout.setId(resID);
             ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(450, 830);
