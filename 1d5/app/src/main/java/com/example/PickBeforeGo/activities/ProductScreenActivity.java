@@ -153,6 +153,7 @@ public class ProductScreenActivity extends AppCompatActivity {
                     Intent intentAdmin = new Intent(ProductScreenActivity.this, AdminFormActivity.class);
 
                     // Filling intents
+                    intentAdmin.putExtra("productID",product_id);
                     intentAdmin.putExtra("name",name);
                     intentAdmin.putExtra("price",price);
                     intentAdmin.putExtra("promotion",isPromo);

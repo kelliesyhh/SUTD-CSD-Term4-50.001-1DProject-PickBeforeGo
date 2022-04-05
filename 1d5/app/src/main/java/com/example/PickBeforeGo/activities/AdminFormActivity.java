@@ -13,6 +13,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.ActionBar;
@@ -40,6 +43,7 @@ public class AdminFormActivity extends AppCompatActivity {
     String intentName;
     String intentPrice;
     String intentPromoValue;
+    String intentProductID;
 
     boolean intentPromo;
     boolean intentStock;
@@ -59,6 +63,7 @@ public class AdminFormActivity extends AppCompatActivity {
         Bundle resultIntent = getIntent().getExtras();
 
         if(resultIntent != null) {
+            intentProductID=resultIntent.getString("productID","null");
             intentName = resultIntent.getString("name","null");
             intentPrice = resultIntent.getString("price","null");
             intentPrice = intentPrice.substring(1);
@@ -119,8 +124,21 @@ public class AdminFormActivity extends AppCompatActivity {
 
         // Init Item Name
             // TODO: On load, edit item name here.
-        String itemNameValue = intentName;
-        itemName.setText(itemNameValue);
+        final String[] itemNameValue = {intentName};
+        itemName.setText(itemNameValue[0]);
+
+        itemName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {  return; }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { return; }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                itemNameValue[0] = editable.toString();
+            }
+        });
 
 
         //// Init Spinner -> Stock Availability ////
@@ -284,6 +302,21 @@ public class AdminFormActivity extends AppCompatActivity {
 
         // SUBMITTING NEW VARIABLES TODO: submit to database.
         btnSubmit.setOnClickListener((view -> {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(intentProductID);
+            reference.child("productName").setValue(itemNameValue[0]);
+            System.out.println(reference.child("productName"));
+            reference.child("price").setValue(newPrice[0]);
+            if (sbmtStockAvailability[0]=="No Stock"){
+                reference.child("inStock").setValue(false);
+            }
+            if (sbmtStockAvailability[0]=="Promotion"){
+                reference.child("isPromo").setValue(true);
+            }
+            if (sbmtStockAvailability[0]=="Available"){
+                reference.child("inStock").setValue(true);
+            }
+            //reference.child("discountPercent").setValue(Integer.valueOf(sbmtPromotionSpinner[0]));
+            reference.child("nextRestockTime").setValue(sbmtRestockTime[0]);
 
             System.out.println("item name is: " + itemNameValue);
             System.out.println("New price is: " + newPrice[0]);
@@ -293,6 +326,8 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
             // Restock Calendar
+            System.out.println("Product id is"+intentProductID);
+            System.out.println("item name is: " + itemNameValue[0]);
             System.out.println("Restock Time is: " + sbmtRestockTime[0]);
             System.out.println("Restock day is: " + dayy);
             System.out.println("Restock month is: " + monthh);
