@@ -27,8 +27,6 @@ import com.example.PickBeforeGo.components.CalendarPicker;
 import com.example.PickBeforeGo.helper.PromotionHelper;
 
 public class AdminFormActivity extends AppCompatActivity {
-    private static final String TAG = "admin";
-
     static String[] todayDate = CalendarPicker.getTodayInit();
     public static String dayy = todayDate[0];
     public static String monthh = todayDate[1];
@@ -89,11 +87,11 @@ public class AdminFormActivity extends AppCompatActivity {
 
         final String[] promotionChoice = {"0%"};
         final String[] priceChoice = {"0"};
-        TextView PriceAfterPromotion = findViewById(R.id.PriceAfterPromotion);
+        TextView PriceAfterPromotion = findViewById(R.id.txtPriceAfterPromo);
         TextView itemName = findViewById(R.id.editItemName);
         ImageButton btnBack = findViewById(R.id.btnBack);
         Button btnSubmit = findViewById(R.id.btnSubmit);
-        EditText editPriceText = findViewById(R.id.texteditPrice);
+        EditText editPriceText = findViewById(R.id.editTxtPrice);
         Button dateButton;
         ImageView placeImage = findViewById(R.id.placeImage);
 
@@ -140,7 +138,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
         //// Init Spinner -> Stock Availability ////
-        Spinner spinnerStockAvailability = findViewById(R.id.StockAvailability);
+        Spinner spinnerStockAvailability = findViewById(R.id.spinnerStockAvailability);
         ArrayAdapter<CharSequence> adapterStockAvailability = ArrayAdapter.createFromResource(this, R.array.StockAvailability, android.R.layout.simple_spinner_item);
         adapterStockAvailability.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerStockAvailability.setAdapter(adapterStockAvailability);
@@ -178,7 +176,7 @@ public class AdminFormActivity extends AppCompatActivity {
         dateButton.setText(CalendarPicker.getTodaysDate());
 
         //// Init Spinner -> Promotion ////
-        Spinner spinnerPromotion = findViewById(R.id.promotionn);
+        Spinner spinnerPromotion = findViewById(R.id.spinnerPromo);
         ArrayAdapter<CharSequence> adapterPromotion = ArrayAdapter.createFromResource(this, R.array.promotion, android.R.layout.simple_spinner_item);
         adapterPromotion.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerPromotion.setAdapter(adapterPromotion);
@@ -237,7 +235,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
         //// Init Edit Text -> Price Value ////
-        EditText editPrice = findViewById(R.id.texteditPrice);
+        EditText editPrice = findViewById(R.id.editTxtPrice);
         editPrice.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {  return; }

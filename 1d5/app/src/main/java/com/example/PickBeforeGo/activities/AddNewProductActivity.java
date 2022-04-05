@@ -60,7 +60,7 @@ public class AddNewProductActivity extends AppCompatActivity{
             InputProductImage = (ImageView) findViewById(R.id.placeImage);
             InputProductName = (EditText) findViewById(R.id.editItemName);
             InputProductDescription = (EditText) findViewById(R.id.description);
-            InputProductPrice = (EditText) findViewById(R.id.texteditPrice);
+            InputProductPrice = (EditText) findViewById(R.id.editTxtPrice);
             loadingBar = new ProgressDialog(this);
 
             // set input image to the database
