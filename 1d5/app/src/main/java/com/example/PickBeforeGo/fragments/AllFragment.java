@@ -41,21 +41,28 @@ public class AllFragment extends Fragment {
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
+    ArrayList<Product> productArrayList = new ArrayList<Product>();
+    RecyclerView productRV;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        MainActivity mainActivity = (MainActivity) getActivity();
+        productArrayList = mainActivity.getAllProducts();
+        productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
+        setRecyclerView(productRV, productArrayList, clickListener);
+        productRVAdapter.notifyDataSetChanged();
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_catalogue,null);
-        ArrayList<Product> productArrayList = new ArrayList<Product>();
         SearchView searchView = rootView.findViewById(R.id.searchBar);
-        RecyclerView productRV = rootView.findViewById(R.id.product_rv);
+        productRV = rootView.findViewById(R.id.product_rv);
         FloatingActionButton adminFloatingButton = rootView.findViewById(R.id.admin_fab);
         MainActivity mainActivity = (MainActivity) getActivity();
 
-
-        productArrayList = mainActivity.getAllProducts();
-
-        // onclick for RV
         clickListener = new ProductRVAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, String productName, String imageUrl, String description, String productID, String productPrice, Boolean isFavourite, Boolean inStock, Boolean isPromo, Double discountPercent, String restock_time) {
@@ -123,7 +130,7 @@ public class AllFragment extends Fragment {
         ArrayList<Product> filteredProductsArrayList = new ArrayList<Product>();
         if (!searchQuery.isEmpty()){
             for (Product product : productArrayList){
-                if (product.getProductName().toLowerCase().contains(searchQuery.toLowerCase())){
+                if (product.getProductName()!= null && product.getProductName().toLowerCase().contains(searchQuery.toLowerCase())){
                     filteredProductsArrayList.add(product);
                 }
             }

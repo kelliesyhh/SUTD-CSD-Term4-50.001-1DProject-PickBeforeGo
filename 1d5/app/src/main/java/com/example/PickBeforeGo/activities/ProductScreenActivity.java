@@ -30,13 +30,11 @@ public class ProductScreenActivity extends AppCompatActivity {
     private String name;
     private String price;
     private String image_url;
-    private Boolean favourite, inStock, isPromo;
+    private Boolean isFavourite, inStock, isPromo;
     private String description;
     private int discountPercent;
     private String restockTime;
-
     FragmentTransaction fragmentTransaction;
-    private MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +43,6 @@ public class ProductScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_screen);
         ImageView btnBack = findViewById(R.id.btnBack);
         TextView txtDescription = findViewById(R.id.txtDescriptionFull);
-        ArrayList<Product> productArrayList = new ArrayList<Product>();
         Button btnAdminEditProductDetails = findViewById(R.id.btnAdminEditProductDetails);
 
         // get arguments from previous intent
@@ -55,7 +52,7 @@ public class ProductScreenActivity extends AppCompatActivity {
         description = args.getString(ProductAttributes.DESCRIPTION);
         product_id = args.getString(ProductAttributes.PRODUCT_ID);
         price = "$" + args.getString(ProductAttributes.PRICE);
-        favourite = args.getBoolean(ProductAttributes.FAVOURITE);
+        isFavourite = args.getBoolean(ProductAttributes.FAVOURITE);
 
         // set up fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -67,7 +64,7 @@ public class ProductScreenActivity extends AppCompatActivity {
         productCardArgs.putString(ProductAttributes.NAME, name);
         productCardArgs.putString(ProductAttributes.PRICE, price);
         productCardArgs.putString(ProductAttributes.IMAGE_URL, image_url);
-        productCardArgs.putBoolean(ProductAttributes.FAVOURITE, favourite);
+        productCardArgs.putBoolean(ProductAttributes.FAVOURITE, isFavourite);
         productCardArgs.putString(ProductAttributes.PRODUCT_ID, product_id);
         productCardArgs.putString(ProductAttributes.DESCRIPTION, description);
         productCardFragment.setArguments(productCardArgs);
@@ -90,7 +87,7 @@ public class ProductScreenActivity extends AppCompatActivity {
             productCardArgs.putString(ProductAttributes.NAME, name);
             productCardArgs.putString(ProductAttributes.PRICE, price);
             productCardArgs.putString(ProductAttributes.IMAGE_URL, image_url);
-            productCardArgs.putBoolean(ProductAttributes.FAVOURITE, favourite);
+            productCardArgs.putBoolean(ProductAttributes.FAVOURITE, isFavourite);
             productCardArgs.putString(ProductAttributes.PRODUCT_ID, product_id);
             productCardArgs.putInt(ProductAttributes.DISCOUNT, discountPercent);
             productCardFragment.setArguments(productCardArgs);
@@ -151,7 +148,7 @@ public class ProductScreenActivity extends AppCompatActivity {
                     startActivity(intentAdmin);
 
 
-
+                    //TODO: remove the print statements
                     // dembird testing zone
                     System.out.println("name is: " + name);
                     System.out.println("price is: "  + price);

@@ -81,12 +81,9 @@ public class AdminFormActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
     private Boolean Favourite=false;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ///fsdfsd
 
         ///// Receiving Intents /////
         Bundle resultIntent = getIntent().getExtras();
@@ -159,7 +156,6 @@ public class AdminFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-
                 if (intentIsNew) {
 
                     OpenGallery();
@@ -221,7 +217,6 @@ public class AdminFormActivity extends AppCompatActivity {
             dateButton.setText(CalendarPicker.getTodaysDate());
 
             //// Next Restock time ////
-
             spinnerRestockTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     Object item = parent.getItemAtPosition(position);
@@ -249,7 +244,6 @@ public class AdminFormActivity extends AppCompatActivity {
                 promotionChoice[0] = intentPromoValue;
             }
         }
-
 
         //// Init Price ////
         final String[] newPrice = new String[1];
@@ -286,7 +280,6 @@ public class AdminFormActivity extends AppCompatActivity {
                 return;
             }
         });
-
 
         //// Init Edit Text -> Price Value ////
         EditText editPrice = findViewById(R.id.texteditPrice);
@@ -370,6 +363,7 @@ public class AdminFormActivity extends AppCompatActivity {
                         reference.child("inStock").setValue(true);
                     }
                     reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+dayy+" "+monthh+" "+yearr);
+                    Toast.makeText(AdminFormActivity.this, "Product details have been updated!", Toast.LENGTH_LONG).show();
                 }
             }
 

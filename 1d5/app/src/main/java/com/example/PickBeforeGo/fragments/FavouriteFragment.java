@@ -36,14 +36,13 @@ public class FavouriteFragment extends Fragment {
     private static final String PROMOTION = "promotion";
     private static final String DISCOUNT = "discount";
     private static final String RESTOCK_TIME = "restock_time";
-    private static final String PROMOTION_FULL = "promotion_text";
+//    private static final String PROMOTION_FULL = "promotion_text";
 
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
     ArrayList<Product> productArrayList = new ArrayList<Product>();
     RecyclerView productRV;
-
 
     @Override
     public void onStart() {
@@ -62,8 +61,6 @@ public class FavouriteFragment extends Fragment {
         productRV = rootView.findViewById(R.id.product_rv);
         SearchView searchView = rootView.findViewById(R.id.searchBar);
         MainActivity mainActivity = (MainActivity) getActivity();
-
-//        productArrayList = mainActivity.getFavouriteProducts();
 
         clickListener = new ProductRVAdapter.ClickListener() {
             @Override
