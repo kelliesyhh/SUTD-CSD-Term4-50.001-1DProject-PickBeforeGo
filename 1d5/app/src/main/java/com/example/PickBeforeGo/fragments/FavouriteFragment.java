@@ -2,8 +2,6 @@ package com.example.PickBeforeGo.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,23 +18,11 @@ import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
-import com.example.PickBeforeGo.helper.GetProductHelper;
+import com.example.PickBeforeGo.components.ProductAttributes;
 
 import java.util.ArrayList;
 
 public class FavouriteFragment extends Fragment {
-    private static final String NAME = "name";
-    private static final String IMAGE_URL = "image_url";
-    private static final String DESCRIPTION = "description";
-    private static final String PRODUCT_ID = "product_id";
-    private static final String PRICE = "price";
-    private static final String FAVOURITE = "favourite";
-    private static final String STOCK = "in_stock";
-    private static final String PROMOTION = "promotion";
-    private static final String DISCOUNT = "discount";
-    private static final String RESTOCK_TIME = "restock_time";
-    private static final String PROMOTION_FULL = "promotion_text";
-
     ProductRVAdapter.ClickListener clickListener;
     ArrayList<Product> filteredProductsArrayList;
     ProductRVAdapter productRVAdapter;
@@ -69,16 +54,17 @@ public class FavouriteFragment extends Fragment {
             @Override
             public void onItemClick(int position, String productName, String imageUrl, String description, String productID, String productPrice, Boolean isFavourite, Boolean inStock, Boolean isPromo, Double discountPercent, String restock_time) {
                 Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
-                intent.putExtra(NAME, productName);
-                intent.putExtra(IMAGE_URL, imageUrl);
-                intent.putExtra(DESCRIPTION, description);
-                intent.putExtra(PRODUCT_ID, productID);
-                intent.putExtra(PRICE, productPrice);
-                intent.putExtra(FAVOURITE, isFavourite);
-                intent.putExtra(STOCK, inStock);
-                intent.putExtra(PROMOTION, isPromo);
-                intent.putExtra(DISCOUNT, (int) Math.round(discountPercent));
-                intent.putExtra(RESTOCK_TIME, restock_time);
+
+                intent.putExtra(ProductAttributes.NAME, productName);
+                intent.putExtra(ProductAttributes.IMAGE_URL, imageUrl);
+                intent.putExtra(ProductAttributes.DESCRIPTION, description);
+                intent.putExtra(ProductAttributes.PRODUCT_ID, productID);
+                intent.putExtra(ProductAttributes.PRICE, productPrice);
+                intent.putExtra(ProductAttributes.FAVOURITE, isFavourite);
+                intent.putExtra(ProductAttributes.STOCK, inStock);
+                intent.putExtra(ProductAttributes.IS_PROMO, isPromo);
+                intent.putExtra(ProductAttributes.DISCOUNT, (int) Math.round(discountPercent));
+                intent.putExtra(ProductAttributes.RESTOCK_TIME, restock_time);
                 startActivity(intent);
             }
         };

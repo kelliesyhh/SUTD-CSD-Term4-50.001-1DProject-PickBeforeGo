@@ -1,6 +1,5 @@
 package com.example.PickBeforeGo.fragments;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.components.ProductAttributes;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,14 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class InStockProductCardFragment extends Fragment {
-
-    // declaration of parameter arguments
-    private static final String PRODUCT_ID = "product_id";
-    private static final String NAME = "name";
-    private static final String PRICE = "price";
-    private static final String IMAGE_URL = "image_url";
-    private static final String FAVOURITE = "favourite";
-
     private String product_id;
     private String name;
     private String price;
@@ -48,11 +40,14 @@ public class InStockProductCardFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            name = getArguments().getString(NAME);
-            price = getArguments().getString(PRICE);
-            image_url = getArguments().getString(IMAGE_URL);
-            favourite = getArguments().getBoolean(FAVOURITE);
-            product_id = getArguments().getString(PRODUCT_ID);
+            name = getArguments().getString(ProductAttributes.NAME);
+            price = getArguments().getString(ProductAttributes.PRICE);
+            image_url = getArguments().getString(ProductAttributes.IMAGE_URL);
+            favourite = getArguments().getBoolean(ProductAttributes.FAVOURITE);
+            product_id = getArguments().getString(ProductAttributes.PRODUCT_ID);
+            if (price.length() == 4) {
+                price += "0";
+            }
         }
     }
 
@@ -60,13 +55,14 @@ public class InStockProductCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (getArguments() != null) {
-            name = getArguments().getString(NAME);
-            price = getArguments().getString(PRICE);
-            image_url = getArguments().getString(IMAGE_URL);
-            favourite = getArguments().getBoolean(FAVOURITE);
-            product_id = getArguments().getString(PRODUCT_ID);
-
-            Log.i("product_id", product_id);
+            name = getArguments().getString(ProductAttributes.NAME);
+            price = getArguments().getString(ProductAttributes.PRICE);
+            image_url = getArguments().getString(ProductAttributes.IMAGE_URL);
+            favourite = getArguments().getBoolean(ProductAttributes.FAVOURITE);
+            product_id = getArguments().getString(ProductAttributes.PRODUCT_ID);
+            if (price.length() == 4) {
+                price += "0";
+            }
         }
 
         // Inflate the layout for this fragment

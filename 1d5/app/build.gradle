@@ -34,7 +34,11 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.gms:play-services-analytics-impl:17.0.0'
     implementation 'com.google.firebase:firebase-database:20.0.4'
+<<<<<<< HEAD
     implementation 'com.google.firebase:firebase-storage:19.2.2'
+=======
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
+>>>>>>> main
     def nav_version = "2.1.0-alpha02"
 //    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
 //    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07"
