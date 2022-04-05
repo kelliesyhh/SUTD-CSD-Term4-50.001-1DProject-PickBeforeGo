@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.components;
+package com.example.PickBeforeGo1.components;
 
 //TODO need justify why the use for builder class here LOL
 public class Product {

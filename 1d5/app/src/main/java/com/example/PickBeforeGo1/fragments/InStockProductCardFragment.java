@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.fragments;
+package com.example.PickBeforeGo1.fragments;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

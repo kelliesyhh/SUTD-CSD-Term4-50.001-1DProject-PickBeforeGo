@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.adapters;
+package com.example.PickBeforeGo1.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.components.Product;
+import com.example.PickBeforeGo1.components.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

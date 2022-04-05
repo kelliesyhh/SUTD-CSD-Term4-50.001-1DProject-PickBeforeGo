@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.activities;
+package com.example.PickBeforeGo1.activities;
 
 
 import android.os.Bundle;
@@ -23,8 +23,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.components.CalendarPicker;
-import com.example.PickBeforeGo.helper.PromotionHelper;
+import com.example.PickBeforeGo1.components.CalendarPicker;
+import com.example.PickBeforeGo1.helper.PromotionHelper;
 
 public class AdminFormActivity extends AppCompatActivity {
     static String[] todayDate = CalendarPicker.getTodayInit();
