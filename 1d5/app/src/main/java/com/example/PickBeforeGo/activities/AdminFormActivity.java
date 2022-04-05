@@ -49,7 +49,7 @@ import java.util.HashMap;
 public class AdminFormActivity extends AppCompatActivity {
     private static final String TAG = "admin";
     private static final String IMAGE_URL = "image_url";
-    private String image_url;
+    private Uri image_url;
 
 
     public static String dayy;
@@ -88,7 +88,8 @@ public class AdminFormActivity extends AppCompatActivity {
 
         ///// Receiving Intents /////
         Bundle resultIntent = getIntent().getExtras();
-
+        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("imageURL");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Product_List");
         if(resultIntent != null) {
             intentName = resultIntent.getString("name","null");
             product_id = resultIntent.getString(ProductAttributes.PRODUCT_ID);
@@ -98,13 +99,13 @@ public class AdminFormActivity extends AppCompatActivity {
             intentPromo = resultIntent.getBoolean("promotion",false);
             intentStock = resultIntent.getBoolean("inStock",false);
             intentIsNew = resultIntent.getBoolean("isNewProduct", true);
-            image_url = resultIntent.getString(IMAGE_URL);
+            image_url = Uri.parse(resultIntent.getString(IMAGE_URL));
         } else {
             intentName = "null";
             intentPrice = "null";
             intentPromoValue = "0%";
             intentIsNew = true;
-            image_url = "null";
+            image_url = null;
         }
 
         String[] todayDate = CalendarPicker.getTodayInit();
@@ -156,8 +157,11 @@ public class AdminFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-//                System.out.println("clicked image");
-                OpenGallery();
+
+                if (intentIsNew) {
+
+                    OpenGallery();
+                }
             }
         });
 
@@ -328,7 +332,7 @@ public class AdminFormActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener((view -> {
             
             //////////
-            if (placeImage == null || image_url=="null")
+            if (placeImage == null || image_url==null)
             {
                 Toast toast = Toast.makeText(AdminFormActivity.this, "Product image is mandatory...", Toast.LENGTH_SHORT);
                 toast.show();
@@ -350,6 +354,7 @@ public class AdminFormActivity extends AppCompatActivity {
             else
             {
                 if (intentIsNew) {
+                    System.out.println(image_url);
                     StoreNewProductInformation();
                 } else {
                     System.out.println("editing data base was calllededdededed");
@@ -366,6 +371,7 @@ public class AdminFormActivity extends AppCompatActivity {
                     if (sbmtStockAvailability[0] == "Available"){
                         reference.child("inStock").setValue(true);
                     }
+                    reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+dayy+" "+monthh+" "+yearr);
                 }
             }
 
@@ -409,8 +415,9 @@ public class AdminFormActivity extends AppCompatActivity {
 
         if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
         {
-            image_url = data.getData().toString();
-            placeImage.setImageURI(Uri.parse(image_url));
+            image_url = data.getData();
+            System.out.println("new image kink is " + image_url);
+            placeImage.setImageURI(image_url);
         }
     }
 
@@ -433,10 +440,10 @@ public class AdminFormActivity extends AppCompatActivity {
 
         productRandomKey = saveCurrentDate + saveCurrentTime;
 
+        System.out.println("final link is :" + image_url);
+        final StorageReference filePath = ProductImagesRef.child(image_url.getLastPathSegment() + productRandomKey + ".jpg");
 
-        final StorageReference filePath = ProductImagesRef.child(Uri.parse(image_url).getLastPathSegment() + productRandomKey + ".jpg");
-
-        final UploadTask uploadTask = filePath.putFile(Uri.parse(image_url));
+        final UploadTask uploadTask = filePath.putFile(image_url);
 
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -491,7 +498,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("category", CategoryName);
+        //productMap.put("category", CategoryName);
         productMap.put("date", saveCurrentDate);
         productMap.put("description", Description);
         productMap.put("imageURL", downloadImageUrl);
@@ -499,12 +506,12 @@ public class AdminFormActivity extends AppCompatActivity {
         productMap.put("productName", Pname);
         productMap.put("price", Price);
         productMap.put("time", saveCurrentTime);
-        productMap.put("weight", Weight );
+        //productMap.put("weight", Weight );
         productMap.put("nextRestockTime", Next_restock);
-        productMap.put("discountPercent", promotionChoice[0].substring(0, promotionChoice[0].length() - 1));
-        productMap.put("isPromo",promotionChoice[0]!="0%"? false : true);
+        productMap.put("discountPercent", Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
+        productMap.put("isPromo",promotionChoice[0].equals("0%")? true : false);
         productMap.put("isFavourite",Favourite);
-        productMap.put("inStock", sbmtStockAvailability[0] == "No Stock"? false:true);
+        productMap.put("inStock", sbmtStockAvailability[0].equals("No Stock")? true:false);
 
 
         ProductsRef.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
