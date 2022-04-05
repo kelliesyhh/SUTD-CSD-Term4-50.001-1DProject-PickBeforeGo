@@ -55,14 +55,13 @@
         <entry key="..\:/java/android/1d5/app/src/main/res/layout/promotion_detail.xml" value="0.1" />
         <entry key="..\:/java/android/1d5/app/src/main/res/menu/bottom_bar.xml" value="0.125" />
         <entry key="..\:/java/android/1d5/app/src/main/res/menu/top_bar.xml" value="0.1796875" />
-        <entry key="..\:/java/android/SUTD-CSD-Term4-50.001-1DProject-PickBeforeGo/1d5/app/src/main/res/layout/individual_product.xml" value="0.1" />
-        <entry key="..\:/java/android/SUTD-CSD-Term4-50.001-1DProject-PickBeforeGo/1d5/app/src/main/res/layout/product_card.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/image_rounded_corner.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/background.xml" value="0.42256410256410254" />
         <entry key="app/src/main/res/drawable/background_catalogue.xml" value="0.42256410256410254" />
         <entry key="app/src/main/res/drawable/background_searchbar.xml" value="0.42256410256410254" />
         <entry key="app/src/main/res/drawable/bg_header.xml" value="0.42256410256410254" />
         <entry key="app/src/main/res/drawable/bg_searchbar.xml" value="0.42256410256410254" />
+        <entry key="app/src/main/res/drawable/ic_add_24dp.xml" value="0.1984375" />
         <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.490625" />
         <entry key="app/src/main/res/drawable/ic_favourite_selected.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/ic_nav_account.xml" value="0.37037037037037035" />

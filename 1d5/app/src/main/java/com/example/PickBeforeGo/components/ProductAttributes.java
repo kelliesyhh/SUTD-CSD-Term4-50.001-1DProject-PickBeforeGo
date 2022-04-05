@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo.helper;
+package com.example.PickBeforeGo.components;
 
 public class ProductAttributes {
     public static final String NAME = "name";

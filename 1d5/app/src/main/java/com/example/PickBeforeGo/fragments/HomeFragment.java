@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import com.example.PickBeforeGo.helper.ProductAttributes;
+import com.example.PickBeforeGo.components.ProductAttributes;
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.components.Product;

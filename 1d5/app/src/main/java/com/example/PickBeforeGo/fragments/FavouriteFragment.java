@@ -18,7 +18,7 @@ import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
-import com.example.PickBeforeGo.helper.ProductAttributes;
+import com.example.PickBeforeGo.components.ProductAttributes;
 
 import java.util.ArrayList;
 

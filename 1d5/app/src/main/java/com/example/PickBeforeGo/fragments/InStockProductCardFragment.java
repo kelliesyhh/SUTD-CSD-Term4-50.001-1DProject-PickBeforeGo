@@ -1,6 +1,5 @@
 package com.example.PickBeforeGo.fragments;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.helper.ProductAttributes;
+import com.example.PickBeforeGo.components.ProductAttributes;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
