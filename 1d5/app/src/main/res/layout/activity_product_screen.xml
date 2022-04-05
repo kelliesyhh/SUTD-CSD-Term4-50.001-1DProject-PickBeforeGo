@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.PickBeforeGo1.activities.ProductScreenActivity">
+    tools:context=".activities.ProductScreenActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_productCard"
-                android:name="com.example.PickBeforeGo1.fragments.InStockProductCardFragment"
+                android:name="com.example.PickBeforeGo.fragments.InStockProductCardFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -89,7 +89,7 @@
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/fragment_availability"
-                    android:name="com.example.PickBeforeGo1.fragments.InStockAvailabilityFragment"
+                    android:name="com.example.PickBeforeGo.fragments.InStockAvailabilityFragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:outlineAmbientShadowColor="@android:color/transparent"

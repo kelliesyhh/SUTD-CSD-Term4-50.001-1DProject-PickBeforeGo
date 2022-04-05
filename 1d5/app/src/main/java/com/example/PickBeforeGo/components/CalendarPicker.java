@@ -1,11 +1,13 @@
-package com.example.PickBeforeGo1.components;
+package com.example.PickBeforeGo.components;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.widget.Button;
 import android.widget.DatePicker;
 
-import com.example.PickBeforeGo1.activities.AdminFormActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.PickBeforeGo.activities.AdminFormActivity;
 
 import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo1.fragments;
+package com.example.PickBeforeGo.fragments;
 
 import android.os.Bundle;
 import android.text.Spannable;
