@@ -19,15 +19,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.components.CalendarPicker;
 import com.example.PickBeforeGo.components.ProductAttributes;
-
-
-import com.example.PickBeforeGo.components.ProductAttributes;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import com.squareup.picasso.Picasso;
-
+import com.example.PickBeforeGo.helper.PromotionHelper;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,14 +40,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.components.CalendarPicker;
-import com.example.PickBeforeGo.helper.PromotionHelper;
+import com.squareup.picasso.Picasso;
 
 
 import java.text.SimpleDateFormat;
@@ -92,6 +86,7 @@ public class AdminFormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ///fsdfsd
 
         ///// Receiving Intents /////
         Bundle resultIntent = getIntent().getExtras();

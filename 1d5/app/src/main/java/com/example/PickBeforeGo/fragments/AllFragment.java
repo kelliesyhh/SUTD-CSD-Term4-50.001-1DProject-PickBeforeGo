@@ -2,6 +2,8 @@ package com.example.PickBeforeGo.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +22,6 @@ import com.example.PickBeforeGo.activities.AdminFormActivity;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
-import com.example.PickBeforeGo.components.ProductAttributes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
