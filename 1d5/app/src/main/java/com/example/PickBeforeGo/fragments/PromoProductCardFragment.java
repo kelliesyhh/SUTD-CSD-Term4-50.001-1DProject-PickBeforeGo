@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.helper.ProductAttributes;
+import com.example.PickBeforeGo.components.ProductAttributes;
 import com.example.PickBeforeGo.helper.PromotionHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,8 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 public class PromoProductCardFragment extends Fragment {
     private String product_id;
