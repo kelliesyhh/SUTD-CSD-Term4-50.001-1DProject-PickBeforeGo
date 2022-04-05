@@ -19,14 +19,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.CalendarPicker;
 import com.example.PickBeforeGo.components.ProductAttributes;
 import com.example.PickBeforeGo.helper.PromotionHelper;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,6 +41,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -170,7 +174,7 @@ public class AdminFormActivity extends AppCompatActivity {
         adapterStockAvailability.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerStockAvailability.setAdapter(adapterStockAvailability);
 
-            // Default Stock Availability Position
+        // Default Stock Availability Position
         String[] spinnerStockAvailOptions = getResources().getStringArray(R.array.StockAvailability);
         String inPromotion = spinnerStockAvailOptions[1];
         String outStock = spinnerStockAvailOptions[0];
@@ -190,7 +194,7 @@ public class AdminFormActivity extends AppCompatActivity {
             System.out.println("There exist an error in Selecting the Spinner for Stock Avail!");
         }
 
-            // New Stock Availability Position //
+        // New Stock Availability Position //
 
         spinnerStockAvailability.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -235,7 +239,7 @@ public class AdminFormActivity extends AppCompatActivity {
         adapterPromotion.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerPromotion.setAdapter(adapterPromotion);
 
-            // Default Promotion Position
+        // Default Promotion Position
         String[] spinnerPromoOptions = getResources().getStringArray(R.array.promotion);
         ArrayAdapter SelectorPromoAdaptor = (ArrayAdapter) spinnerPromotion.getAdapter();
         for (int i=0; i < spinnerPromoOptions.length; i++ ) {
@@ -257,7 +261,7 @@ public class AdminFormActivity extends AppCompatActivity {
             PriceAfterPromotion.setText(newPromotedValue);
             newPrice[0] = intentPrice;
         }
-            // Setting Promotion //
+        // Setting Promotion //
         final String[] sbmtPromotionSpinner = new String[1];
         spinnerPromotion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -328,7 +332,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
         // SUBMITTING NEW VARIABLES TODO: submit to database.
         btnSubmit.setOnClickListener((view -> {
-            
+
             //////////
             if (placeImage == null || image_url==null)
             {
