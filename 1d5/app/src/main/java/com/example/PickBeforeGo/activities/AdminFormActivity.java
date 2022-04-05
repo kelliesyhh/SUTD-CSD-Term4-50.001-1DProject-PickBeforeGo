@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.PickBeforeGo.helper.ProductAttributes;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -25,30 +26,23 @@ import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.CalendarPicker;
 import com.example.PickBeforeGo.helper.PromotionHelper;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Calendar;
-
 public class AdminFormActivity extends AppCompatActivity {
     private static final String TAG = "admin";
-    private static final String IMAGE_URL = "image_url";
-    private String image_url;
 
     static String[] todayDate = CalendarPicker.getTodayInit();
     public static String dayy = todayDate[0];
     public static String monthh = todayDate[1];
     public static String yearr = todayDate[2];
 
-    String intentName;
-    String intentPrice;
-    String intentPromoValue;
-    String intentProductID;
-
-    boolean intentPromo;
-    boolean intentStock;
-    boolean intentIsNew;
-
+    private String product_id;
+    private String name;
+    private String price;
+    private String image_url;
+    private Boolean favourite, inStock, isPromo, isNew;
+    private String description;
+    private int discountPercent;
+    private String discountPercentStr;
+    private String restockTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,22 +54,26 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
         ///// Receiving Intents /////
-        Bundle resultIntent = getIntent().getExtras();
+        Bundle args = getIntent().getExtras();
 
-        if(resultIntent != null) {
-            intentProductID=resultIntent.getString("productID","null");
-            intentName = resultIntent.getString("name","null");
-            intentPrice = resultIntent.getString("price","null");
-            intentPrice = intentPrice.substring(1);
-            intentPromoValue = resultIntent.getString("promoValue", "0%");
-            intentPromo = resultIntent.getBoolean("promotion",false);
-            intentStock = resultIntent.getBoolean("inStock",false);
-            intentIsNew = resultIntent.getBoolean("isNewProduct", false);
-            image_url = resultIntent.getString(IMAGE_URL);
+        if (args != null) {
+            name = args.getString(ProductAttributes.NAME);
+            image_url = args.getString(ProductAttributes.IMAGE_URL);
+            description = args.getString(ProductAttributes.DESCRIPTION);
+            product_id = args.getString(ProductAttributes.PRODUCT_ID);
+            price = args.getString(ProductAttributes.PRICE).substring(1);
+            favourite = args.getBoolean(ProductAttributes.FAVOURITE);
+            isPromo = args.getBoolean(ProductAttributes.IS_PROMO);
+            discountPercent = args.getInt(ProductAttributes.DISCOUNT);
+            discountPercentStr = discountPercentStr + "%";
+            inStock = args.getBoolean(ProductAttributes.STOCK);
+            isNew = args.getBoolean(ProductAttributes.IS_NEW);
+
         } else {
-            intentName = "null";
-            intentPrice = "null";
-            intentPromoValue = "0%";
+            name = "null";
+            price = "null";
+            discountPercent = 0;
+            discountPercentStr = "0%";
         }
 
 
@@ -124,7 +122,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
         // Init Item Name
             // TODO: On load, edit item name here.
-        final String[] itemNameValue = {intentName};
+        final String[] itemNameValue = {name};
         itemName.setText(itemNameValue[0]);
 
         itemName.addTextChangedListener(new TextWatcher() {
@@ -157,11 +155,11 @@ public class AdminFormActivity extends AppCompatActivity {
         int inPromotionPos = SelectorAdaptor.getPosition(inPromotion);
         int outStockPos = SelectorAdaptor.getPosition(outStock);
         int inAvailabilityPos = SelectorAdaptor.getPosition(inAvailability);
-        if (intentPromo) {
+        if (isPromo) {
             spinnerStockAvailability.setSelection(inPromotionPos);
-        } else if (!intentStock) {
+        } else if (!inStock) {
             spinnerStockAvailability.setSelection(outStockPos);
-        } else if (intentStock) {
+        } else if (inStock) {
             spinnerStockAvailability.setSelection(inAvailabilityPos);
         } else {
             System.out.println("There exist an error in Selecting the Spinner for Stock Avail!");
@@ -189,10 +187,10 @@ public class AdminFormActivity extends AppCompatActivity {
         String[] spinnerPromoOptions = getResources().getStringArray(R.array.promotion);
         ArrayAdapter SelectorPromoAdaptor = (ArrayAdapter) spinnerPromotion.getAdapter();
         for (int i=0; i < spinnerPromoOptions.length; i++ ) {
-            if (intentPromoValue.equals(spinnerPromoOptions[i])   ) {
+            if (discountPercentStr.equals(spinnerPromoOptions[i])   ) {
                 int chosenPromo = SelectorPromoAdaptor.getPosition(spinnerPromoOptions[i]);
                 spinnerPromotion.setSelection(chosenPromo);
-                promotionChoice[0] = intentPromoValue;
+                promotionChoice[0] = discountPercentStr;
                 System.out.println("hehehe" + promotionChoice[0]);
                 String test = spinnerPromotion.getSelectedItem().toString();
                 System.out.println("asdasdsaasdsdsa" + test);
@@ -202,13 +200,13 @@ public class AdminFormActivity extends AppCompatActivity {
 
         //// Init Price ////
         final String[] newPrice = new String[1];
-        if (intentPrice!="null") {
-            editPriceText.setText(intentPrice);
-            priceChoice[0] = intentPrice;
+        if (price != "null") {
+            editPriceText.setText(price);
+            priceChoice[0] = price;
 
             String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
             PriceAfterPromotion.setText(newPromotedValue);
-            newPrice[0] = intentPrice;
+            newPrice[0] = price;
         }
             // Setting Promotion //
         final String[] sbmtPromotionSpinner = new String[1];
@@ -302,17 +300,17 @@ public class AdminFormActivity extends AppCompatActivity {
 
         // SUBMITTING NEW VARIABLES TODO: submit to database.
         btnSubmit.setOnClickListener((view -> {
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(intentProductID);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
             reference.child("productName").setValue(itemNameValue[0]);
             System.out.println(reference.child("productName"));
             reference.child("price").setValue(newPrice[0]);
-            if (sbmtStockAvailability[0]=="No Stock"){
+            if (sbmtStockAvailability[0] == "No Stock"){
                 reference.child("inStock").setValue(false);
             }
-            if (sbmtStockAvailability[0]=="Promotion"){
+            if (sbmtStockAvailability[0] == "Promotion"){
                 reference.child("isPromo").setValue(true);
             }
-            if (sbmtStockAvailability[0]=="Available"){
+            if (sbmtStockAvailability[0] == "Available"){
                 reference.child("inStock").setValue(true);
             }
             //reference.child("discountPercent").setValue(Integer.valueOf(sbmtPromotionSpinner[0]));
@@ -326,7 +324,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
             // Restock Calendar
-            System.out.println("Product id is"+intentProductID);
+            System.out.println("Product id is"+ product_id);
             System.out.println("item name is: " + itemNameValue[0]);
             System.out.println("Restock Time is: " + sbmtRestockTime[0]);
             System.out.println("Restock day is: " + dayy);
@@ -334,7 +332,7 @@ public class AdminFormActivity extends AppCompatActivity {
             System.out.println("Restock year is: " + yearr);
 
             // Miscell
-            System.out.println("Is a new Product?: " + intentIsNew);
+            System.out.println("Is a new Product?: " + isNew);
 
         }));
 
