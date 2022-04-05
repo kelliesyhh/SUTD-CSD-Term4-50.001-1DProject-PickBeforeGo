@@ -306,21 +306,27 @@ public class AdminFormActivity extends AppCompatActivity {
             reference.child("productName").setValue(itemNameValue[0]);
             System.out.println(reference.child("productName"));
             reference.child("price").setValue(newPrice[0]);
-            if (sbmtStockAvailability[0]=="No Stock"){
+            System.out.println(sbmtStockAvailability[0]);
+            if (sbmtStockAvailability[0].equals("No Stock")){
                 reference.child("inStock").setValue(false);
             }
-            if (sbmtStockAvailability[0]=="Promotion"){
+            if (sbmtStockAvailability[0].equals("Promotion")){
                 reference.child("isPromo").setValue(true);
             }
-            if (sbmtStockAvailability[0]=="Available"){
+            if (sbmtStockAvailability[0].equals("Available")){
                 reference.child("inStock").setValue(true);
             }
-            //reference.child("discountPercent").setValue(Integer.valueOf(sbmtPromotionSpinner[0]));
-            reference.child("nextRestockTime").setValue(sbmtRestockTime[0]);
+            if (sbmtPromotionSpinner[0].length()==2){
+                reference.child("discountPercent").setValue(Integer.valueOf(sbmtPromotionSpinner[0].substring(0,1)));
+            }
+            else{
+                reference.child("discountPercent").setValue(Integer.valueOf(sbmtPromotionSpinner[0].substring(0,2)));}
+            reference.child("nextRestockTime").setValue(sbmtRestockTime[0]+" "+dayy+" "+monthh+" "+yearr);
 
             System.out.println("item name is: " + itemNameValue);
             System.out.println("New price is: " + newPrice[0]);
             System.out.println("Stock Status is: " + sbmtStockAvailability[0]);
+            System.out.println(sbmtStockAvailability[0].length());
             System.out.println("Promotion Value is: " + sbmtPromotionSpinner[0]);
 
 
