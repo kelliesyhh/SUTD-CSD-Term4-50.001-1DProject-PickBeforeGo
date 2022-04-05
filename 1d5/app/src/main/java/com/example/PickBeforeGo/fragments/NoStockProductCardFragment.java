@@ -45,6 +45,9 @@ public class NoStockProductCardFragment extends Fragment {
             image_url = getArguments().getString(ProductAttributes.IMAGE_URL);
             favourite = getArguments().getBoolean(ProductAttributes.FAVOURITE);
             product_id = getArguments().getString(ProductAttributes.PRODUCT_ID);
+            if (price.length() == 4) {
+                price += "0";
+            }
         }
     }
 
@@ -57,6 +60,9 @@ public class NoStockProductCardFragment extends Fragment {
             image_url = getArguments().getString(ProductAttributes.IMAGE_URL);
             favourite = getArguments().getBoolean(ProductAttributes.FAVOURITE);
             product_id = getArguments().getString(ProductAttributes.PRODUCT_ID);
+            if (price.length() == 4) {
+                price += "0";
+            }
         }
 
         // Inflate the layout for this fragment

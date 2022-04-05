@@ -1,6 +1,9 @@
 package com.example.PickBeforeGo.fragments;
 
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.helper.ProductAttributes;
+import com.example.PickBeforeGo.helper.PromotionHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +29,8 @@ import org.w3c.dom.Text;
 public class PromoProductCardFragment extends Fragment {
     private String product_id;
     private String name;
-    private String price;
+    private String originalPrice;
+    private String discountedPrice;
     private String image_url;
     private boolean favourite;
     private int discountPercent;
@@ -45,11 +50,19 @@ public class PromoProductCardFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             name = getArguments().getString(ProductAttributes.NAME);
-            price = getArguments().getString(ProductAttributes.PRICE);
+            originalPrice = getArguments().getString(ProductAttributes.PRICE);
             image_url = getArguments().getString(ProductAttributes.IMAGE_URL);
             favourite = getArguments().getBoolean(ProductAttributes.FAVOURITE);
             product_id = getArguments().getString(ProductAttributes.PRODUCT_ID);
             discountPercent = getArguments().getInt(ProductAttributes.DISCOUNT);
+            PromotionHelper promoHelper = new PromotionHelper(originalPrice.substring(1), String.valueOf(discountPercent) + "%");
+            discountedPrice = "$" + promoHelper.promoChange();
+            if (originalPrice.length() == 4) {
+                originalPrice += "0";
+            }
+            if (discountedPrice.length() == 4) {
+                discountedPrice += "0";
+            }
         }
     }
 
@@ -58,11 +71,19 @@ public class PromoProductCardFragment extends Fragment {
                              Bundle savedInstanceState) {
         if (getArguments() != null) {
             name = getArguments().getString(ProductAttributes.NAME);
-            price = getArguments().getString(ProductAttributes.PRICE);
+            originalPrice = getArguments().getString(ProductAttributes.PRICE);
             image_url = getArguments().getString(ProductAttributes.IMAGE_URL);
             favourite = getArguments().getBoolean(ProductAttributes.FAVOURITE);
             product_id = getArguments().getString(ProductAttributes.PRODUCT_ID);
             discountPercent = getArguments().getInt(ProductAttributes.DISCOUNT);
+            PromotionHelper promoHelper = new PromotionHelper(originalPrice.substring(1), String.valueOf(discountPercent) + "%");
+            discountedPrice = "$" + promoHelper.promoChange();
+            if (originalPrice.length() == 4) {
+                originalPrice += "0";
+            }
+            if (discountedPrice.length() == 4) {
+                discountedPrice += "0";
+            }
 
         }
 
@@ -77,7 +98,10 @@ public class PromoProductCardFragment extends Fragment {
         itemName.setText(name);
 
         TextView itemPrice = rootView.findViewById(R.id.txtProductPrice);
-        itemPrice.setText(price);
+        String price = originalPrice + " " + discountedPrice;
+        itemPrice.setText(price, TextView.BufferType.SPANNABLE);
+        Spannable spannable = (Spannable) itemPrice.getText();
+        spannable.setSpan(new StrikethroughSpan(), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         TextView itemPromotion = rootView.findViewById(R.id.txtProductPromo);
         String promotion = "Promo " + String.valueOf(discountPercent) + "%";
