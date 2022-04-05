@@ -338,7 +338,6 @@ public class AdminFormActivity extends AppCompatActivity {
             {
                 Toast toast = Toast.makeText(AdminFormActivity.this, "Product image is mandatory...", Toast.LENGTH_SHORT);
                 toast.show();
-                System.out.println("invoke error here");
             }
 //            else if (TextUtils.isEmpty(Description))
 //            {
@@ -356,13 +355,10 @@ public class AdminFormActivity extends AppCompatActivity {
             else
             {
                 if (intentIsNew) {
-                    System.out.println(image_url);
                     StoreNewProductInformation();
                 } else {
-                    System.out.println("editing data base was calllededdededed");
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
                     reference.child("productName").setValue(itemNameValue);
-                    System.out.println(reference.child("productName"));
                     reference.child("price").setValue(newPrice[0]);
                     if (sbmtStockAvailability[0] == "No Stock"){
                         reference.child("inStock").setValue(false);
@@ -495,10 +491,6 @@ public class AdminFormActivity extends AppCompatActivity {
 
     private void SaveProductInfoToDatabase()
     {
-        //
-        System.out.println("this was called databadsseeeee");
-
-
         HashMap<String, Object> productMap = new HashMap<>();
         //productMap.put("category", CategoryName);
         productMap.put("date", saveCurrentDate);
