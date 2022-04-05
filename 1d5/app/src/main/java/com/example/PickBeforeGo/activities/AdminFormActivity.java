@@ -63,13 +63,13 @@ public class AdminFormActivity extends AppCompatActivity {
         Bundle resultIntent = getIntent().getExtras();
 
         if(resultIntent != null) {
-            intentProductID=resultIntent.getString("productID","null");
+            intentProductID=resultIntent.getString("product_id","null");
             intentName = resultIntent.getString("name","null");
             intentPrice = resultIntent.getString("price","null");
             intentPrice = intentPrice.substring(1);
-            intentPromoValue = resultIntent.getString("promoValue", "0%");
-            intentPromo = resultIntent.getBoolean("promotion",false);
-            intentStock = resultIntent.getBoolean("inStock",false);
+            intentPromoValue = resultIntent.getString("discount", "0%");
+            intentPromo = resultIntent.getBoolean("is_promo",false);
+            intentStock = resultIntent.getBoolean("in_stock",false);
             intentIsNew = resultIntent.getBoolean("isNewProduct", false);
             image_url = resultIntent.getString(IMAGE_URL);
         } else {
