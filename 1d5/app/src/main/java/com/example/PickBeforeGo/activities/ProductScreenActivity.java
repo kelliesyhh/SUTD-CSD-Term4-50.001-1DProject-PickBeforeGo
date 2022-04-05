@@ -21,10 +21,6 @@ import com.example.PickBeforeGo.fragments.InStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.NoStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.NoStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
-<<<<<<< HEAD
-=======
-import com.example.PickBeforeGo.components.ProductAttributes;
->>>>>>> main
 
 import java.util.ArrayList;
 

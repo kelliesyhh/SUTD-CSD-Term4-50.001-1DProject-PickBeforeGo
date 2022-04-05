@@ -6,16 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="207dp"
-        android:layout_height="42dp"
-        android:height="100dp"
-        android:text="Description"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="195dp"
-        tools:ignore="MissingConstraints" />
-
 
     <View
         android:id="@+id/view3"
@@ -27,7 +17,7 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
-        android:id="@+id/txtViewTitle"
+        android:id="@+id/textView"
         android:layout_width="230dp"
         android:layout_height="49dp"
         android:layout_marginTop="36dp"
@@ -41,7 +31,7 @@
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
     <Spinner
-        android:id="@+id/spinnerStockAvailability"
+        android:id="@+id/StockAvailability"
         android:layout_width="210dp"
         android:layout_height="35dp"
         android:layout_marginTop="30dp"
@@ -52,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editItemName" />
 
     <Spinner
-        android:id="@+id/spinnerPromo"
+        android:id="@+id/promotionn"
         android:layout_width="185dp"
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
@@ -136,10 +126,10 @@
         android:layout_marginEnd="135dp"
         android:gravity="right|center_horizontal|center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerStockAvailability" />
+        app:layout_constraintTop_toBottomOf="@+id/StockAvailability" />
 
     <EditText
-        android:id="@+id/editTxtPrice"
+        android:id="@+id/texteditPrice"
         android:layout_width="185dp"
         android:layout_height="33dp"
         android:layout_marginTop="20dp"
@@ -149,7 +139,7 @@
         android:inputType="none|numberDecimal"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPromo" />
+        app:layout_constraintTop_toBottomOf="@+id/promotionn" />
 
     <TextView
         android:id="@+id/dollarSign"
@@ -158,8 +148,8 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="10dp"
         android:text="$"
-        app:layout_constraintEnd_toStartOf="@+id/editTxtPrice"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPromo" />
+        app:layout_constraintEnd_toStartOf="@+id/texteditPrice"
+        app:layout_constraintTop_toBottomOf="@+id/promotionn" />
 
     <TextView
         android:id="@+id/dollarSign2"
@@ -168,11 +158,11 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="23dp"
         android:text="$"
-        app:layout_constraintEnd_toStartOf="@+id/txtPriceAfterPromo"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtPrice" />
+        app:layout_constraintEnd_toStartOf="@+id/PriceAfterPromotion"
+        app:layout_constraintTop_toBottomOf="@+id/texteditPrice" />
 
     <TextView
-        android:id="@+id/txtPriceAfterPromo"
+        android:id="@+id/PriceAfterPromotion"
         android:layout_width="172dp"
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
@@ -181,7 +171,7 @@
         android:text="blank"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTxtPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/texteditPrice" />
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -211,7 +201,7 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerStockAvailability" />
+        app:layout_constraintTop_toBottomOf="@+id/StockAvailability" />
 
     <EditText
         android:id="@+id/editItemName"
@@ -234,7 +224,7 @@
         android:text="submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPriceAfterPromo" />
+        app:layout_constraintTop_toBottomOf="@+id/PriceAfterPromotion" />
 
     <ImageView
         android:id="@+id/placeImage"

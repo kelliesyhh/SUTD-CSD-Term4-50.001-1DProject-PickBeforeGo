@@ -10,8 +10,8 @@ public class PromotionHelper {
     private final String promotion;
 
     public PromotionHelper(String price, String promotion){
-        StringBuffer priceSB = new StringBuffer(price);
-        StringBuffer promotionSB = new StringBuffer(promotion);
+        StringBuffer priceSB= new StringBuffer(price);
+        StringBuffer promotionSB= new StringBuffer(promotion);
 
         this.price = priceSB.toString();
         this.promotion = promotionSB.deleteCharAt(promotionSB.length()-1).toString();
