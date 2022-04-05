@@ -15,12 +15,16 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.components.Product;
+import com.example.PickBeforeGo.components.ProductAttributes;
 import com.example.PickBeforeGo.fragments.InStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.InStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.NoStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.NoStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
+<<<<<<< HEAD
+=======
 import com.example.PickBeforeGo.components.ProductAttributes;
+>>>>>>> main
 
 import java.util.ArrayList;
 
