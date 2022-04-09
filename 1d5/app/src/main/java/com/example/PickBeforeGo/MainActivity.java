@@ -1,6 +1,9 @@
 package com.example.PickBeforeGo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -11,6 +14,8 @@ import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.helper.GetProductHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -21,12 +26,18 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<Product> favouriteProductArrayList;
     private ArrayList<Product> promoProductArrayList;
     private ArrayList<Product> noStockProductArrayList;
+    private FirebaseAuth fAuth;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
+
+        //Get authentication
+        FirebaseAuth.getInstance().getCurrentUser();
 
         //set up the bottom navigation bar
         BottomNavigationView btmNavBar = findViewById(R.id.bottomNavigationView);
@@ -43,6 +54,19 @@ public class MainActivity extends AppCompatActivity{
 //            System.out.println("in main activity promo size: " + promoProductArrayList.size());
             noStockProductArrayList = getProduct.getNoStockProducts();
         }
+
+        //TODO WAI SHUN: Button for Logout
+        Button btnLogout;
+        btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivity.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
