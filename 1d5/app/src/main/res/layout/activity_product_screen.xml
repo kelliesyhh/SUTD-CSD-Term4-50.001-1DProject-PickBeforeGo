@@ -115,7 +115,7 @@
                 android:background="@color/brandOrange"
                 android:text="Edit Product Details"
                 android:textColor="@color/white"
-                android:visibility="invisible"/>
+                android:visibility="visible"/>
         </LinearLayout>
     </ScrollView>
 

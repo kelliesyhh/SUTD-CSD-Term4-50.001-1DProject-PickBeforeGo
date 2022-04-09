@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.helper.UserHelperClass;
 import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.fragments.InStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.InStockProductCardFragment;
@@ -21,6 +22,13 @@ import com.example.PickBeforeGo.fragments.NoStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.NoStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
 import com.example.PickBeforeGo.components.ProductAttributes;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 
@@ -129,6 +137,13 @@ public class ProductScreenActivity extends AppCompatActivity {
         txtDescription.setText("Product Description: " + description);
 
         // TODO: get isAdmin property from other screens
+
+        FirebaseFirestore db;
+        db = FirebaseFirestore.getInstance();
+        CollectionReference docRef = db.collection("Users");
+        FirebaseAuth.getInstance();
+
+
         boolean isAdmin = true;
         if (isAdmin) {
             btnAdminEditProductDetails.setVisibility(View.VISIBLE);
