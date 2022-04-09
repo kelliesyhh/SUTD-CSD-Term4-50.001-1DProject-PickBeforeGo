@@ -144,19 +144,19 @@ public class ProductScreenActivity extends AppCompatActivity {
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         String userid = fAuth.getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
-        Log.i(TAG,"userid is "+userid);
+        Log.i(TAG, "userid is " + userid);
         DocumentReference docRef = db.collection("Users").document(userid);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 UserHelperClass user = documentSnapshot.toObject(UserHelperClass.class);
-                Log.i(TAG,"Is null"+Boolean.toString(user==null));
-                Log.i(TAG,"Is admin"+user.getIs_admin());
-                Log.i(TAG,"Is admin"+user.getUsername());
+                Log.i(TAG, "Is null" + Boolean.toString(user == null));
+                Log.i(TAG, "Is admin" + user.getIs_admin());
+                Log.i(TAG, "Is admin" + user.getUsername());
                 isAdmin.set(user.getIs_admin());
-                Log.i(TAG,"Is admin in container"+Boolean.toString(isAdmin.get()));
+                Log.i(TAG, "Is admin in container" + Boolean.toString(isAdmin.get()));
                 if (isAdmin.get() == Boolean.TRUE) {
-                    Log.i(TAG,"Setting edit btn "+Boolean.toString(isAdmin.get()));
+                    Log.i(TAG, "Setting edit btn " + Boolean.toString(isAdmin.get()));
                     btnAdminEditProductDetails.setVisibility(View.VISIBLE);
                     btnAdminEditProductDetails.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -176,11 +176,10 @@ public class ProductScreenActivity extends AppCompatActivity {
                             startActivity(intentAdmin);
 
 
-
                             // dembird testing zone
                             System.out.println("name is: " + name);
-                            System.out.println("price is: "  + price);
-                            System.out.println("promotion is: " + discountPercent+"%");
+                            System.out.println("price is: " + price);
+                            System.out.println("promotion is: " + discountPercent + "%");
                             System.out.println("product id: " + product_id);
                             System.out.println("is promo: " + isPromo);
                             System.out.println("is inStock?" + inStock);
@@ -188,5 +187,8 @@ public class ProductScreenActivity extends AppCompatActivity {
 
                         }
                     });
+                }
+            }
+        });
     }
 }

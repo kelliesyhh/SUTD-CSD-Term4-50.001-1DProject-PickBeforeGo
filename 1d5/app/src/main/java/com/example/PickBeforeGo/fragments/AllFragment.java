@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,15 @@ import com.example.PickBeforeGo.activities.AdminFormActivity;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
+import com.example.PickBeforeGo.components.ProductAttributes;
+import com.example.PickBeforeGo.helper.Container;
+import com.example.PickBeforeGo.helper.UserHelperClass;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -103,19 +112,31 @@ public class AllFragment extends Fragment {
         productRVAdapter.notifyDataSetChanged();
 
         //TODO: get isAdmin property from other screens/activity
-        boolean isAdmin = true;
-        if (isAdmin) {
-            adminFloatingButton.setVisibility(View.VISIBLE);
-            adminFloatingButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // TODO: add in intent putExtras if needed, to populate the various fields for editing
-                    Intent intent = new Intent(getActivity(), AdminFormActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
 
+        final Container<Boolean> isAdmin = new Container(false);
+        FirebaseFirestore db;
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        String userid = fAuth.getCurrentUser().getUid();
+        db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("Users").document(userid);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                UserHelperClass user = documentSnapshot.toObject(UserHelperClass.class);
+                isAdmin.set(user.getIs_admin());
+                if (isAdmin.get() == Boolean.TRUE) {
+                    adminFloatingButton.setVisibility(View.VISIBLE);
+                    adminFloatingButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // TODO: add in intent putExtras if needed, to populate the various fields for editing
+                            Intent intent = new Intent(getActivity(), AdminFormActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+        });
         return rootView;
     }
 
