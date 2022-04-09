@@ -28,7 +28,6 @@ public class UserHelperClass {
         this.is_admin = is_admin;
     }
 
-    public Boolean getisadmin(){ return is_admin; }
 
     public String getUsername() {
         return username;
@@ -61,7 +60,7 @@ public class UserHelperClass {
     public void setFavourites(ArrayList<ProductHelperClass> favourites) {
         this.favourites = favourites;
     }*/
-
+    public boolean getIs_admin(){ return is_admin; }
 
     public void setIs_admin(boolean is_admin) {
         this.is_admin = is_admin;
