@@ -55,18 +55,7 @@ public class MainActivity extends AppCompatActivity{
             noStockProductArrayList = getProduct.getNoStockProducts();
         }
 
-        //TODO WAI SHUN: Button for Logout
-        Button btnLogout;
-        btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
 
     }
 

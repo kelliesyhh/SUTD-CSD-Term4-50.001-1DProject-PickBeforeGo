@@ -115,8 +115,10 @@ public class FavouriteFragment extends Fragment {
         ArrayList<Product> filteredProductsArrayList = new ArrayList<Product>();
         if (!searchQuery.isEmpty()){
             for (Product product : productArrayList){
-                if (product.getProductName().toLowerCase().contains(searchQuery.toLowerCase())){
-                    filteredProductsArrayList.add(product);
+                if (product.getProductName()!=null){
+                    if (product.getProductName().toLowerCase().contains(searchQuery.toLowerCase())){
+                        filteredProductsArrayList.add(product);
+                    }
                 }
             }
         }

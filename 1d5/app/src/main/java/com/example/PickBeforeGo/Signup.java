@@ -85,7 +85,7 @@ public class Signup extends AppCompatActivity {
                     FirebaseUser user = fAuth.getCurrentUser();
                     DocumentReference df = fStore.collection("Users").document(user.getUid());
 
-                    UserHelperClass helperClass = new UserHelperClass(username,email,password, true);
+                    UserHelperClass helperClass = new UserHelperClass(username,email,password, false);
 
                     df.set(helperClass);
 
