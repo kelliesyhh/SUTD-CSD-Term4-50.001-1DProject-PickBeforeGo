@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -46,6 +47,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class AdminFormActivity extends AppCompatActivity {
     private static final String TAG = "admin";
@@ -65,6 +67,7 @@ public class AdminFormActivity extends AppCompatActivity {
     final String[] promotionChoice = {"0%"};
     final String[] priceChoice = {"0"};
     final String[] sbmtStockAvailability = new String[1];
+    final String[] itemNameValue = new String[1];
 
     boolean intentPromo;
     boolean intentStock;
@@ -75,7 +78,9 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
     private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime, Weight="", Next_restock="";
-    private String productRandomKey, downloadImageUrl;
+    private String downloadImageUrl;
+    private UUID productRandomUUID;
+    private int productHashfromUUID;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
@@ -145,8 +150,21 @@ public class AdminFormActivity extends AppCompatActivity {
         //////////// INIT COMPONENTS ///////////////
 
         // Get Item Name
-        String itemNameValue = intentName;
-        itemName.setText(itemNameValue);
+        itemNameValue[0] = intentName;
+        itemName.setText(itemNameValue[0]);
+
+        itemName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {  return; }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { return; }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                itemNameValue[0] = editable.toString();
+            }
+        });
 
         // Get Item Image
         Picasso.get().load(image_url).placeholder(R.drawable.placeholder_product_pic).into(placeImage);
@@ -298,6 +316,7 @@ public class AdminFormActivity extends AppCompatActivity {
                     String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
                     PriceAfterPromotion.setText(newPromotedValue);
                     newPrice[0] = newPromotedValue;
+                    System.out.println("item name is: " + itemNameValue[0]);
 
                 } else {
                     PriceAfterPromotion.setText("0.00");
@@ -341,17 +360,18 @@ public class AdminFormActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(AdminFormActivity.this, "Please write product Price...", Toast.LENGTH_LONG);
                 toast.show();
             }
-            else if (TextUtils.isEmpty(itemNameValue))
+            else if (TextUtils.isEmpty(itemNameValue[0]))
             {
                 Toast.makeText(AdminFormActivity.this, "Please write product name...", Toast.LENGTH_LONG).show();
             }
             else
             {
                 if (intentIsNew) {
-                    StoreNewProductInformation();
+                    Log.i(TAG,"This is ItemNameVBalue"+ itemNameValue[0]);
+                    StoreNewProductInformation(itemNameValue[0]);
                 } else {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
-                    reference.child("productName").setValue(itemNameValue);
+                    reference.child("productName").setValue(itemNameValue[0]);
                     reference.child("price").setValue(newPrice[0]);
                     if (sbmtStockAvailability[0] == "No Stock"){
                         reference.child("inStock").setValue(false);
@@ -372,7 +392,7 @@ public class AdminFormActivity extends AppCompatActivity {
             // DEBUGGING
             System.out.println("-----DEBUGGING-----");
 
-            System.out.println("item name is: " + itemNameValue);
+            System.out.println("item name is: " + itemNameValue[0]);
             System.out.println("New price is: " + newPrice[0]);
             System.out.println("Stock Status is: " + sbmtStockAvailability[0]);
             System.out.println("Promotion Value is: " + sbmtPromotionSpinner[0]);
@@ -415,7 +435,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
 
-    private void StoreNewProductInformation()
+    private void StoreNewProductInformation(String itemNameValue)
     {
         loadingBar.setTitle("Add New Product");
         loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
@@ -430,10 +450,12 @@ public class AdminFormActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calendar.getTime());
 
-        productRandomKey = saveCurrentDate + saveCurrentTime;
+        //TODO Change Product Key
+        productRandomUUID = UUID.nameUUIDFromBytes(itemNameValue.getBytes());
+        productHashfromUUID = productRandomUUID.hashCode();
 
         System.out.println("final link is :" + image_url);
-        final StorageReference filePath = ProductImagesRef.child(image_url.getLastPathSegment() + productRandomKey + ".jpg");
+        final StorageReference filePath = ProductImagesRef.child(image_url.getLastPathSegment() + productHashfromUUID + ".jpg");
 
         final UploadTask uploadTask = filePath.putFile(image_url);
 
@@ -490,8 +512,8 @@ public class AdminFormActivity extends AppCompatActivity {
         productMap.put("date", saveCurrentDate);
         productMap.put("description", Description);
         productMap.put("imageURL", downloadImageUrl);
-        productMap.put("productID", productRandomKey);
-        productMap.put("productName", Pname);
+        productMap.put("productID", productHashfromUUID);
+        productMap.put("productName", itemNameValue[0]);
         productMap.put("price", Price);
         productMap.put("time", saveCurrentTime);
         //productMap.put("weight", Weight );
@@ -502,7 +524,7 @@ public class AdminFormActivity extends AppCompatActivity {
         productMap.put("inStock", sbmtStockAvailability[0].equals("No Stock")? true:false);
 
 
-        ProductsRef.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        ProductsRef.child(Integer.toString(productHashfromUUID)).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task)
             {
