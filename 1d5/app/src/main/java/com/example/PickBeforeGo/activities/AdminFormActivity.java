@@ -68,6 +68,7 @@ public class AdminFormActivity extends AppCompatActivity {
     final String[] priceChoice = {"0"};
     final String[] sbmtStockAvailability = new String[1];
     final String[] itemNameValue = new String[1];
+    final String[] newPrice = new String[1];
 
     boolean intentPromo;
     boolean intentStock;
@@ -264,7 +265,6 @@ public class AdminFormActivity extends AppCompatActivity {
         }
 
         //// Init Price ////
-        final String[] newPrice = new String[1];
         if (intentPrice!="null") {
             editPriceText.setText(intentPrice);
             priceChoice[0] = intentPrice;
@@ -514,7 +514,7 @@ public class AdminFormActivity extends AppCompatActivity {
         productMap.put("imageURL", downloadImageUrl);
         productMap.put("productID", productHashfromUUID);
         productMap.put("productName", itemNameValue[0]);
-        productMap.put("price", Price);
+        productMap.put("price", newPrice[0]);
         productMap.put("time", saveCurrentTime);
         //productMap.put("weight", Weight );
         productMap.put("nextRestockTime", Next_restock);
