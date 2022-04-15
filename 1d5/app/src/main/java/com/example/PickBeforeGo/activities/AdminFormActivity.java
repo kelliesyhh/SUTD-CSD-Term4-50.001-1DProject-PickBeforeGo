@@ -63,11 +63,13 @@ public class AdminFormActivity extends AppCompatActivity {
     private String product_id;
     String intentPrice;
     String intentPromoValue;
+    String intentDescription;
 
     final String[] promotionChoice = {"0%"};
     final String[] priceChoice = {"0"};
     final String[] sbmtStockAvailability = new String[1];
     final String[] itemNameValue = new String[1];
+    final String[] itemDescriptionValue = new String[1];
     final String[] newPrice = new String[1];
 
     boolean intentPromo;
@@ -105,6 +107,7 @@ public class AdminFormActivity extends AppCompatActivity {
             intentStock = resultIntent.getBoolean("inStock",false);
             intentIsNew = resultIntent.getBoolean("isNewProduct", true);
             image_url = Uri.parse(resultIntent.getString(IMAGE_URL));
+            intentDescription = resultIntent.getString("description", "null");
         } else {
             intentName = "null";
             intentPrice = "null";
@@ -141,6 +144,7 @@ public class AdminFormActivity extends AppCompatActivity {
         TextView PriceAfterPromotion = findViewById(R.id.PriceAfterPromotion);
         TextView itemName = findViewById(R.id.editItemName);
         ImageButton btnBack = findViewById(R.id.btnBack);
+        EditText itemDescription = findViewById(R.id.editDescription);
         Button btnSubmit = findViewById(R.id.btnSubmit);
         EditText editPriceText = findViewById(R.id.texteditPrice);
         Button dateButton;
@@ -179,6 +183,22 @@ public class AdminFormActivity extends AppCompatActivity {
 
                     OpenGallery();
                 }
+            }
+        });
+
+        /// Get Item Description
+        itemDescription.setText(intentDescription);
+        itemDescriptionValue[0] = intentDescription;
+        itemDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {  return; }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { return; }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                itemDescriptionValue[0] = editable.toString();
             }
         });
 
@@ -393,6 +413,7 @@ public class AdminFormActivity extends AppCompatActivity {
             System.out.println("-----DEBUGGING-----");
 
             System.out.println("item name is: " + itemNameValue[0]);
+            System.out.println("item description is :" + itemDescriptionValue[0]) ;
             System.out.println("New price is: " + newPrice[0]);
             System.out.println("Stock Status is: " + sbmtStockAvailability[0]);
             System.out.println("Promotion Value is: " + sbmtPromotionSpinner[0]);

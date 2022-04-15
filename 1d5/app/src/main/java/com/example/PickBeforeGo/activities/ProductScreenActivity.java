@@ -180,6 +180,7 @@ public class ProductScreenActivity extends AppCompatActivity {
                             // Filling intents
                             intentAdmin.putExtra(ProductAttributes.PRODUCT_ID, product_id);
                             intentAdmin.putExtra(ProductAttributes.NAME, name);
+                            intentAdmin.putExtra(ProductAttributes.DESCRIPTION,description);
                             intentAdmin.putExtra(ProductAttributes.PRICE, price);
                             intentAdmin.putExtra(ProductAttributes.IS_PROMO, isPromo);
                             intentAdmin.putExtra(ProductAttributes.STOCK, inStock);
