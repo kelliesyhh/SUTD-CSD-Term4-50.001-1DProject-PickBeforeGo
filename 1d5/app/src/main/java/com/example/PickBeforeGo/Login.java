@@ -64,7 +64,8 @@ public class Login extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (email.getText().toString() != null & password.getText().toString() != null){
+
+                if (!email.getText().toString().isEmpty() & !password.getText().toString().isEmpty()){
                     fAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
@@ -80,6 +81,9 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this, "Failed to Login to Account", Toast.LENGTH_SHORT).show();
                         }
                     });
+                } else {
+                    Log.i(TAG,"Empty email/password");
+                    Toast.makeText(Login.this, "Email/Password cannot be empty", Toast.LENGTH_SHORT).show();
                 }
             }
         });
