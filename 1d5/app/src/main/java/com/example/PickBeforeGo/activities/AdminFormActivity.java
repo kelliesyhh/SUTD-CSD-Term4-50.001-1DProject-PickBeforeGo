@@ -419,14 +419,17 @@ public class AdminFormActivity extends AppCompatActivity {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
                     reference.child("productName").setValue(itemNameValue[0]);
                     reference.child("price").setValue(newPrice[0]);
-                    if (sbmtStockAvailability[0] == "No Stock"){
+                    if (sbmtStockAvailability[0].equals("No Stock")){
                         reference.child("inStock").setValue(false);
+                        reference.child("isPromo").setValue(false);
                     }
-                    if (sbmtStockAvailability[0] == "Promotion"){
+                    if (sbmtStockAvailability[0].equals("Promotion")){
                         reference.child("isPromo").setValue(true);
-                    }
-                    if (sbmtStockAvailability[0] == "Available"){
                         reference.child("inStock").setValue(true);
+                    }
+                    if (sbmtStockAvailability[0].equals("Available")){
+                        reference.child("inStock").setValue(true);
+                        reference.child("isPromo").setValue(false);
                     }
                     reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+dayy+" "+monthh+" "+yearr);
                     Toast.makeText(AdminFormActivity.this, "Product details have been updated!", Toast.LENGTH_LONG).show();
@@ -567,9 +570,9 @@ public class AdminFormActivity extends AppCompatActivity {
         //productMap.put("weight", Weight );
         productMap.put("nextRestockTime", Next_restock);
         productMap.put("discountPercent", Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
-        productMap.put("isPromo",promotionChoice[0].equals("0%")? true : false);
         productMap.put("isFavourite",Favourite);
-        productMap.put("inStock", sbmtStockAvailability[0].equals("No Stock")? true:false);
+        productMap.put("inStock", sbmtStockAvailability[0].equals("No Stock")? false:true);
+        productMap.put("isPromo", sbmtStockAvailability[0].equals("Promotion"));
 
 
         ProductsRef.child(Integer.toString(productHashfromUUID)).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
