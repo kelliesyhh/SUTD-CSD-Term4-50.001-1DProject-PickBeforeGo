@@ -474,6 +474,9 @@ public class AdminFormActivity extends AppCompatActivity {
         //TODO Change Product Key
         productRandomUUID = UUID.nameUUIDFromBytes(itemNameValue.getBytes());
         productHashfromUUID = productRandomUUID.hashCode();
+        //String productHashfromUUIDstring;
+        //productHashfromUUIDstring = Integer.toString(productHashfromUUID);
+
 
         System.out.println("final link is :" + image_url);
         final StorageReference filePath = ProductImagesRef.child(image_url.getLastPathSegment() + productHashfromUUID + ".jpg");
@@ -533,7 +536,7 @@ public class AdminFormActivity extends AppCompatActivity {
         productMap.put("date", saveCurrentDate);
         productMap.put("description", Description);
         productMap.put("imageURL", downloadImageUrl);
-        productMap.put("productID", productHashfromUUID);
+        productMap.put("productID", Long.toString(productHashfromUUID));
         productMap.put("productName", itemNameValue[0]);
         productMap.put("price", newPrice[0]);
         productMap.put("time", saveCurrentTime);
