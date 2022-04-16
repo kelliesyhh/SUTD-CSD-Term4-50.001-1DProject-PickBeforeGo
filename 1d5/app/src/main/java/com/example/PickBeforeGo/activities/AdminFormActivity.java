@@ -113,10 +113,7 @@ public class AdminFormActivity extends AppCompatActivity {
             image_url = Uri.parse(resultIntent.getString(IMAGE_URL));
             intentDescription = resultIntent.getString("description", "Product Description");
         } else {
-<<<<<<< HEAD
-=======
             intentName = "Product Name";
->>>>>>> 160f8058eeba9729611bbc61afb5f4c3035538e8
             intentPrice = "null";
             intentDescription="Product Description";
             intentPromoValue = "0%";

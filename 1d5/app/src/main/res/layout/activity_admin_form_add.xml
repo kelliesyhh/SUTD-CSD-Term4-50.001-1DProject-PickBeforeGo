@@ -174,10 +174,7 @@
         android:ems="10"
         android:hint="Product Name"
         android:inputType="textPersonName"
-<<<<<<< HEAD
-=======
         android:text="Product Name"
->>>>>>> 160f8058eeba9729611bbc61afb5f4c3035538e8
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
