@@ -68,7 +68,7 @@ public class AdminFormActivity extends AppCompatActivity {
     String intentPromoValue;
     String intentDescription;
 
-    final String[] promotionChoice = {"0%"};
+    final String[] promotionChoice = {"1%"};
     final String[] priceChoice = {"0"};
     final String[] sbmtStockAvailability = new String[1];
     final String[] itemNameValue = new String[1];
@@ -418,7 +418,7 @@ public class AdminFormActivity extends AppCompatActivity {
                 } else {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
                     reference.child("productName").setValue(itemNameValue[0]);
-                    reference.child("price").setValue(newPrice[0]);
+//                    reference.child("price").setValue(newPrice[0]);
                     if (sbmtStockAvailability[0].equals("No Stock")){
                         reference.child("inStock").setValue(false);
                         reference.child("isPromo").setValue(false);
@@ -431,11 +431,12 @@ public class AdminFormActivity extends AppCompatActivity {
                         reference.child("inStock").setValue(true);
                         reference.child("isPromo").setValue(false);
                     }
+                    reference.child("discountPercent").setValue(Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
                     reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+dayy+" "+monthh+" "+yearr);
                     Toast.makeText(AdminFormActivity.this, "Product details have been updated!", Toast.LENGTH_LONG).show();
                 }
             }
-
+//            promotionChoice[0] = sbmtPromotionSpinner[0];
 
 
             // DEBUGGING
@@ -446,6 +447,7 @@ public class AdminFormActivity extends AppCompatActivity {
             System.out.println("New price is: " + newPrice[0]);
             System.out.println("Stock Status is: " + sbmtStockAvailability[0]);
             System.out.println("Promotion Value is: " + sbmtPromotionSpinner[0]);
+//            System.out.println(promotionChoice[0]);
 
             System.out.println("Restock Time is: " + sbmtRestockTime[0]);
             System.out.println("Restock day is: " + dayy);
