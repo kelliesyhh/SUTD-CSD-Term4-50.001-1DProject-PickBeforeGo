@@ -169,11 +169,15 @@
         android:id="@+id/editItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Product Name"
         android:inputType="textPersonName"
+<<<<<<< HEAD
+=======
+        android:text="Product Name"
+>>>>>>> 160f8058eeba9729611bbc61afb5f4c3035538e8
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
@@ -206,7 +210,7 @@
         android:layout_marginTop="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="description here"
+        android:text="Description"
         android:textColor="#808080"
         android:textColorHint="#000000"
         android:textSize="12sp"
