@@ -433,6 +433,7 @@ public class AdminFormActivity extends AppCompatActivity {
                     }
                     reference.child("discountPercent").setValue(Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
                     reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+dayy+" "+monthh+" "+yearr);
+                    reference.child("description").setValue(itemDescriptionValue[0]);
                     Toast.makeText(AdminFormActivity.this, "Product details have been updated!", Toast.LENGTH_LONG).show();
                 }
             }
