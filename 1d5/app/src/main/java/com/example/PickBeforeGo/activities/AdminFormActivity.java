@@ -101,7 +101,7 @@ public class AdminFormActivity extends AppCompatActivity {
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("imageURL");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Product_List");
         if(resultIntent != null) {
-            intentName = resultIntent.getString("name","null");
+            intentName = resultIntent.getString("name","Product Name");
             product_id = resultIntent.getString(ProductAttributes.PRODUCT_ID);
             intentPrice = resultIntent.getString("price","null");
             intentPrice = intentPrice.substring(1);
@@ -110,10 +110,11 @@ public class AdminFormActivity extends AppCompatActivity {
             intentStock = resultIntent.getBoolean("inStock",false);
             intentIsNew = resultIntent.getBoolean("isNewProduct", true);
             image_url = Uri.parse(resultIntent.getString(IMAGE_URL));
-            intentDescription = resultIntent.getString("description", "null");
+            intentDescription = resultIntent.getString("description", "Product Description");
         } else {
             intentName = "null";
             intentPrice = "null";
+            intentDescription="null";
             intentPromoValue = "0%";
             intentIsNew = true;
             image_url = null;
