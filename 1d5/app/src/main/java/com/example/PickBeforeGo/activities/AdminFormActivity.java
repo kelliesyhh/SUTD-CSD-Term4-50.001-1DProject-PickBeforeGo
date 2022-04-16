@@ -36,8 +36,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -388,7 +391,30 @@ public class AdminFormActivity extends AppCompatActivity {
             {
                 if (intentIsNew) {
                     Log.i(TAG,"This is ItemNameVBalue"+ itemNameValue[0]);
-                    StoreNewProductInformation(itemNameValue[0]);
+                    //TODO check if the string name already exists
+                    productRandomUUID = UUID.nameUUIDFromBytes(itemNameValue[0].getBytes());
+                    productHashfromUUID = productRandomUUID.hashCode();
+                    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Product_List");
+                    DatabaseReference userNameRef = rootRef.child(Integer.toString(productHashfromUUID));
+                    ValueEventListener eventListener = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(!dataSnapshot.exists()) {
+                                Log.d(TAG, "creating");
+                                StoreNewProductInformation(productHashfromUUID);
+                            } else {
+                                Toast.makeText(AdminFormActivity.this, "Product already exists", Toast.LENGTH_LONG).show();
+                                Log.d(TAG, "databaseError.getMessage()"); //Don't ignore errors!
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.d(TAG, "databaseError.getMessage()"); //Don't ignore errors!
+                        }
+                    };
+                    userNameRef.addListenerForSingleValueEvent(eventListener);
+
                 } else {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
                     reference.child("productName").setValue(itemNameValue[0]);
@@ -456,7 +482,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
 
-    private void StoreNewProductInformation(String itemNameValue)
+    private void StoreNewProductInformation(int productHashfromUUID)
     {
         loadingBar.setTitle("Add New Product");
         loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
@@ -472,8 +498,6 @@ public class AdminFormActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calendar.getTime());
 
         //TODO Change Product Key
-        productRandomUUID = UUID.nameUUIDFromBytes(itemNameValue.getBytes());
-        productHashfromUUID = productRandomUUID.hashCode();
         //String productHashfromUUIDstring;
         //productHashfromUUIDstring = Integer.toString(productHashfromUUID);
 
