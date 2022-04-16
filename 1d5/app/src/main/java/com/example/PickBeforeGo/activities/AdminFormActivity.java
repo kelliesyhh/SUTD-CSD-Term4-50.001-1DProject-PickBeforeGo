@@ -561,7 +561,7 @@ public class AdminFormActivity extends AppCompatActivity {
         HashMap<String, Object> productMap = new HashMap<>();
         //productMap.put("category", CategoryName);
         productMap.put("date", saveCurrentDate);
-        productMap.put("description", Description);
+        productMap.put("description", itemDescriptionValue[0]);
         productMap.put("imageURL", downloadImageUrl);
         productMap.put("productID", Long.toString(productHashfromUUID));
         productMap.put("productName", itemNameValue[0]);
