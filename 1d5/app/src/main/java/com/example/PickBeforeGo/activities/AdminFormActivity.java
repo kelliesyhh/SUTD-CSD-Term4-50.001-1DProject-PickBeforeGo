@@ -100,19 +100,19 @@ public class AdminFormActivity extends AppCompatActivity {
         Bundle resultIntent = getIntent().getExtras();
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("imageURL");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Product_List");
+        System.out.println(resultIntent==null);
         if(resultIntent != null) {
-            intentName = resultIntent.getString("name","null");
+            intentName = resultIntent.getString("name","Product Name");
             product_id = resultIntent.getString(ProductAttributes.PRODUCT_ID);
             intentPrice = resultIntent.getString("price","null");
             intentPrice = intentPrice.substring(1);
             intentPromoValue = resultIntent.getString("promoValue", "0%");
-            intentPromo = resultIntent.getBoolean("promotion",false);
-            intentStock = resultIntent.getBoolean("inStock",false);
+            intentPromo = resultIntent.getBoolean(ProductAttributes.IS_PROMO,false);
+            intentStock = resultIntent.getBoolean(ProductAttributes.STOCK,false);
             intentIsNew = resultIntent.getBoolean("isNewProduct", true);
             image_url = Uri.parse(resultIntent.getString(IMAGE_URL));
             intentDescription = resultIntent.getString("description", "null");
         } else {
-            intentName = "null";
             intentPrice = "null";
             intentPromoValue = "0%";
             intentIsNew = true;
@@ -155,12 +155,15 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
 
+
+
         //////////// INIT COMPONENTS ///////////////
 
         // Get Item Name
-        itemNameValue[0] = intentName;
-        itemName.setText(itemNameValue[0]);
-
+        if (intentName != null) {
+            itemNameValue[0] = intentName;
+            itemName.setText(itemNameValue[0]);
+        }
         itemName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {  return; }
@@ -205,6 +208,8 @@ public class AdminFormActivity extends AppCompatActivity {
             }
         });
 
+        System.out.println("DEBUG promo : " + intentPromo);
+        System.out.println("DEBUG inSTOCK : " + intentStock);
 
         //// Init Spinner -> Stock Availability ////
         Spinner spinnerStockAvailability = findViewById(R.id.StockAvailability);
