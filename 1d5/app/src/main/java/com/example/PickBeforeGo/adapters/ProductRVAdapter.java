@@ -27,6 +27,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         this.context = context;
         this.productArrayList = productArrayList;
         this.clickListener = clickListener;
+
     }
 
     @NonNull
@@ -75,6 +76,16 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         holder.inStock = product.getInStock();
         holder.discountPercent = product.getDiscountPercent();
         holder.restockTime = product.getNextRestockTime();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
