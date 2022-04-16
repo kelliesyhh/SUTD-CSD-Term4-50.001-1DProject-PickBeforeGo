@@ -32,13 +32,14 @@
                 <ImageView
                     android:id="@+id/imgProduct"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="280dp"
                     android:layout_gravity="center_horizontal|top"
                     android:layout_marginLeft="28dp"
                     android:layout_marginTop="26dp"
                     android:layout_marginRight="28dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Picture of Product"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/placeholder_product_pic" />
 
                 <androidx.cardview.widget.CardView
