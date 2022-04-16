@@ -23,7 +23,6 @@
     <!--    for the AdminFormActivity-->
     <string-array name="StockAvailability">
         <item>No Stock</item>
-        <item>Promotion</item>
         <item>Available</item>
     </string-array>
     <string-array name="NextRestockTime">

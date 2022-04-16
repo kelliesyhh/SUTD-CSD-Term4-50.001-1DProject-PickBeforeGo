@@ -71,6 +71,7 @@ public class AdminFormActivity extends AppCompatActivity {
     final String[] promotionChoice = {"1%"};
     final String[] priceChoice = {"0"};
     final String[] sbmtStockAvailability = new String[1];
+    final String[] sbmtPromotionSpinner = new String[1];
     final String[] itemNameValue = new String[1];
     final String[] itemDescriptionValue = new String[1];
     final String[] newPrice = new String[1];
@@ -111,7 +112,7 @@ public class AdminFormActivity extends AppCompatActivity {
             intentStock = resultIntent.getBoolean(ProductAttributes.STOCK,false);
             intentIsNew = resultIntent.getBoolean("isNewProduct", true);
             image_url = Uri.parse(resultIntent.getString(IMAGE_URL));
-            intentDescription = resultIntent.getString("description", "Product Description");
+            intentDescription = resultIntent.getString(ProductAttributes.DESCRIPTION, "Product Description");
         } else {
             intentName = "Product Name";
             intentPrice = "null";
@@ -221,17 +222,13 @@ public class AdminFormActivity extends AppCompatActivity {
 
         // Default Stock Availability Position
         String[] spinnerStockAvailOptions = getResources().getStringArray(R.array.StockAvailability);
-        String inPromotion = spinnerStockAvailOptions[1];
         String outStock = spinnerStockAvailOptions[0];
-        String inAvailability = spinnerStockAvailOptions[2];
+        String inAvailability = spinnerStockAvailOptions[1];
         ArrayAdapter SelectorAdaptor = (ArrayAdapter) spinnerStockAvailability.getAdapter();
 
-        int inPromotionPos = SelectorAdaptor.getPosition(inPromotion);
         int outStockPos = SelectorAdaptor.getPosition(outStock);
         int inAvailabilityPos = SelectorAdaptor.getPosition(inAvailability);
-        if (intentPromo) {
-            spinnerStockAvailability.setSelection(inPromotionPos);
-        } else if (!intentStock) {
+        if (!intentStock) {
             spinnerStockAvailability.setSelection(outStockPos);
         } else if (intentStock) {
             spinnerStockAvailability.setSelection(inAvailabilityPos);
@@ -304,7 +301,7 @@ public class AdminFormActivity extends AppCompatActivity {
             newPrice[0] = intentPrice;
         }
         // Setting Promotion //
-        final String[] sbmtPromotionSpinner = new String[1];
+
         spinnerPromotion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -422,6 +419,8 @@ public class AdminFormActivity extends AppCompatActivity {
                     };
                     userNameRef.addListenerForSingleValueEvent(eventListener);
 
+                    finish();
+
                 } else {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
                     reference.child("productName").setValue(itemNameValue[0]);
@@ -442,6 +441,8 @@ public class AdminFormActivity extends AppCompatActivity {
                     reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+dayy+" "+monthh+" "+yearr);
                     reference.child("description").setValue(itemDescriptionValue[0]);
                     Toast.makeText(AdminFormActivity.this, "Product details have been updated!", Toast.LENGTH_LONG).show();
+
+                    finish();
                 }
             }
 //            promotionChoice[0] = sbmtPromotionSpinner[0];
@@ -463,6 +464,7 @@ public class AdminFormActivity extends AppCompatActivity {
             System.out.println("Restock year is: " + yearr);
 
             System.out.println("Is a new Product?: " + intentIsNew);
+            System.out.println("Is this on promo?: " + !sbmtPromotionSpinner[0].equals("0%"));
 
         }));
 
@@ -582,7 +584,7 @@ public class AdminFormActivity extends AppCompatActivity {
         productMap.put("discountPercent", Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
         productMap.put("isFavourite",Favourite);
         productMap.put("inStock", sbmtStockAvailability[0].equals("No Stock")? false:true);
-        productMap.put("isPromo", sbmtStockAvailability[0].equals("Promotion"));
+        productMap.put("isPromo", !sbmtPromotionSpinner[0].equals("0%"));
 
 
         ProductsRef.child(Integer.toString(productHashfromUUID)).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
