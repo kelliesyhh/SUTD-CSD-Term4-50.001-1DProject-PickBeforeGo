@@ -76,6 +76,7 @@ public class AllFragment extends Fragment {
             @Override
             public void onItemClick(int position, String productName, String imageUrl, String description, String productID, String productPrice, Boolean isFavourite, Boolean inStock, Boolean isPromo, Double discountPercent, String restock_time) {
                 Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
+                System.out.println("item click all frag " + productPrice);
                 intent.putExtra(NAME, productName);
                 intent.putExtra(IMAGE_URL, imageUrl);
                 intent.putExtra(DESCRIPTION, description);

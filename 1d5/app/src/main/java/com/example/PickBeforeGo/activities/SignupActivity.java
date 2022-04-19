@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo;
+package com.example.PickBeforeGo.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 //import com.google.android.material.textfield.TextInputLayout;
+import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.helper.UserHelperClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Signup extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "TAG";
     EditText regFullname, regUsername, regEmail, regPassword;
@@ -54,7 +55,7 @@ public class Signup extends AppCompatActivity {
         regtoLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Signup.this,Login.class);
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -77,7 +78,7 @@ public class Signup extends AppCompatActivity {
             fAuth.createUserWithEmailAndPassword(regEmail.getText().toString(),regPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    Toast.makeText(Signup.this, "Account Created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
                     Log.i(TAG, "create user success");
 
                     //to store other values into the Firestore
@@ -89,13 +90,13 @@ public class Signup extends AppCompatActivity {
 
                     df.set(helperClass);
 
-                    startActivity(new Intent(Signup.this, Login.class));
+                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Signup.this, "Failed to create an Account", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Failed to create an Account", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {

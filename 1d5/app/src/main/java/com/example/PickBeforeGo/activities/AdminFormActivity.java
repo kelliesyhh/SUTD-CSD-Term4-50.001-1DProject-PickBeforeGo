@@ -423,6 +423,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
                 } else {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
+                    Double discountPercent = Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1));
                     reference.child("productName").setValue(itemNameValue[0]);
 //                    reference.child("price").setValue(newPrice[0]);
                     if (sbmtStockAvailability[0].equals("No Stock")){
@@ -437,6 +438,9 @@ public class AdminFormActivity extends AppCompatActivity {
                         reference.child("inStock").setValue(true);
                         reference.child("isPromo").setValue(false);
                     }
+                    if (discountPercent != 0){
+                        reference.child("isPromo").setValue(true);
+                    };
                     reference.child("discountPercent").setValue(Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
                     reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+dayy+" "+monthh+" "+yearr);
                     reference.child("description").setValue(itemDescriptionValue[0]);

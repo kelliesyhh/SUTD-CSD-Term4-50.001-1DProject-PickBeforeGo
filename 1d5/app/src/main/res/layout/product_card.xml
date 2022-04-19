@@ -53,7 +53,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:typeface="normal"></TextView>
+                    android:typeface="normal"/>
 
                 <TextView
                     android:id="@+id/txtPrice"

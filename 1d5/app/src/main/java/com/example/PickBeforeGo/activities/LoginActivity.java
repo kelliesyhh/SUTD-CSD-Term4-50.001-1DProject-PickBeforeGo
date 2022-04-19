@@ -1,4 +1,4 @@
-package com.example.PickBeforeGo;
+package com.example.PickBeforeGo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,21 +14,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.Signup;
 //import com.google.firebase.database.DataSnapshot;
+import com.example.PickBeforeGo.MainActivity;
+import com.example.PickBeforeGo.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button callSignUp, login_btn;
     ImageView image;
@@ -55,7 +50,7 @@ public class Login extends AppCompatActivity {
         callSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Login.this, Signup.class);
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +65,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Log.i(TAG,"Successful Login");
-                            Intent intent = new Intent(Login.this,MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -78,12 +73,12 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.i(TAG,"Failed Login");
-                            Toast.makeText(Login.this, "Failed to Login to Account", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Failed to Login to Account", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
                     Log.i(TAG,"Empty email/password");
-                    Toast.makeText(Login.this, "Email/Password cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Email/Password cannot be empty", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -94,7 +89,7 @@ public class Login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(Login.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
     }
