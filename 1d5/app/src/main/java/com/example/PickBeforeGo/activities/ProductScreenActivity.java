@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.components.ProductAttributes;
 import com.example.PickBeforeGo.fragments.InStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.InStockProductCardFragment;
@@ -28,8 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
 
 public class ProductScreenActivity extends AppCompatActivity {
     private String productId;
