@@ -5,8 +5,10 @@ public class UserHelperClass {
     String email;
     String password;
     boolean isAdmin;
-
-    //constructor
+    
+    //constructors
+    public UserHelperClass() {
+    }
     public UserHelperClass(String username, String email, String password, boolean isAdmin) {
         this.username = username;
         this.email = email;
