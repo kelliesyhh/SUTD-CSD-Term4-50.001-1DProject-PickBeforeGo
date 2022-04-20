@@ -5,13 +5,11 @@ import android.app.DatePickerDialog;
 import android.widget.Button;
 import android.widget.DatePicker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.PickBeforeGo.activities.AdminFormActivity;
 
 import java.util.Calendar;
 
-public class CalendarPicker {
+public class calendarPicker {
     public static DatePickerDialog datePickerDialog;
 
     public static void initDatePicker(AdminFormActivity mainActivity, Button dateButton) {
@@ -23,9 +21,9 @@ public class CalendarPicker {
                 String date = makeDateString(year, month, day);
                 System.out.println("i was called" + day + month + year);
                 dateButton.setText(date);
-                AdminFormActivity.dayy = String.valueOf(year);
-                AdminFormActivity.monthh = String.valueOf(month);
-                AdminFormActivity.yearr = String.valueOf(day);
+                AdminFormActivity.restockDay = String.valueOf(year);
+                AdminFormActivity.restockMonth = String.valueOf(month);
+                AdminFormActivity.restockYear = String.valueOf(day);
             }
         };
 

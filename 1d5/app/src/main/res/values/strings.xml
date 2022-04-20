@@ -4,7 +4,7 @@
     <string name="availability">Availability</string>
     <string name="placeholder_product_name">Hokkaido Milk Bread Gardenia</string>
     <string name="placeholder_weight">400g</string>
-    <string name="placeholder_price">$2.90</string>
+    <string name="placeholder_price">0.00</string>
     <string name="placeholder_address">8 Somapah Rd, #01-201 Building 2, Singapore 487372</string>
     <string name="placeholder_location"><![CDATA[Pick & Go @ SUTD]]></string>
     <string name="placeholder_stock">In Stock</string>
@@ -21,11 +21,11 @@
     <string name="promo_placeholder">Promo 20%</string>
 
     <!--    for the AdminFormActivity-->
-    <string-array name="StockAvailability">
+    <string-array name="arrSpinnerStockAvailability">
         <item>No Stock</item>
         <item>Available</item>
     </string-array>
-    <string-array name="NextRestockTime">
+    <string-array name="arrNextRestockTime">
         <item>00:00</item>
         <item>01:00</item>
         <item>02:00</item>
@@ -51,7 +51,7 @@
         <item>22:00</item>
         <item>23:00</item>
     </string-array>
-    <string-array name="promotion">
+    <string-array name="arrPromotion">
         <item>0%</item>
         <item>5%</item>
         <item>15%</item>

@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
     <Spinner
-        android:id="@+id/StockAvailability"
+        android:id="@+id/spinnerStockAvailability"
         android:layout_width="210dp"
         android:layout_height="35dp"
         android:layout_marginTop="90dp"
@@ -39,10 +39,10 @@
         android:spinnerMode="dropdown"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editItemName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
     <Spinner
-        android:id="@+id/promotionn"
+        android:id="@+id/spinnerPromotion"
         android:layout_width="185dp"
         android:layout_height="35dp"
         android:layout_marginTop="40dp"
@@ -50,7 +50,7 @@
         android:spinnerMode="dropdown"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StockAvailability" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerStockAvailability" />
 
     <TextView
         android:id="@+id/textStockAvailability"
@@ -64,7 +64,7 @@
 
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editItemName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
     <TextView
         android:id="@+id/textPromotion"
@@ -106,17 +106,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textPrice2" />
 
     <EditText
-        android:id="@+id/texteditPrice"
+        android:id="@+id/editTextPrice"
         android:layout_width="185dp"
         android:layout_height="33dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="35dp"
         android:ems="10"
-        android:hint="price"
+        android:hint="Price"
         android:inputType="none|numberDecimal"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/promotionn" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPromotion" />
 
     <TextView
         android:id="@+id/dollarSign"
@@ -125,8 +125,8 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="10dp"
         android:text="$"
-        app:layout_constraintEnd_toStartOf="@+id/texteditPrice"
-        app:layout_constraintTop_toBottomOf="@+id/promotionn" />
+        app:layout_constraintEnd_toStartOf="@+id/editTextPrice"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPromotion" />
 
     <TextView
         android:id="@+id/dollarSign2"
@@ -135,11 +135,11 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="23dp"
         android:text="$"
-        app:layout_constraintEnd_toStartOf="@+id/PriceAfterPromotion"
-        app:layout_constraintTop_toBottomOf="@+id/texteditPrice" />
+        app:layout_constraintEnd_toStartOf="@+id/txtViewPriceAfterPromo"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrice" />
 
     <TextView
-        android:id="@+id/PriceAfterPromotion"
+        android:id="@+id/txtViewPriceAfterPromo"
         android:layout_width="172dp"
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
@@ -148,7 +148,7 @@
         android:text="blank"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texteditPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrice" />
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -166,7 +166,7 @@
 
 
     <EditText
-        android:id="@+id/editItemName"
+        android:id="@+id/editTextName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -174,7 +174,6 @@
         android:ems="10"
         android:hint="Product Name"
         android:inputType="textPersonName"
-        android:text="Product Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 
@@ -187,10 +186,10 @@
         android:text="submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PriceAfterPromotion" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewPriceAfterPromo" />
 
     <ImageView
-        android:id="@+id/placeImage"
+        android:id="@+id/imgViewUploadedImage"
         android:layout_width="98dp"
         android:layout_height="99dp"
         android:layout_marginTop="110dp"
@@ -207,11 +206,11 @@
         android:layout_marginTop="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Description"
+        android:hint="Product Description"
         android:textColor="#808080"
         android:textColorHint="#000000"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editItemName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

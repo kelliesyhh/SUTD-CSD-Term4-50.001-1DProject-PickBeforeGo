@@ -27,7 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.components.CalendarPicker;
+import com.example.PickBeforeGo.components.calendarPicker;
 import com.example.PickBeforeGo.components.ProductAttributes;
 import com.example.PickBeforeGo.helper.PromotionHelper;
 
@@ -53,20 +53,22 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class AdminFormActivity extends AppCompatActivity {
-    private static final String TAG = "admin";
-    private static final String IMAGE_URL = "image_url";
-    private Uri image_url;
+    private static final String DATABASE_TAG = "admin_database";
+    private static final String DEBUG = "debug_admin";
+    private Uri imageUri;
 
+    public static String restockDay;
+    public static String restockMonth;
+    public static String restockYear;
 
-    public static String dayy;
-    public static String monthh;
-    public static String yearr;
-
-    String intentName;
-    private String product_id;
-    String intentPrice;
-    String intentPromoValue;
-    String intentDescription;
+    String productNameFromIntent;
+    String productIdFromIntent;
+    String productPriceFromIntent;
+    String productPromoValueFromIntent;
+    String productDescriptionFromIntent;
+    boolean isPromoFromIntent;
+    boolean inStockFromIntent;
+    boolean isNewProductFromIntent;
 
     final String[] promotionChoice = {"1%"};
     final String[] priceChoice = {"0"};
@@ -76,22 +78,19 @@ public class AdminFormActivity extends AppCompatActivity {
     final String[] itemDescriptionValue = new String[1];
     final String[] newPrice = new String[1];
 
-    boolean intentPromo;
-    boolean intentStock;
-    boolean intentIsNew;
+    private static final int galleryPick = 1;
+    private ImageView imgViewUploadedImage;
 
-    private static final int GalleryPick = 1;
-    private ImageView placeImage;
-
-
-    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime, Weight="", Next_restock="";
+    private String saveCurrentDate;
+    private String saveCurrentTime;
+    private final String nextRestockTiming = "";
     private String downloadImageUrl;
     private UUID productRandomUUID;
     private int productHashfromUUID;
-    private StorageReference ProductImagesRef;
-    private DatabaseReference ProductsRef;
+    private StorageReference storageRefProductImages;
+    private DatabaseReference dbRefProduct;
     private ProgressDialog loadingBar;
-    private Boolean Favourite=false;
+    private final Boolean isFavourite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,40 +98,39 @@ public class AdminFormActivity extends AppCompatActivity {
 
         ///// Receiving Intents /////
         Bundle resultIntent = getIntent().getExtras();
-        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("imageURL");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Product_List");
-        System.out.println(resultIntent==null);
-        if(resultIntent != null) {
-            intentName = resultIntent.getString("name","Product Name");
-            product_id = resultIntent.getString(ProductAttributes.PRODUCT_ID);
-            intentPrice = resultIntent.getString("price","null");
-            intentPrice = intentPrice.substring(1);
-            intentPromoValue = resultIntent.getString("promoValue", "0%");
-            intentPromo = resultIntent.getBoolean(ProductAttributes.IS_PROMO,false);
-            intentStock = resultIntent.getBoolean(ProductAttributes.STOCK,false);
-            intentIsNew = resultIntent.getBoolean("isNewProduct", true);
-            image_url = Uri.parse(resultIntent.getString(IMAGE_URL));
-            intentDescription = resultIntent.getString(ProductAttributes.DESCRIPTION, "Product Description");
-        } else {
-            intentName = "Product Name";
-            intentPrice = "null";
-            intentDescription="Product Description";
-            intentPromoValue = "0%";
-            intentIsNew = true;
-            image_url = null;
+        storageRefProductImages = FirebaseStorage.getInstance().getReference().child("imageURL");
+        dbRefProduct = FirebaseDatabase.getInstance().getReference().child("Product_List");
+        if (resultIntent != null) {
+            productNameFromIntent = resultIntent.getString("name","Product Name");
+            productIdFromIntent = resultIntent.getString(ProductAttributes.PRODUCT_ID);
+            productPriceFromIntent = resultIntent.getString("price","null");
+            productPriceFromIntent = productPriceFromIntent.substring(1);
+            productPromoValueFromIntent = resultIntent.getString("promoValue", "0%");
+            isPromoFromIntent = resultIntent.getBoolean(ProductAttributes.IS_PROMO,false);
+            inStockFromIntent = resultIntent.getBoolean(ProductAttributes.STOCK,false);
+            isNewProductFromIntent = resultIntent.getBoolean("isNewProduct", true);
+            imageUri = Uri.parse(resultIntent.getString(ProductAttributes.IMAGE_URL));
+            productDescriptionFromIntent = resultIntent.getString(ProductAttributes.DESCRIPTION, "Product Description");
+        }
+        else {
+            productPriceFromIntent = "null";
+            productPromoValueFromIntent = "0%";
+            isNewProductFromIntent = true;
+            imageUri = null;
         }
 
-        String[] todayDate = CalendarPicker.getTodayInit();
-        dayy = todayDate[0];
-        monthh = todayDate[1];
-        yearr = todayDate[2];
+        String[] todayDate = calendarPicker.getTodayInit();
+        restockDay = todayDate[0];
+        restockMonth = todayDate[1];
+        restockYear = todayDate[2];
 
-        if (intentIsNew) {
-            dayy = "null";
-            monthh = "null";
-            yearr = "null";
+        if (isNewProductFromIntent) {
+            restockDay = "null";
+            restockMonth = "null";
+            restockYear = "null";
             setContentView(R.layout.activity_admin_form_add);
-        } else {
+        }
+        else {
             setContentView(R.layout.activity_admin_form_edit);
         }
 
@@ -141,38 +139,32 @@ public class AdminFormActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
 
 
-
         /*----------------------------------------------------------------------------*/
 
         //////////// INIT VARIABLES ///////////////
-
-
-        TextView PriceAfterPromotion = findViewById(R.id.PriceAfterPromotion);
-        TextView itemName = findViewById(R.id.editItemName);
+        TextView txtViewPriceAfterPromo = findViewById(R.id.txtViewPriceAfterPromo);
+        EditText editTextName = findViewById(R.id.editTextName);
         ImageButton btnBack = findViewById(R.id.btnBack);
         EditText itemDescription = findViewById(R.id.editDescription);
         Button btnSubmit = findViewById(R.id.btnSubmit);
-        EditText editPriceText = findViewById(R.id.texteditPrice);
-        Button dateButton;
-        placeImage = findViewById(R.id.placeImage);
-
-
-
-
+        EditText editTextPrice = findViewById(R.id.editTextPrice);
+        Button btnDate;
+        imgViewUploadedImage = findViewById(R.id.imgViewUploadedImage);
 
         //////////// INIT COMPONENTS ///////////////
-
         // Get Item Name
-        if (intentName != null) {
-            itemNameValue[0] = intentName;
-            itemName.setText(itemNameValue[0]);
+        if (productNameFromIntent != null) {
+            itemNameValue[0] = productNameFromIntent;
+            editTextName.setText(itemNameValue[0]);
         }
-        itemName.addTextChangedListener(new TextWatcher() {
+        editTextName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {  return; }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { return; }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -181,63 +173,59 @@ public class AdminFormActivity extends AppCompatActivity {
         });
 
         // Get Item Image
-        Picasso.get().load(image_url).placeholder(R.drawable.placeholder_product_pic).into(placeImage);
-
-        // TODO: Opening Gallery
-        placeImage.setOnClickListener(new View.OnClickListener() {
+        Picasso.get().load(imageUri).placeholder(R.drawable.placeholder_product_pic).into(imgViewUploadedImage);
+        imgViewUploadedImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                if (intentIsNew) {
-
-                    OpenGallery();
+            public void onClick(View view) {
+                if (isNewProductFromIntent) {
+                    openGallery();
                 }
             }
         });
 
         /// Get Item Description
-        itemDescription.setText(intentDescription);
-        itemDescriptionValue[0] = intentDescription;
+        itemDescription.setText(productDescriptionFromIntent);
+        itemDescriptionValue[0] = productDescriptionFromIntent;
         itemDescription.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {  return; }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { return; }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 itemDescriptionValue[0] = editable.toString();
             }
         });
-
-        System.out.println("DEBUG promo : " + intentPromo);
-        System.out.println("DEBUG inSTOCK : " + intentStock);
+        Log.i(DEBUG, "isPromo : " + isPromoFromIntent);
+        Log.i(DEBUG, "inStock : " + inStockFromIntent);
 
         //// Init Spinner -> Stock Availability ////
-        Spinner spinnerStockAvailability = findViewById(R.id.StockAvailability);
-        ArrayAdapter<CharSequence> adapterStockAvailability = ArrayAdapter.createFromResource(this, R.array.StockAvailability, android.R.layout.simple_spinner_item);
+        Spinner spinnerStockAvailability = findViewById(R.id.spinnerStockAvailability);
+        ArrayAdapter<CharSequence> adapterStockAvailability = ArrayAdapter.createFromResource(this, R.array.arrSpinnerStockAvailability, android.R.layout.simple_spinner_item);
         adapterStockAvailability.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerStockAvailability.setAdapter(adapterStockAvailability);
 
         // Default Stock Availability Position
-        String[] spinnerStockAvailOptions = getResources().getStringArray(R.array.StockAvailability);
+        String[] spinnerStockAvailOptions = getResources().getStringArray(R.array.arrSpinnerStockAvailability);
         String outStock = spinnerStockAvailOptions[0];
         String inAvailability = spinnerStockAvailOptions[1];
         ArrayAdapter SelectorAdaptor = (ArrayAdapter) spinnerStockAvailability.getAdapter();
 
         int outStockPos = SelectorAdaptor.getPosition(outStock);
         int inAvailabilityPos = SelectorAdaptor.getPosition(inAvailability);
-        if (!intentStock) {
+        if (!inStockFromIntent) {
             spinnerStockAvailability.setSelection(outStockPos);
-        } else if (intentStock) {
+        } else if (inStockFromIntent) {
             spinnerStockAvailability.setSelection(inAvailabilityPos);
         } else {
-            System.out.println("There exist an error in Selecting the Spinner for Stock Avail!");
+            Log.i(DEBUG, "There exists an error in Selecting the Spinner for Stock Avail!");
         }
 
         // New Stock Availability Position //
-
         spinnerStockAvailability.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Object item = parent.getItemAtPosition(position);
@@ -250,17 +238,17 @@ public class AdminFormActivity extends AppCompatActivity {
 
 
         final String[] sbmtRestockTime = new String[1];
-        if (!intentIsNew) {
+        if (!isNewProductFromIntent) {
             //// Init Spinner -> Next Restock Timing ////
-            Spinner spinnerRestockTime = findViewById(R.id.NextRestockTime);
-            ArrayAdapter<CharSequence> adapterRestockTime = ArrayAdapter.createFromResource(this, R.array.NextRestockTime, android.R.layout.simple_spinner_item);
+            Spinner spinnerRestockTime = findViewById(R.id.spinnerNextRestockTime);
+            ArrayAdapter<CharSequence> adapterRestockTime = ArrayAdapter.createFromResource(this, R.array.arrNextRestockTime, android.R.layout.simple_spinner_item);
             adapterRestockTime.setDropDownViewResource(android.R.layout.simple_spinner_item);
             spinnerRestockTime.setAdapter(adapterRestockTime);
 
             //// Init Calendar Selector -> Next Restock Date ////
-            dateButton = findViewById(R.id.dateButton);
-            CalendarPicker.initDatePicker(this, dateButton);
-            dateButton.setText(CalendarPicker.getTodaysDate());
+            btnDate = findViewById(R.id.btnDate);
+            calendarPicker.initDatePicker(this, btnDate);
+            btnDate.setText(calendarPicker.getTodaysDate());
 
             //// Next Restock time ////
             spinnerRestockTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -275,65 +263,62 @@ public class AdminFormActivity extends AppCompatActivity {
         }
 
         //// Init Spinner -> Promotion ////
-        Spinner spinnerPromotion = findViewById(R.id.promotionn);
-        ArrayAdapter<CharSequence> adapterPromotion = ArrayAdapter.createFromResource(this, R.array.promotion, android.R.layout.simple_spinner_item);
+        Spinner spinnerPromotion = findViewById(R.id.spinnerPromotion);
+        ArrayAdapter<CharSequence> adapterPromotion = ArrayAdapter.createFromResource(this, R.array.arrPromotion, android.R.layout.simple_spinner_item);
         adapterPromotion.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerPromotion.setAdapter(adapterPromotion);
 
         // Default Promotion Position
-        String[] spinnerPromoOptions = getResources().getStringArray(R.array.promotion);
-        ArrayAdapter SelectorPromoAdaptor = (ArrayAdapter) spinnerPromotion.getAdapter();
+        String[] spinnerPromoOptions = getResources().getStringArray(R.array.arrPromotion);
+        ArrayAdapter selectorPromoAdaptor = (ArrayAdapter) spinnerPromotion.getAdapter();
         for (int i=0; i < spinnerPromoOptions.length; i++ ) {
-            if (intentPromoValue.equals(spinnerPromoOptions[i])   ) {
-                int chosenPromo = SelectorPromoAdaptor.getPosition(spinnerPromoOptions[i]);
+            if (productPromoValueFromIntent.equals(spinnerPromoOptions[i])) {
+                int chosenPromo = selectorPromoAdaptor.getPosition(spinnerPromoOptions[i]);
                 spinnerPromotion.setSelection(chosenPromo);
-                promotionChoice[0] = intentPromoValue;
+                promotionChoice[0] = productPromoValueFromIntent;
             }
         }
 
         //// Init Price ////
-        if (intentPrice!="null") {
-            editPriceText.setText(intentPrice);
-            priceChoice[0] = intentPrice;
+        if (!productPriceFromIntent.equals("null")) {
+            editTextPrice.setText(productPriceFromIntent);
+            priceChoice[0] = productPriceFromIntent;
 
             String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
-            PriceAfterPromotion.setText(newPromotedValue);
-            newPrice[0] = intentPrice;
+            txtViewPriceAfterPromo.setText(newPromotedValue);
+            newPrice[0] = productPriceFromIntent;
         }
-        // Setting Promotion //
 
+        // Setting Promotion //
         spinnerPromotion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 promotionChoice[0] = spinnerPromotion.getSelectedItem().toString();
-
                 if (!priceChoice[0].isEmpty()) {
                     String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
-                    PriceAfterPromotion.setText(newPromotedValue);
-
+                    txtViewPriceAfterPromo.setText(newPromotedValue);
                     sbmtPromotionSpinner[0] = spinnerPromotion.getSelectedItem().toString();
                     newPrice[0] = newPromotedValue;
                 } else {
-                    PriceAfterPromotion.setText(priceChoice[0]);
-
+                    txtViewPriceAfterPromo.setText(priceChoice[0]);
                     sbmtPromotionSpinner[0] = "null";
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                return;
             }
         });
 
         //// Init Edit Text -> Price Value ////
-        EditText editPrice = findViewById(R.id.texteditPrice);
-        editPrice.addTextChangedListener(new TextWatcher() {
+        editTextPrice.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {  return; }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { return; }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -341,25 +326,15 @@ public class AdminFormActivity extends AppCompatActivity {
 
                 if (!priceChoice[0].isEmpty()) {
                     String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
-                    PriceAfterPromotion.setText(newPromotedValue);
+                    txtViewPriceAfterPromo.setText(newPromotedValue);
                     newPrice[0] = newPromotedValue;
-                    System.out.println("item name is: " + itemNameValue[0]);
+                    Log.i(DEBUG, "item name is: " + itemNameValue[0]);
 
                 } else {
-                    PriceAfterPromotion.setText("0.00");
+                    txtViewPriceAfterPromo.setText(R.string.placeholder_price);
                 }
             }
         });
-
-
-        ///////// Storing NEW VARIABLES ///////////
-
-
-
-
-
-        /*----------------------------------------------------------------*/
-
 
         //// Init Buttons ////
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -369,184 +344,153 @@ public class AdminFormActivity extends AppCompatActivity {
             }
         });
 
-        // SUBMITTING NEW VARIABLES TODO: submit to database.
-        btnSubmit.setOnClickListener((view -> {
-
-            //////////
-            if (placeImage == null || image_url==null)
-            {
-                Toast toast = Toast.makeText(AdminFormActivity.this, "Product image is mandatory...", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-//            else if (TextUtils.isEmpty(Description))
-//            {
-//                Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
-//            }
-            else if (TextUtils.isEmpty(newPrice[0]))
-            {
-                Toast toast = Toast.makeText(AdminFormActivity.this, "Please write product Price...", Toast.LENGTH_LONG);
-                toast.show();
-            }
-            else if (TextUtils.isEmpty(itemNameValue[0]))
-            {
-                Toast.makeText(AdminFormActivity.this, "Please write product name...", Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-                if (intentIsNew) {
-                    Log.i(TAG,"This is ItemNameVBalue"+ itemNameValue[0]);
-                    //TODO check if the string name already exists
-                    productRandomUUID = UUID.nameUUIDFromBytes(itemNameValue[0].getBytes());
-                    productHashfromUUID = productRandomUUID.hashCode();
-                    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Product_List");
-                    DatabaseReference userNameRef = rootRef.child(Integer.toString(productHashfromUUID));
-                    ValueEventListener eventListener = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(!dataSnapshot.exists()) {
-                                Log.d(TAG, "creating");
-                                StoreNewProductInformation(productHashfromUUID);
-                            } else {
-                                Toast.makeText(AdminFormActivity.this, "Product already exists", Toast.LENGTH_LONG).show();
-                                Log.d(TAG, "databaseError.getMessage()"); //Don't ignore errors!
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Log.d(TAG, "databaseError.getMessage()"); //Don't ignore errors!
-                        }
-                    };
-                    userNameRef.addListenerForSingleValueEvent(eventListener);
-
-                    finish();
-
-                } else {
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(product_id);
-                    Double discountPercent = Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1));
-                    reference.child("productName").setValue(itemNameValue[0]);
-//                    reference.child("price").setValue(newPrice[0]);
-                    if (sbmtStockAvailability[0].equals("No Stock")){
-                        reference.child("inStock").setValue(false);
-                        reference.child("isPromo").setValue(false);
-                    }
-                    if (sbmtStockAvailability[0].equals("Promotion")){
-                        reference.child("isPromo").setValue(true);
-                        reference.child("inStock").setValue(true);
-                    }
-                    if (sbmtStockAvailability[0].equals("Available")){
-                        reference.child("inStock").setValue(true);
-                        reference.child("isPromo").setValue(false);
-                    }
-                    if (discountPercent != 0){
-                        reference.child("isPromo").setValue(true);
-                    };
-                    reference.child("discountPercent").setValue(Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
-                    reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+dayy+" "+monthh+" "+yearr);
-                    reference.child("description").setValue(itemDescriptionValue[0]);
-                    Toast.makeText(AdminFormActivity.this, "Product details have been updated!", Toast.LENGTH_LONG).show();
-
-                    finish();
+        /*----------------------------------------------------------------*/
+        // SUBMITTING NEW VARIABLES
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Checking if product details are properly entered before submitting
+                if (imgViewUploadedImage == null || imageUri == null) {
+                    Toast toast = Toast.makeText(AdminFormActivity.this, "Product image is mandatory!", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
+                else if (TextUtils.isEmpty(itemDescriptionValue[0])) {
+                    Toast.makeText(AdminFormActivity.this, "Please enter product description!", Toast.LENGTH_SHORT).show();
+                }
+                else if (TextUtils.isEmpty(newPrice[0])) {
+                    Toast.makeText(AdminFormActivity.this, "Please enter product price!", Toast.LENGTH_LONG).show();
+                }
+                else if (TextUtils.isEmpty(itemNameValue[0])) {
+                    Toast.makeText(AdminFormActivity.this, "Please enter product name!", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    if (isNewProductFromIntent) {
+                        Log.i(DEBUG,"Item Name: " + itemNameValue[0]);
+                        // check if the string name already exists
+                        productRandomUUID = UUID.nameUUIDFromBytes(itemNameValue[0].getBytes());
+                        productHashfromUUID = productRandomUUID.hashCode();
+                        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Product_List");
+                        DatabaseReference userNameRef = rootRef.child(Integer.toString(productHashfromUUID));
+                        ValueEventListener eventListener = new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(!dataSnapshot.exists()) {
+                                    Log.d(DATABASE_TAG, "Creating product");
+                                    storeNewProductInformation(productHashfromUUID);
+                                } else {
+                                    Toast.makeText(AdminFormActivity.this, "Product already exists", Toast.LENGTH_LONG).show();
+                                    Log.d(DATABASE_TAG, "databaseError.getMessage()");
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.d(DATABASE_TAG, "databaseError.getMessage()");
+                            }
+                        };
+                        userNameRef.addListenerForSingleValueEvent(eventListener);
+
+                        finish();
+
+                    } else {
+                        Double discountPercent = Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1));
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Product_List").child(productIdFromIntent);
+                        reference.child("productName").setValue(itemNameValue[0]);
+//                    reference.child("price").setValue(newPrice[0]);
+                        if (sbmtStockAvailability[0].equals("No Stock")){
+                            reference.child("inStock").setValue(false);
+                            reference.child("isPromo").setValue(false);
+                        }
+                        if (sbmtStockAvailability[0].equals("Promotion")){
+                            reference.child("isPromo").setValue(true);
+                            reference.child("inStock").setValue(true);
+                        }
+                        if (sbmtStockAvailability[0].equals("Available")){
+                            reference.child("inStock").setValue(true);
+                            reference.child("isPromo").setValue(false);
+                        }
+                        if (discountPercent != 0){
+                            reference.child("isPromo").setValue(true);
+                        }
+                        reference.child("discountPercent").setValue(Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
+                        reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+restockDay+" "+ restockMonth +" "+ restockYear);
+                        reference.child("description").setValue(itemDescriptionValue[0]);
+                        Toast.makeText(AdminFormActivity.this, "Product details have been updated!", Toast.LENGTH_LONG).show();
+
+                        finish();
+                    }
+                }
+
+                // DEBUGGING
+                Log.i(DEBUG, "item name is: " + itemNameValue[0]);
+                Log.i(DEBUG, "item description is :" + itemDescriptionValue[0]) ;
+                Log.i(DEBUG, "New price is: " + newPrice[0]);
+                Log.i(DEBUG, "Stock Status is: " + sbmtStockAvailability[0]);
+                Log.i(DEBUG, "Promotion Value is: " + sbmtPromotionSpinner[0]);
+
+                Log.i(DEBUG, "Restock Time is: " + sbmtRestockTime[0]);
+                Log.i(DEBUG, "Restock day is: " + restockDay);
+                Log.i(DEBUG, "Restock month is: " + restockMonth);
+                Log.i(DEBUG, "Restock year is: " + restockYear);
+
+                Log.i(DEBUG, "Is a new Product?: " + isNewProductFromIntent);
+                Log.i(DEBUG, "Is this on promo?: " + !sbmtPromotionSpinner[0].equals("0%"));
             }
-//            promotionChoice[0] = sbmtPromotionSpinner[0];
-
-
-            // DEBUGGING
-            System.out.println("-----DEBUGGING-----");
-
-            System.out.println("item name is: " + itemNameValue[0]);
-            System.out.println("item description is :" + itemDescriptionValue[0]) ;
-            System.out.println("New price is: " + newPrice[0]);
-            System.out.println("Stock Status is: " + sbmtStockAvailability[0]);
-            System.out.println("Promotion Value is: " + sbmtPromotionSpinner[0]);
-//            System.out.println(promotionChoice[0]);
-
-            System.out.println("Restock Time is: " + sbmtRestockTime[0]);
-            System.out.println("Restock day is: " + dayy);
-            System.out.println("Restock month is: " + monthh);
-            System.out.println("Restock year is: " + yearr);
-
-            System.out.println("Is a new Product?: " + intentIsNew);
-            System.out.println("Is this on promo?: " + !sbmtPromotionSpinner[0].equals("0%"));
-
-        }));
-
-
-
-
+        });
     }
 
-    private void OpenGallery()
-    {
+    private void openGallery() {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, GalleryPick);
+        startActivityForResult(galleryIntent, galleryPick);
     }
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
-        {
-            image_url = data.getData();
-            System.out.println("new image kink is " + image_url);
-            placeImage.setImageURI(image_url);
+        if (requestCode == galleryPick && resultCode == RESULT_OK && data != null) {
+            imageUri = data.getData();
+            Log.i(DEBUG, "new image uri is " + imageUri);
+            imgViewUploadedImage.setImageURI(imageUri);
         }
     }
 
-
-
-    private void StoreNewProductInformation(int productHashfromUUID)
-    {
-        loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
-        loadingBar.setCanceledOnTouchOutside(false);
-        loadingBar.show();
+    private void storeNewProductInformation(int productHashfromUUID) {
+        if(!this.isFinishing()) {
+            loadingBar.setTitle("Add New Product");
+            loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+        }
 
         Calendar calendar = Calendar.getInstance();
-
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
-
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calendar.getTime());
 
         //TODO Change Product Key
-        //String productHashfromUUIDstring;
-        //productHashfromUUIDstring = Integer.toString(productHashfromUUID);
 
-
-        System.out.println("final link is :" + image_url);
-        final StorageReference filePath = ProductImagesRef.child(image_url.getLastPathSegment() + productHashfromUUID + ".jpg");
-
-        final UploadTask uploadTask = filePath.putFile(image_url);
-
-
+        Log.i(DEBUG, "Image URI:" + imageUri);
+        final StorageReference filePath = storageRefProductImages.child(imageUri.getLastPathSegment() + productHashfromUUID + ".jpg");
+        final UploadTask uploadTask = filePath.putFile(imageUri);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e)
-            {
+            public void onFailure(@NonNull Exception e) {
                 String message = e.toString();
                 Toast.makeText(AdminFormActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-            {
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(AdminFormActivity.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
 
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
-                    {
-                        if (!task.isSuccessful())
-                        {
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
                             throw task.getException();
                         }
 
@@ -555,15 +499,11 @@ public class AdminFormActivity extends AppCompatActivity {
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
-                    public void onComplete(@NonNull Task<Uri> task)
-                    {
-                        if (task.isSuccessful())
-                        {
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
                             downloadImageUrl = task.getResult().toString();
-
                             Toast.makeText(AdminFormActivity.this, "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
-
-                            SaveProductInfoToDatabase();
+                            saveProductInfoToDatabase();
                         }
                     }
                 });
@@ -571,11 +511,8 @@ public class AdminFormActivity extends AppCompatActivity {
         });
     }
 
-
-    private void SaveProductInfoToDatabase()
-    {
+    private void saveProductInfoToDatabase() {
         HashMap<String, Object> productMap = new HashMap<>();
-        //productMap.put("category", CategoryName);
         productMap.put("date", saveCurrentDate);
         productMap.put("description", itemDescriptionValue[0]);
         productMap.put("imageURL", downloadImageUrl);
@@ -583,35 +520,25 @@ public class AdminFormActivity extends AppCompatActivity {
         productMap.put("productName", itemNameValue[0]);
         productMap.put("price", newPrice[0]);
         productMap.put("time", saveCurrentTime);
-        //productMap.put("weight", Weight );
-        productMap.put("nextRestockTime", Next_restock);
+        productMap.put("nextRestockTime", nextRestockTiming);
         productMap.put("discountPercent", Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
-        productMap.put("isFavourite",Favourite);
-        productMap.put("inStock", sbmtStockAvailability[0].equals("No Stock")? false:true);
+        productMap.put("isFavourite", isFavourite);
+        productMap.put("inStock", !sbmtStockAvailability[0].equals("No Stock"));
         productMap.put("isPromo", !sbmtPromotionSpinner[0].equals("0%"));
 
-
-        ProductsRef.child(Integer.toString(productHashfromUUID)).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        dbRefProduct.child(Integer.toString(productHashfromUUID)).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task)
-            {
-                if (task.isSuccessful())
-                {
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
                     loadingBar.dismiss();
                     Toast.makeText(AdminFormActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
+                else {
                     loadingBar.dismiss();
                     String message = task.getException().toString();
                     Toast.makeText(AdminFormActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-    }
-
-
-    public void openDatePicker(View view) {
-        CalendarPicker.datePickerDialog.show();
     }
 }
