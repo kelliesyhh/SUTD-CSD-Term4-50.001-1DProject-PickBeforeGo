@@ -130,7 +130,6 @@ public class AllFragment extends Fragment {
                     adminFloatingButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            // TODO: add in intent putExtras if needed, to populate the various fields for editing
                             Intent intent = new Intent(getActivity(), AdminFormActivity.class);
                             startActivity(intent);
                         }
