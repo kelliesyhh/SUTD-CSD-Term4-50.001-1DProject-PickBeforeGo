@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,34 +26,36 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private static final String TAG = "TAG";
-    EditText regFullname, regUsername, regEmail, regPassword;
-    Button regBtn, regtoLoginBtn;
-
+    EditText editTextUsername, editTextEmail, editTextPassword;
+    Button btnSignup, btnToLogin;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+
+    private static final String TAG = "signup";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        // Initialising all xmlelements in activity_sign_up.xml
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        btnSignup = findViewById(R.id.btnSignup);
+        btnToLogin = findViewById(R.id.btnToLogin);
 
-        //Hooks to all xmlelements in activity_sign_up.xml
-        regUsername = findViewById(R.id.username);
-        regEmail = findViewById(R.id.email);
-        regPassword = findViewById(R.id.password);
-        regBtn = findViewById(R.id.regbtn);
-        regtoLoginBtn = findViewById(R.id.tologinbtn);
+        final boolean[] passwordVisible = {false};
+
         //Save data in Firebase on button click
-        regBtn.setOnClickListener(new View.OnClickListener() {
+        btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerUser(view);
             }
         });
 
-        regtoLoginBtn.setOnClickListener(new View.OnClickListener() {
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
@@ -60,22 +63,21 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     public void registerUser (View view){
-
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         Log.i(TAG, "registering user");
 
-        String username = regUsername.getText().toString();
-        String email = regEmail.getText().toString();
-        String password = regPassword.getText().toString();
+        String username = editTextUsername.getText().toString();
+        String email = editTextEmail.getText().toString();
+        String password = editTextPassword.getText().toString();
+
         // check validation of email, password and username
-        if (validateEmail() | validatepassword() | validateusername()){
+        if (validateEmail() && validatePassword() && validateUsername()){
             Log.i(TAG, "user validated");
-            fAuth.createUserWithEmailAndPassword(regEmail.getText().toString(),regPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            fAuth.createUserWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(SignupActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
@@ -105,53 +107,49 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    private Boolean validateusername(){
-        String val = regUsername.getText().toString();
+    private Boolean validateUsername(){
+        String val = editTextUsername.getText().toString();
         String noWhiteSpace = "(?=\\S+$)";
 
         if (val.isEmpty()){
-            regUsername.setError("Field cannot be empty");
+            editTextUsername.setError("Field cannot be empty");
             return false;
         } /*else if (val.length()>=15) {
             regUsername.setError("Username too long");
             return false;
         } else if (!val.matches(noWhiteSpace)){
-            regUsername.setError("White spaces are not allow");
+            regUsername.setError("White spaces are not allowed");
             return false;
         }*/ else {
-            regUsername.setError(null);
+            editTextUsername.setError(null);
             return true;
         }
 
     }
     private Boolean validateEmail(){
-        String val = regEmail.getText().toString();
-        String emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String val = editTextEmail.getText().toString();
 
         if (val.isEmpty()){
-            regEmail.setError("Field cannot be empty");
+            editTextEmail.setError("Field cannot be empty");
             return false;
-        } /*else if (!val.matches(emailPattern)) {
-            regEmail.setError("Invalid Email format");
-            return false;
-        } */else {
-            regEmail.setError(null);
+        }
+        else {
+            editTextEmail.setError(null);
             return true;
         }
     }
-    private Boolean validatepassword(){
-        String val = regPassword.getText().toString();
-        if (val.isEmpty()){
-            regPassword.setError("Field cannot be empty");
+    private Boolean validatePassword(){
+        String val = editTextPassword.getText().toString();
+        if (val.isEmpty()) {
+            editTextPassword.setError("Field cannot be empty");
             return false;
-        } else if (val.length()<=7) {
-            regUsername.setError("Username too short");
+        } else if (val.length() <= 7) {
+            editTextPassword.setError("Password too short");
             return false;
         } else {
-            regPassword.setError(null);
+            editTextPassword.setError(null);
             return true;
         }
-        //can include password validation type
 
     }
 }

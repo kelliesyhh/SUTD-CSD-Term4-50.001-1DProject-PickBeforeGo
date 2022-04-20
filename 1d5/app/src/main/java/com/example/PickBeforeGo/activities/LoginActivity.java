@@ -7,14 +7,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-//import com.google.firebase.database.DataSnapshot;
 import com.example.PickBeforeGo.MainActivity;
 import com.example.PickBeforeGo.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,14 +22,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button callSignUp, login_btn;
-    ImageView image;
-    TextView logoText, sloganText;
-    EditText email, password;
+    Button btnToSignup, btnLogin;
+    EditText editTextEmail, editTextPassword;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
-    private static final String TAG = "TAG";
-
+    private static final String TAG = "login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +36,12 @@ public class LoginActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-        callSignUp = findViewById(R.id.signup_screen);
-        login_btn = findViewById(R.id.loginbtn);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
+        btnToSignup = findViewById(R.id.btnToSignup);
+        btnLogin = findViewById(R.id.btnLogin);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
 
-        callSignUp.setOnClickListener(new View.OnClickListener() {
+        btnToSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
@@ -55,13 +49,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        login_btn.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (!email.getText().toString().isEmpty() & !password.getText().toString().isEmpty()){
-                    fAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                if (!editTextEmail.getText().toString().isEmpty() & !editTextPassword.getText().toString().isEmpty()){
+                    fAuth.signInWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Log.i(TAG,"Successful Login");
