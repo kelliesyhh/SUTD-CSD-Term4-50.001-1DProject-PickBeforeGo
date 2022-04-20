@@ -145,9 +145,9 @@ public class ProductScreenActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 UserHelperClass user = documentSnapshot.toObject(UserHelperClass.class);
                 Log.i(TAG, "Is null" + (user == null));
-                Log.i(TAG, "Is admin" + user.getIs_admin());
+                Log.i(TAG, "Is admin" + user.getIsAdmin());
                 Log.i(TAG, "Is admin" + user.getUsername());
-                isAdmin.set(user.getIs_admin());
+                isAdmin.set(user.getIsAdmin());
                 Log.i(TAG, "Is admin in container" + isAdmin.get());
                 if (isAdmin.get() == Boolean.TRUE) {
                     Log.i(TAG, "Setting edit btn " + isAdmin.get());
@@ -169,12 +169,12 @@ public class ProductScreenActivity extends AppCompatActivity {
                             intentAdmin.putExtra(ProductAttributes.IMAGE_URL, imageUrl);
                             startActivity(intentAdmin);
 
-                            Log.i(DEBUG, "name is: " + name);
-                            Log.i(DEBUG, "price is: " + price);
-                            Log.i(DEBUG, "promotion is: " + discountPercent + "%");
-                            Log.i(DEBUG, "product id: " + productId);
-                            Log.i(DEBUG, "is promo: " + isPromo);
-                            Log.i(DEBUG, "is inStock?" + inStock);
+                            Log.d(DEBUG, "name is: " + name);
+                            Log.d(DEBUG, "price is: " + price);
+                            Log.d(DEBUG, "promotion is: " + discountPercent + "%");
+                            Log.d(DEBUG, "product id: " + productId);
+                            Log.d(DEBUG, "is promo: " + isPromo);
+                            Log.d(DEBUG, "is inStock?" + inStock);
                         }
                     });
                 }

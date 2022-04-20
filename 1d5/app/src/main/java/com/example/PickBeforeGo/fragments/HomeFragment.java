@@ -30,13 +30,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
+    Button btnLogout;
+
     public HomeFragment() {}
+    private static final String TAG = "home";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ArrayList productList = new ArrayList<Product>();
         ArrayList promoList = new ArrayList<Product>();
@@ -54,15 +56,14 @@ public class HomeFragment extends Fragment {
                       productList.add(product);
                   }
                   int l = promoList.size();
-                  addBox(view,inflater,l,promoList);
+                  addBox(view, inflater, l, promoList);
               }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                    Log.w("TAG", "loadPost:onCancelled", databaseError.toException());
+                    Log.e(TAG, "loadPost:onCancelled", databaseError.toException());
             }
           });
-        //TODO WAI SHUN: Button for Logout
-        Button btnLogout;
+
         btnLogout = view.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +80,7 @@ public class HomeFragment extends Fragment {
 //         promotion
         ConstraintLayout home_layout = view.findViewById(R.id.main_home);
         LinearLayout promotion = home_layout.findViewById(R.id.promoLayout);
-        for (int i=0; i<length; i++){
+        for (int i = 0; i < length; i++){
             Product product = productlist.get(i);
             View productLayout = inflater.inflate(R.layout.individual_product, null);
             ShapeableImageView prod_main = productLayout.findViewById(R.id.product_main_img);
@@ -87,7 +88,7 @@ public class HomeFragment extends Fragment {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 int discountPercent = (int) Math.round(product.getDiscountPercent());
                 TextView promodetail = productLayout.findViewById(R.id.promodetail);
-                promodetail.setText("Promo "+ discountPercent + "%");
+                promodetail.setText("Promo " + discountPercent + "%");
             }
             TextView name = productLayout.findViewById(R.id.nameTxt);
             name.setText(product.getProductName());

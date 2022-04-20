@@ -1,8 +1,6 @@
 package com.example.PickBeforeGo.components;
 
-//TODO need justify why the use for builder class here LOL
 public class Product {
-
     private String category = null;
     private String date = null;
     private String description = null;

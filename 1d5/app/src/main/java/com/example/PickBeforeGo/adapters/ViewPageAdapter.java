@@ -18,10 +18,10 @@ public class ViewPageAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
 
-        if (position == 0){return new AllFragment();
+        if (position == 0) {return new AllFragment();
         }
 
-        else if (position == 1){return new FavouriteFragment();}
+        else if (position == 1) {return new FavouriteFragment();}
 
 
         return new AllFragment();

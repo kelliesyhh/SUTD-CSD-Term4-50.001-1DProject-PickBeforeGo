@@ -1,33 +1,18 @@
 package com.example.PickBeforeGo.helper;
 
-
-import java.util.ArrayList;
-
 public class UserHelperClass {
-
     String username;
     String email;
     String password;
-    /*
-        ArrayList<ProductHelperClass> favourites;
-    */
-    boolean is_admin;
-
-    //empty constructor
-    UserHelperClass(){
-    }
+    boolean isAdmin;
 
     //constructor
-    public UserHelperClass(String username, String email, String password, boolean is_admin) {
+    public UserHelperClass(String username, String email, String password, boolean isAdmin) {
         this.username = username;
         this.email = email;
         this.password = password;
-/*
-        this.favourites = new ArrayList<ProductHelperClass>();
-*/
-        this.is_admin = is_admin;
+        this.isAdmin = isAdmin;
     }
-
 
     public String getUsername() {
         return username;
@@ -53,16 +38,23 @@ public class UserHelperClass {
         this.password = password;
     }
 
+    public boolean getIsAdmin() { return isAdmin; }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+}
+
+
+    /*
+        ArrayList<ProductHelperClass> favourites;
+
+
     /*public ArrayList<ProductHelperClass> getFavourites() {
         return favourites;
     }
 
     public void setFavourites(ArrayList<ProductHelperClass> favourites) {
         this.favourites = favourites;
-    }*/
-    public boolean getIs_admin(){ return is_admin; }
-
-    public void setIs_admin(boolean is_admin) {
-        this.is_admin = is_admin;
     }
-}
+    */

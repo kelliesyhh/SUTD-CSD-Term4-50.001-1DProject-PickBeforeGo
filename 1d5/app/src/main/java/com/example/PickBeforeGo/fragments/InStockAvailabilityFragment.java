@@ -9,11 +9,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.PickBeforeGo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link InStockAvailabilityFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class InStockAvailabilityFragment extends Fragment {
 
     public InStockAvailabilityFragment() {

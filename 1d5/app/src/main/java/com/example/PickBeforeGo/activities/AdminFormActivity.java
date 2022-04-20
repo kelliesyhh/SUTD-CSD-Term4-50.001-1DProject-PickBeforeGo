@@ -25,7 +25,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.components.calendarPicker;
+import com.example.PickBeforeGo.components.CalendarPicker;
 import com.example.PickBeforeGo.components.ProductAttributes;
 import com.example.PickBeforeGo.helper.PromotionHelper;
 
@@ -116,7 +116,7 @@ public class AdminFormActivity extends AppCompatActivity {
             imageUri = null;
         }
 
-        String[] todayDate = calendarPicker.getTodayInit();
+        String[] todayDate = CalendarPicker.getTodayInit();
         restockDay = todayDate[0];
         restockMonth = todayDate[1];
         restockYear = todayDate[2];
@@ -197,8 +197,8 @@ public class AdminFormActivity extends AppCompatActivity {
                 itemDescriptionValue[0] = editable.toString();
             }
         });
-        Log.i(DEBUG, "isPromo : " + isPromoFromIntent);
-        Log.i(DEBUG, "inStock : " + inStockFromIntent);
+        Log.d(DEBUG, "isPromo : " + isPromoFromIntent);
+        Log.d(DEBUG, "inStock : " + inStockFromIntent);
 
         //// Init Spinner -> Stock Availability ////
         Spinner spinnerStockAvailability = findViewById(R.id.spinnerStockAvailability);
@@ -219,7 +219,7 @@ public class AdminFormActivity extends AppCompatActivity {
         } else if (inStockFromIntent) {
             spinnerStockAvailability.setSelection(inAvailabilityPos);
         } else {
-            Log.i(DEBUG, "There exists an error in Selecting the Spinner for Stock Avail!");
+            Log.d(DEBUG, "There exists an error in Selecting the Spinner for Stock Avail!");
         }
 
         // New Stock Availability Position //
@@ -244,8 +244,8 @@ public class AdminFormActivity extends AppCompatActivity {
 
             //// Init Calendar Selector -> Next Restock Date ////
             btnDate = findViewById(R.id.btnDate);
-            calendarPicker.initDatePicker(this, btnDate);
-            btnDate.setText(calendarPicker.getTodaysDate());
+            CalendarPicker.initDatePicker(this, btnDate);
+            btnDate.setText(CalendarPicker.getTodayDate());
 
             //// Next Restock time ////
             spinnerRestockTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -325,7 +325,7 @@ public class AdminFormActivity extends AppCompatActivity {
                     String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
                     txtViewPriceAfterPromo.setText(newPromotedValue);
                     newPrice[0] = newPromotedValue;
-                    Log.i(DEBUG, "item name is: " + itemNameValue[0]);
+                    Log.d(DEBUG, "item name is: " + itemNameValue[0]);
 
                 } else {
                     txtViewPriceAfterPromo.setText(R.string.placeholder_price);
@@ -362,7 +362,7 @@ public class AdminFormActivity extends AppCompatActivity {
                 }
                 else {
                     if (isNewProductFromIntent) {
-                        Log.i(DEBUG,"Item Name: " + itemNameValue[0]);
+                        Log.d(DEBUG,"Item Name: " + itemNameValue[0]);
                         // check if the string name already exists
                         productRandomUUID = UUID.nameUUIDFromBytes(itemNameValue[0].getBytes());
                         productHashfromUUID = productRandomUUID.hashCode();
@@ -418,19 +418,19 @@ public class AdminFormActivity extends AppCompatActivity {
                 }
 
                 // DEBUGGING
-                Log.i(DEBUG, "item name is: " + itemNameValue[0]);
-                Log.i(DEBUG, "item description is :" + itemDescriptionValue[0]) ;
-                Log.i(DEBUG, "New price is: " + newPrice[0]);
-                Log.i(DEBUG, "Stock Status is: " + sbmtStockAvailability[0]);
-                Log.i(DEBUG, "Promotion Value is: " + sbmtPromotionSpinner[0]);
+                Log.d(DEBUG, "item name is: " + itemNameValue[0]);
+                Log.d(DEBUG, "item description is :" + itemDescriptionValue[0]) ;
+                Log.d(DEBUG, "New price is: " + newPrice[0]);
+                Log.d(DEBUG, "Stock Status is: " + sbmtStockAvailability[0]);
+                Log.d(DEBUG, "Promotion Value is: " + sbmtPromotionSpinner[0]);
 
-                Log.i(DEBUG, "Restock Time is: " + sbmtRestockTime[0]);
-                Log.i(DEBUG, "Restock day is: " + restockDay);
-                Log.i(DEBUG, "Restock month is: " + restockMonth);
-                Log.i(DEBUG, "Restock year is: " + restockYear);
+                Log.d(DEBUG, "Restock Time is: " + sbmtRestockTime[0]);
+                Log.d(DEBUG, "Restock day is: " + restockDay);
+                Log.d(DEBUG, "Restock month is: " + restockMonth);
+                Log.d(DEBUG, "Restock year is: " + restockYear);
 
-                Log.i(DEBUG, "Is a new Product?: " + isNewProductFromIntent);
-                Log.i(DEBUG, "Is this on promo?: " + !sbmtPromotionSpinner[0].equals("0%"));
+                Log.d(DEBUG, "Is a new Product?: " + isNewProductFromIntent);
+                Log.d(DEBUG, "Is this on promo?: " + !sbmtPromotionSpinner[0].equals("0%"));
             }
         });
     }
@@ -448,7 +448,7 @@ public class AdminFormActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == galleryPick && resultCode == RESULT_OK && data != null) {
             imageUri = data.getData();
-            Log.i(DEBUG, "new image uri is " + imageUri);
+            Log.d(DEBUG, "new image uri is " + imageUri);
             imgViewUploadedImage.setImageURI(imageUri);
         }
     }
@@ -469,7 +469,7 @@ public class AdminFormActivity extends AppCompatActivity {
 
         //TODO Change Product Key
 
-        Log.i(DEBUG, "Image URI:" + imageUri);
+        Log.d(DEBUG, "Image URI:" + imageUri);
         final StorageReference filePath = storageRefProductImages.child(imageUri.getLastPathSegment() + productHashfromUUID + ".jpg");
         final UploadTask uploadTask = filePath.putFile(imageUri);
         uploadTask.addOnFailureListener(new OnFailureListener() {

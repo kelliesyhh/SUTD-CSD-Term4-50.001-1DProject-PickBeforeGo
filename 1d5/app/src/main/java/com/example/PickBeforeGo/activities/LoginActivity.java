@@ -65,12 +65,12 @@ public class LoginActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.i(TAG,"Failed Login");
+                            Log.e(TAG,"Failed Login");
                             Toast.makeText(LoginActivity.this, "Failed to Login to Account", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
-                    Log.i(TAG,"Empty email/password");
+                    Log.e(TAG,"Empty email/password");
                     Toast.makeText(LoginActivity.this, "Email/Password cannot be empty", Toast.LENGTH_SHORT).show();
                 }
             }

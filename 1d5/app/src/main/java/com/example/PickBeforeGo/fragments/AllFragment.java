@@ -2,9 +2,6 @@ package com.example.PickBeforeGo.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +10,6 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -98,11 +94,9 @@ public class AllFragment extends Fragment {
                 return false;
             }
         });
-
         productRVAdapter.notifyDataSetChanged();
 
         //TODO: get isAdmin property from other screens/activity
-
         final Container<Boolean> isAdmin = new Container(false);
         FirebaseFirestore db;
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -113,7 +107,7 @@ public class AllFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 UserHelperClass user = documentSnapshot.toObject(UserHelperClass.class);
-                isAdmin.set(user.getIs_admin());
+                isAdmin.set(user.getIsAdmin());
                 if (isAdmin.get() == Boolean.TRUE) {
                     adminFloatingButton.setVisibility(View.VISIBLE);
                     adminFloatingButton.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +139,9 @@ public class AllFragment extends Fragment {
                 }
             }
         }
-        else { filteredProductsArrayList = productArrayList;}
+        else {
+            filteredProductsArrayList = productArrayList;
+        }
 
         return filteredProductsArrayList;
     }

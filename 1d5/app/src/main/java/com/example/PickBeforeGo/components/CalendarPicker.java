@@ -9,15 +9,14 @@ import com.example.PickBeforeGo.activities.AdminFormActivity;
 
 import java.util.Calendar;
 
-public class calendarPicker {
+public class CalendarPicker {
     public static DatePickerDialog datePickerDialog;
 
     public static void initDatePicker(AdminFormActivity mainActivity, Button dateButton) {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-
             @Override
             public void onDateSet(DatePicker datePicker, int day, int month, int year) {
-                month = month +1;
+                month = month + 1;
                 String date = makeDateString(year, month, day);
                 System.out.println("i was called" + day + month + year);
                 dateButton.setText(date);
@@ -27,15 +26,12 @@ public class calendarPicker {
             }
         };
 
-        Calendar calanderr = Calendar.getInstance();
-        int year = calanderr.get(Calendar.YEAR);
-        int month = calanderr.get(Calendar.MONTH);
-        int day = calanderr.get(Calendar.DAY_OF_MONTH);
+        Calendar calendarIns = Calendar.getInstance();
+        int year = calendarIns.get(Calendar.YEAR);
+        int month = calendarIns.get(Calendar.MONTH);
+        int day = calendarIns.get(Calendar.DAY_OF_MONTH);
         int style = AlertDialog.THEME_DEVICE_DEFAULT_DARK;
-        datePickerDialog = new DatePickerDialog(mainActivity ,style, dateSetListener, year, month, day);
-//        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
-
+        datePickerDialog = new DatePickerDialog(mainActivity, style, dateSetListener, year, month, day);
     }
 
     private static String makeDateString(int day, int month, int year) {
@@ -43,35 +39,24 @@ public class calendarPicker {
     }
 
     private static String getMonthFormat(int month)   {
-        if(month == 1)
-            return "JAN";
-        if(month == 2)
-            return "FEB";
-        if(month == 3)
-            return "MAR";
-        if(month == 4)
-            return "APR";
-        if(month == 5)
-            return "MAY";
-        if(month == 6)
-            return "JUN";
-        if(month == 7)
-            return "JUL";
-        if(month == 8)
-            return "AUG";
-        if(month == 9)
-            return "SEP";
-        if(month == 10)
-            return "OCT";
-        if(month == 11)
-            return "NOV";
-        if(month == 12)
-            return "DEC";
-
-        return "error";
+        switch(month) {
+            case 1: return "JAN";
+            case 2: return "FEB";
+            case 3: return "MAR";
+            case 4: return "APR";
+            case 5: return "MAY";
+            case 6: return "JUN";
+            case 7: return "JUL";
+            case 8: return "AUG";
+            case 9: return "SEP";
+            case 10: return "OCT";
+            case 11: return "NOV";
+            case 12: return "DEC";
+            default: throw new IllegalStateException("Unexpected value: " + month);
+        }
     }
 
-    public static String getTodaysDate() {
+    public static String getTodayDate() {
         Calendar cal = Calendar.getInstance();
         int day = cal.get(Calendar.DAY_OF_MONTH);
         int month = cal.get(Calendar.MONTH);

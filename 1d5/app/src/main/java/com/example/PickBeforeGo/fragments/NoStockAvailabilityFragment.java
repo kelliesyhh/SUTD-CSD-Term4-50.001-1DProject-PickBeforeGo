@@ -4,22 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.PickBeforeGo.R;
+import com.example.PickBeforeGo.components.ProductAttributes;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link NoStockAvailabilityFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NoStockAvailabilityFragment extends Fragment {
 
-    // declaration of parameter arguments
-    private static final String RESTOCK_TIMING = "restock_timing";
-
-    private String restock_timing;
+    private String nextRestockTiming;
+    TextView txtStock;
 
     public NoStockAvailabilityFragment() {
         // Required empty public constructor
@@ -29,7 +24,7 @@ public class NoStockAvailabilityFragment extends Fragment {
     public static NoStockAvailabilityFragment newInstance(String restock_timing) {
         NoStockAvailabilityFragment fragment = new NoStockAvailabilityFragment();
         Bundle args = new Bundle();
-        args.putString(RESTOCK_TIMING, restock_timing);
+        args.putString(ProductAttributes.NEXT_RESTOCK_TIMING, restock_timing);
         fragment.setArguments(args);
         return fragment;
     }
@@ -38,7 +33,7 @@ public class NoStockAvailabilityFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            restock_timing = getArguments().getString(RESTOCK_TIMING);
+            nextRestockTiming = getArguments().getString(ProductAttributes.NEXT_RESTOCK_TIMING);
         }
     }
 
@@ -46,6 +41,9 @@ public class NoStockAvailabilityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_availability_no_stock, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_availability_no_stock, container, false);
+        txtStock = rootView.findViewById(R.id.txtStock);
+        txtStock.setText("Next Restock Timing: " + nextRestockTiming);
+        return rootView;
     }
 }

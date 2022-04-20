@@ -102,7 +102,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Log.i(TAG, "user not validated");
+            Log.e(TAG, "user not validated");
         }
 
     }

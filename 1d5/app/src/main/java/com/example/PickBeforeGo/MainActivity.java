@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity{
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
-        //Get authentication
+        // Get authentication
         FirebaseAuth.getInstance().getCurrentUser();
 
         //set up the bottom navigation bar
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
         NavController navController = Navigation.findNavController(this,R.id.my_nav);
         NavigationUI.setupWithNavController(btmNavBar,navController);
 
-        //Call database if product empty
+        // Call database if product empty
         if (allProductArrayList == null){
             GetProductHelper getProduct = new GetProductHelper();
             allProductArrayList = getProduct.getAllProducts();
@@ -54,9 +54,6 @@ public class MainActivity extends AppCompatActivity{
 //            System.out.println("in main activity promo size: " + promoProductArrayList.size());
             noStockProductArrayList = getProduct.getNoStockProducts();
         }
-
-
-
     }
 
     //get methods for fragment to access activity products
