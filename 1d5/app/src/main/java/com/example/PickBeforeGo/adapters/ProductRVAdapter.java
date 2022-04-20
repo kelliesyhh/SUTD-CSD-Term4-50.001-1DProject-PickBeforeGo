@@ -34,7 +34,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
     @Override
     public ProductRVAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //to inflate layout for each item of recycler view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.individual_product,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_card, parent,false);
         Viewholder viewholder = new Viewholder(view);
         viewholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         holder.isFavourite = product.getIsFavourite();
         holder.isPromo = product.getIsPromo();
         if (holder.isPromo){
-            holder.txtPromotion.setText("Promo "+Math.round(product.getDiscountPercent())+"%");
+            holder.txtPromotion.setText("Promo "+ Math.round(product.getDiscountPercent()) +"%");
         }
         else {
             holder.txtPromotion.setVisibility(View.INVISIBLE);
@@ -109,10 +109,10 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
 
         public Viewholder(@NonNull View itemView){
             super(itemView);
-            imgProduct = itemView.findViewById(R.id.product_main_img);
-            txtProductName = itemView.findViewById(R.id.nameTxt);
-            txtPrice = itemView.findViewById(R.id.txtPrice);
-            txtPromotion = itemView.findViewById(R.id.promodetail);
+            imgProduct = itemView.findViewById(R.id.imgProduct);
+            txtProductName = itemView.findViewById(R.id.txtProductName);
+            txtPrice = itemView.findViewById(R.id.txtProductPrice);
+            txtPromotion = itemView.findViewById(R.id.txtProductPromo);
         }
     }
 

@@ -82,7 +82,7 @@
             <HorizontalScrollView
                 android:id="@+id/horizontalScrollView1"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="7dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/promotion1">
@@ -106,7 +106,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/brandOrange"
-                android:paddingVertical="5px"
+                android:paddingVertical="5dp"
                 android:text="Logout"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"

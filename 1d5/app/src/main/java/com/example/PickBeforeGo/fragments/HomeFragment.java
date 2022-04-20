@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -83,19 +84,22 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < length; i++){
             Product product = productlist.get(i);
             View productLayout = inflater.inflate(R.layout.individual_product, null);
-            ShapeableImageView prod_main = productLayout.findViewById(R.id.product_main_img);
-            Picasso.get().load(product.getImageURL()).placeholder(R.drawable.placeholder_product_pic).into(prod_main);
+            ImageView imgProduct = productLayout.findViewById(R.id.imgProduct);
+            Picasso.get().load(product.getImageURL()).placeholder(R.drawable.placeholder_product_pic).into(imgProduct);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 int discountPercent = (int) Math.round(product.getDiscountPercent());
-                TextView promodetail = productLayout.findViewById(R.id.promodetail);
+                TextView promodetail = productLayout.findViewById(R.id.txtProductPromo);
                 promodetail.setText("Promo " + discountPercent + "%");
             }
-            TextView name = productLayout.findViewById(R.id.nameTxt);
-            name.setText(product.getProductName());
+            TextView txtViewName = productLayout.findViewById(R.id.txtProductName);
+            txtViewName.setText(product.getProductName());
+            TextView txtViewPrice = productLayout.findViewById(R.id.txtProductPrice);
+            txtViewPrice.setText("$" + product.getPrice());
+
             int resID = View.generateViewId();
             productLayout.setId(resID);
-            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(450, 750);
-            params.setMargins(50, 0, 20, 0);
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(450, 800);
+            params.setMargins(50, 0, 50, 0);
             productLayout.setLayoutParams(params);
             productLayout.setOnClickListener(new View.OnClickListener() {
                 @Override

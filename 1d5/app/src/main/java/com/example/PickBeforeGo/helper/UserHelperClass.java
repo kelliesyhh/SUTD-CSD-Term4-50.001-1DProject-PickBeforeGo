@@ -5,7 +5,7 @@ public class UserHelperClass {
     String email;
     String password;
     boolean isAdmin;
-    
+
     //constructors
     public UserHelperClass() {
     }

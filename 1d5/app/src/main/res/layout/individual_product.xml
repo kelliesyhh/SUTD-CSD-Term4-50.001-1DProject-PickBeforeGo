@@ -1,81 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/product"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="18dp"
-    android:layout_marginVertical="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.PickBeforeGo.fragments.HomeFragment">
 
-
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="160dp"
-        android:layout_height="157dp"
-        android:background="@drawable/background"
+    <androidx.cardview.widget.CardView
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.023"
         app:layout_constraintStart_toStartOf="parent"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01">
 
-    </ImageView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAligned="true"
+            android:orientation="vertical"
+            >
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/product_main_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:maxHeight="160dp"
-        android:maxWidth="160dp"
-        android:scaleType="fitCenter"
-        android:foregroundGravity="center"
-        android:background="@drawable/rectangle"
-        app:layout_constraintStart_toStartOf="@+id/back"
-        app:layout_constraintTop_toTopOf="@id/back"
-        app:shapeAppearanceOverlay="@style/roundSnack" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/promodetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/rectangle"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="Promo 0%"
-        android:textColor="@color/white"
-        android:textSize="13dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/product_main_img"
-        app:layout_constraintTop_toTopOf="@id/product_main_img"/>
+                <ImageView
+                    android:id="@+id/imgProduct"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/placeholder_product_pic" />
 
-    <TextView
-        android:id="@+id/nameTxt"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="5dp"
-        android:text="Hokkiado Milk Bread Gardenia 400g"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/back"
-        app:layout_constraintTop_toBottomOf="@id/back"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/imgProduct"
+                    android:layout_alignTop="@id/imgProduct"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    app:cardCornerRadius="6dp">
 
-    <TextView
-        android:id="@+id/txtPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:clickable="false"
-        android:contextClickable="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/darkgrey"
-        android:textSize="14sp"
-        android:layout_marginLeft="3dp"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameTxt" />
+                    <TextView
+                        android:id="@+id/txtProductPromo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/inStockGreen"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="@string/promo_placeholder"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtProductName"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
+                android:clickable="false"
+                android:contextClickable="true"
+                android:text="@string/placeholder_product_name"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+            <TextView
+                android:id="@+id/txtProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="false"
+                android:contextClickable="true"
+                android:text="@string/placeholder_price"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/darkgrey"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
