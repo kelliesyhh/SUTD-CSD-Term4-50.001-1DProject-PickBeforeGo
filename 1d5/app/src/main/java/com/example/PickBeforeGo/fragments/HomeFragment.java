@@ -17,6 +17,7 @@ import com.example.PickBeforeGo.activities.LoginActivity;
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.components.Product;
+import com.example.PickBeforeGo.components.ProductAttributes;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,17 +30,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-    private static final String NAME = "name";
-    private static final String IMAGE_URL = "image_url";
-    private static final String DESCRIPTION = "description";
-    private static final String PRODUCT_ID = "product_id";
-    private static final String PRICE = "price";
-    private static final String FAVOURITE = "favourite";
-    private static final String STOCK = "in_stock";
-    private static final String PROMOTION = "promotion";
-    private static final String DISCOUNT = "discount";
-    private static final String RESTOCK_TIME = "restock_time";
-
     public HomeFragment() {}
 
     @Override
@@ -110,16 +100,16 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getActivity(),ProductScreenActivity.class);
-                    intent.putExtra(PRICE, product.getPrice());
-                    intent.putExtra(NAME, product.getProductName());
-                    intent.putExtra(IMAGE_URL, product.getImageURL());
-                    intent.putExtra(DESCRIPTION, product.getDescription());
-                    intent.putExtra(FAVOURITE, product.getIsFavourite());
-                    intent.putExtra(PRODUCT_ID, product.getProductID());
-                    intent.putExtra(STOCK, product.getInStock());
-                    intent.putExtra(PROMOTION, product.getIsPromo());
-                    intent.putExtra(DISCOUNT, (int) Math.round(product.getDiscountPercent()));
-                    intent.putExtra(RESTOCK_TIME, product.getNextRestockTime());
+                    intent.putExtra(ProductAttributes.NAME, product.getProductName());
+                    intent.putExtra(ProductAttributes.IMAGE_URL, product.getImageURL());
+                    intent.putExtra(ProductAttributes.DESCRIPTION, product.getDescription());
+                    intent.putExtra(ProductAttributes.FAVOURITE, product.getIsFavourite());
+                    intent.putExtra(ProductAttributes.PRODUCT_ID, product.getProductID());
+                    intent.putExtra(ProductAttributes.PRICE, product.getPrice());
+                    intent.putExtra(ProductAttributes.STOCK, product.getInStock());
+                    intent.putExtra(ProductAttributes.IS_PROMO, product.getIsPromo());
+                    intent.putExtra(ProductAttributes.DISCOUNT, (int) Math.round(product.getDiscountPercent()));
+                    intent.putExtra(ProductAttributes.NEXT_RESTOCK_TIMING, product.getNextRestockTime());
                     startActivity(intent);
                 }
             });
