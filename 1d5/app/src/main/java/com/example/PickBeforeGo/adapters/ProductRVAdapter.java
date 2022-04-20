@@ -1,5 +1,6 @@
 package com.example.PickBeforeGo.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,14 +67,20 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         holder.txtProductName.setText(holder.productName);
         holder.txtPrice.setText("$" + (holder.productPrice));
         holder.isFavourite = product.getIsFavourite();
-        holder.isPromo = product.getIsPromo();
-        if (holder.isPromo){
-            holder.txtPromotion.setText("Promo "+ Math.round(product.getDiscountPercent()) +"%");
-        }
-        else {
-            holder.txtPromotion.setVisibility(View.INVISIBLE);
-        }
         holder.inStock = product.getInStock();
+        holder.isPromo = product.getIsPromo();
+        if (!holder.inStock) {
+            holder.txtPromoStock.setText("No Stock");
+            holder.txtPromoStock.setBackgroundColor(context.getResources().getColor(R.color.noStockRed));
+        }
+        else if (holder.isPromo) {
+            holder.txtPromoStock.setText("Promo " + Math.round(product.getDiscountPercent()) + "%");
+            holder.txtPromoStock.setBackgroundColor((context.getResources().getColor(R.color.inStockGreen)));
+        }
+        else if (holder.inStock && !holder.isPromo){
+            holder.txtPromoStock.setVisibility(View.INVISIBLE);
+            holder.txtPromoStock.setVisibility(View.GONE);
+        }
         holder.discountPercent = product.getDiscountPercent();
         holder.restockTime = product.getNextRestockTime();
     }
@@ -97,7 +104,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
         private final ImageView imgProduct;
         private final TextView txtProductName;
         private final TextView txtPrice;
-        private final TextView txtPromotion;
+        private final TextView txtPromoStock;
         private String productName;
         private String imageUrl;
         private String productDescription;
@@ -112,7 +119,7 @@ public class ProductRVAdapter extends RecyclerView.Adapter<ProductRVAdapter.View
             imgProduct = itemView.findViewById(R.id.imgProduct);
             txtProductName = itemView.findViewById(R.id.txtProductName);
             txtPrice = itemView.findViewById(R.id.txtProductPrice);
-            txtPromotion = itemView.findViewById(R.id.txtProductPromo);
+            txtPromoStock = itemView.findViewById(R.id.txtPromoStock);
         }
     }
 
