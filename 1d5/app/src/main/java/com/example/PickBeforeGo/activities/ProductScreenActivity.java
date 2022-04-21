@@ -144,11 +144,11 @@ public class ProductScreenActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 UserHelperClass user = documentSnapshot.toObject(UserHelperClass.class);
-                Log.i(TAG, "Is null" + (user == null));
-                Log.i(TAG, "Is admin" + user.getIsAdmin());
-                Log.i(TAG, "Is admin" + user.getUsername());
+                Log.i(TAG, "Is null " + (user == null));
+                Log.i(TAG, "Is admin? " + user.getIsAdmin());
+                Log.i(TAG, "Is admin " + user.getUsername());
                 isAdmin.set(user.getIsAdmin());
-                Log.i(TAG, "Is admin in container" + isAdmin.get());
+                Log.i(TAG, "Is admin in container " + isAdmin.get());
                 if (isAdmin.get() == Boolean.TRUE) {
                     Log.i(TAG, "Setting edit btn " + isAdmin.get());
                     btnAdminEditProductDetails.setVisibility(View.VISIBLE);
@@ -164,7 +164,7 @@ public class ProductScreenActivity extends AppCompatActivity {
                             intentAdmin.putExtra(ProductAttributes.PRICE, price);
                             intentAdmin.putExtra(ProductAttributes.IS_PROMO, isPromo);
                             intentAdmin.putExtra(ProductAttributes.STOCK, inStock);
-                            intentAdmin.putExtra(ProductAttributes.DISCOUNT, discountPercent);
+                            intentAdmin.putExtra(ProductAttributes.DISCOUNT, discountPercent + "%");
                             intentAdmin.putExtra(ProductAttributes.IS_NEW, false);
                             intentAdmin.putExtra(ProductAttributes.IMAGE_URL, imageUrl);
                             startActivity(intentAdmin);
