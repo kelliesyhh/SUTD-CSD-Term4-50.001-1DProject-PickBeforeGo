@@ -269,8 +269,6 @@ public class AdminFormActivity extends AppCompatActivity {
         String[] spinnerPromoOptions = getResources().getStringArray(R.array.arrPromotion);
         ArrayAdapter selectorPromoAdaptor = (ArrayAdapter) spinnerPromotion.getAdapter();
         for (int i = 0; i < spinnerPromoOptions.length; i++ ) {
-            Log.i("HELP", productDiscountFromIntent);
-            Log.i("HELP", spinnerPromoOptions[i]);
             if (productDiscountFromIntent.equals(spinnerPromoOptions[i])) {
                 int chosenPromo = selectorPromoAdaptor.getPosition(spinnerPromoOptions[i]);
                 spinnerPromotion.setSelection(chosenPromo);
@@ -295,8 +293,8 @@ public class AdminFormActivity extends AppCompatActivity {
                 if (!priceChoice[0].isEmpty()) {
                     String newPromotedValue = new PromotionHelper(priceChoice[0], promotionChoice[0]).promoChange();
                     txtViewPriceAfterPromo.setText(newPromotedValue);
-                sbmtPromotionSpinner[0] = spinnerPromotion.getSelectedItem().toString();
-                newPrice[0] = newPromotedValue;
+                    sbmtPromotionSpinner[0] = spinnerPromotion.getSelectedItem().toString();
+                    newPrice[0] = newPromotedValue;
             } else {
                 txtViewPriceAfterPromo.setText(priceChoice[0]);
                 sbmtPromotionSpinner[0] = "null";
