@@ -25,14 +25,26 @@ Personally, we want to know when products would be restocked, so that we can mak
 2. Open the project in Android Studio and sync project with Gradle files
 3. Run the project on any Android device (local emulator or a physical device paired via Wi-Fi or wire)
 
-## Usage - User View
+## User View
+### Credentials
+* Email: master_userpng@gmail.com
+* Username: master_user
+* Password: IAmAUser
+
+### Instructions
 1. Once the app has been installed, sign up for an account with your email, password and a username. The details will be saved locally to allow for persistent login upon the next launch of the app.
 2. Start browsing the products in our promotion carousel on the home page from the comforts of your own room. Click on any item to find out more about it.
 3. Click the second button (Products) on the bottom navigation bar to view the live product catalogue. You can view items in stock, on promotion, or out of stock easily from this page! If needed, you can even search for an item using the search bar easily.
 4. Add items to your favourites for quick access if needed. Your favourites can be accessed from the favourites page in the bottom navigation bar.
 5. Use the QR code on the home page to enter Pick & GO’s physical store.
 
-## Usage - Admin View
+## Admin View
+### Credentials
+Email: master_adminpng@gmail.com
+Username: master_admin
+Password: IAmAnAdmin
+
+### Instructions
 1. Once the app has been installed, sign up for an account with your email, password and a username. The details will be saved locally to allow for persistent login upon the next launch of the app. 
 2. Upon login, our backend engineers will toggle your admin rights manually.
 3. Start browsing the products in the promotion carousel on the home page from the comforts of your own room. Edit them easily by clicking the “Edit Product Details” button on each product’s sub-page.
