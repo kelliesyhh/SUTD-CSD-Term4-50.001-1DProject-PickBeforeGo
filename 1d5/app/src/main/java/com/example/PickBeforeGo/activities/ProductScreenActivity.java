@@ -21,7 +21,7 @@ import com.example.PickBeforeGo.fragments.NoStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.NoStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
 import com.example.PickBeforeGo.helper.Container;
-import com.example.PickBeforeGo.helper.UserHelperClass;
+import com.example.PickBeforeGo.helper.UserHelper;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -143,7 +143,7 @@ public class ProductScreenActivity extends AppCompatActivity {
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                UserHelperClass user = documentSnapshot.toObject(UserHelperClass.class);
+                UserHelper user = documentSnapshot.toObject(UserHelper.class);
                 Log.i(TAG, "Is null " + (user == null));
                 Log.i(TAG, "Is admin? " + user.getIsAdmin());
                 Log.i(TAG, "Is admin " + user.getUsername());

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,7 +14,7 @@ import android.widget.Toast;
 
 //import com.google.android.material.textfield.TextInputLayout;
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.helper.UserHelperClass;
+import com.example.PickBeforeGo.helper.UserHelper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -88,7 +87,7 @@ public class SignupActivity extends AppCompatActivity {
                     FirebaseUser user = fAuth.getCurrentUser();
                     DocumentReference df = fStore.collection("Users").document(user.getUid());
 
-                    UserHelperClass helperClass = new UserHelperClass(username,email,password, false);
+                    UserHelper helperClass = new UserHelper(username,email,password, false);
 
                     df.set(helperClass);
 
