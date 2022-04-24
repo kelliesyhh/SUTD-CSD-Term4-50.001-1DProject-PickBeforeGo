@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.PickBeforeGo.R;
-import com.example.PickBeforeGo.helper.UserHelper;
+import com.example.PickBeforeGo.components.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -87,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
                     FirebaseUser user = fAuth.getCurrentUser();
                     DocumentReference df = fStore.collection("Users").document(user.getUid());
 
-                    UserHelper helperClass = new UserHelper(username,email,password, false);
+                    User helperClass = new User(username,email,password, false);
 
                     df.set(helperClass);
 

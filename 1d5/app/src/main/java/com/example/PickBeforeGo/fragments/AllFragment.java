@@ -20,7 +20,7 @@ import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.components.ProductAttributes;
-import com.example.PickBeforeGo.helper.UserHelper;
+import com.example.PickBeforeGo.components.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -102,7 +102,7 @@ public class AllFragment extends Fragment {
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                UserHelper user = documentSnapshot.toObject(UserHelper.class);
+                User user = documentSnapshot.toObject(User.class);
                 if (user.getIsAdmin() == Boolean.TRUE) {
                     adminFloatingButton.setVisibility(View.VISIBLE);
                     adminFloatingButton.setOnClickListener(new View.OnClickListener() {

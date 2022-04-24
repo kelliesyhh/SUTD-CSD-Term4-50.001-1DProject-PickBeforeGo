@@ -1,15 +1,15 @@
-package com.example.PickBeforeGo.helper;
+package com.example.PickBeforeGo.components;
 
-public class UserHelper {
+public class User {
     String username;
     String email;
     String password;
     boolean isAdmin;
 
     //constructors
-    public UserHelper() {
+    public User() {
     }
-    public UserHelper(String username, String email, String password, boolean isAdmin) {
+    public User(String username, String email, String password, boolean isAdmin) {
         this.username = username;
         this.email = email;
         this.password = password;
