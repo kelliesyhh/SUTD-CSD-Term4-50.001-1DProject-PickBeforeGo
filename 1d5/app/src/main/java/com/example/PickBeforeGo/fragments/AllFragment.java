@@ -20,7 +20,6 @@ import com.example.PickBeforeGo.activities.ProductScreenActivity;
 import com.example.PickBeforeGo.adapters.ProductRVAdapter;
 import com.example.PickBeforeGo.components.Product;
 import com.example.PickBeforeGo.components.ProductAttributes;
-import com.example.PickBeforeGo.helper.Container;
 import com.example.PickBeforeGo.helper.UserHelper;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -95,7 +94,6 @@ public class AllFragment extends Fragment {
         });
         productRVAdapter.notifyDataSetChanged();
 
-        final Container<Boolean> isAdmin = new Container(false);
         FirebaseFirestore db;
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         String userid = fAuth.getCurrentUser().getUid();
@@ -105,8 +103,7 @@ public class AllFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 UserHelper user = documentSnapshot.toObject(UserHelper.class);
-                isAdmin.set(user.getIsAdmin());
-                if (isAdmin.get() == Boolean.TRUE) {
+                if (user.getIsAdmin() == Boolean.TRUE) {
                     adminFloatingButton.setVisibility(View.VISIBLE);
                     adminFloatingButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -121,7 +118,8 @@ public class AllFragment extends Fragment {
         return rootView;
     }
 
-    private void setRecyclerView(RecyclerView productRV, ArrayList<Product> productArrayList, ProductRVAdapter.ClickListener clickListener){
+    private void setRecyclerView(RecyclerView productRV, ArrayList<Product> productArrayList,
+                                 ProductRVAdapter.ClickListener clickListener){
         ProductRVAdapter productRVAdapter = new ProductRVAdapter(getActivity(), productArrayList, clickListener);
         int numOfColumns = 2;
         productRV.setLayoutManager(new GridLayoutManager(getActivity(), numOfColumns));

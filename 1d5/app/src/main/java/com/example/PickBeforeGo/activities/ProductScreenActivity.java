@@ -20,7 +20,6 @@ import com.example.PickBeforeGo.fragments.InStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.NoStockAvailabilityFragment;
 import com.example.PickBeforeGo.fragments.NoStockProductCardFragment;
 import com.example.PickBeforeGo.fragments.PromoProductCardFragment;
-import com.example.PickBeforeGo.helper.Container;
 import com.example.PickBeforeGo.helper.UserHelper;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -133,7 +132,6 @@ public class ProductScreenActivity extends AppCompatActivity {
         txtDescription.setText("Product Description: " + description);
 
         //TODO: get isAdmin property from other screens/activity
-        final Container<Boolean> isAdmin = new Container(false);
         FirebaseFirestore db;
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         String userid = fAuth.getCurrentUser().getUid();
@@ -147,10 +145,8 @@ public class ProductScreenActivity extends AppCompatActivity {
                 Log.i(TAG, "Is null " + (user == null));
                 Log.i(TAG, "Is admin? " + user.getIsAdmin());
                 Log.i(TAG, "Is admin " + user.getUsername());
-                isAdmin.set(user.getIsAdmin());
-                Log.i(TAG, "Is admin in container " + isAdmin.get());
-                if (isAdmin.get() == Boolean.TRUE) {
-                    Log.i(TAG, "Setting edit btn " + isAdmin.get());
+                //isAdmin.set(user.getIsAdmin());
+                if (user.getIsAdmin() == Boolean.TRUE) {
                     btnAdminEditProductDetails.setVisibility(View.VISIBLE);
                     btnAdminEditProductDetails.setOnClickListener(new View.OnClickListener() {
                         @Override
