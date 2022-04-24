@@ -40,9 +40,9 @@ Personally, we want to know when products would be restocked, so that we can mak
 
 ## Admin View
 ### Credentials
-Email: master_adminpng@gmail.com
-Username: master_admin
-Password: IAmAnAdmin
+* Email: master_adminpng@gmail.com
+* Username: master_admin
+* Password: IAmAnAdmin
 
 ### Instructions
 1. Once the app has been installed, sign up for an account with your email, password and a username. The details will be saved locally to allow for persistent login upon the next launch of the app. 
