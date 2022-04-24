@@ -1,18 +1,16 @@
 package com.example.PickBeforeGo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//import com.google.android.material.textfield.TextInputLayout;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.PickBeforeGo.R;
 import com.example.PickBeforeGo.helper.UserHelper;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,7 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class SignupActivity extends AppCompatActivity {
+//import com.google.android.material.textfield.TextInputLayout;
+
+public class SignUpActivity extends AppCompatActivity {
 
     EditText editTextUsername, editTextEmail, editTextPassword;
     Button btnSignup, btnToLogin;
@@ -57,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
         btnToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -79,7 +79,7 @@ public class SignupActivity extends AppCompatActivity {
             fAuth.createUserWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    Toast.makeText(SignupActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
                     Log.i(TAG, "create user success");
 
                     //to store other values into the Firestore
@@ -91,13 +91,13 @@ public class SignupActivity extends AppCompatActivity {
 
                     df.set(helperClass);
 
-                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(SignupActivity.this, "Failed to create an Account", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Failed to create an Account", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -113,13 +113,8 @@ public class SignupActivity extends AppCompatActivity {
         if (val.isEmpty()){
             editTextUsername.setError("Field cannot be empty");
             return false;
-        } /*else if (val.length()>=15) {
-            regUsername.setError("Username too long");
-            return false;
-        } else if (!val.matches(noWhiteSpace)){
-            regUsername.setError("White spaces are not allowed");
-            return false;
-        }*/ else {
+        }
+        else {
             editTextUsername.setError(null);
             return true;
         }
