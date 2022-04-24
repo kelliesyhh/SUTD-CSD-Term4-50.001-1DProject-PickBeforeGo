@@ -17,7 +17,8 @@ As shoppers and users of the Pick & GO app, we want to be aware of the availabil
 
 Personally, we want to know when products would be restocked, so that we can make plans for future purchases accordingly. We also want to know if a product is out of stock, so that we can make an informed choice before patronising Pick & GO. However, the current app offers none of these features. All that can be done on the app is generating a QR code to enter the shop, viewing past purchases and viewing possible rewards. As such, we see the significance in developing this solution for ourselves and our peers, especially for those facing similar issues as us.
 
-## System Architecture ![](https://lh4.googleusercontent.com/WxIsGWK0McNF2j6i2Vl77Cm9BZkQqTVrx-wk3cMQsH5Z4T1DcPmvYEMsU2ywqTLsn3nGjKAoMSH1TO6LVq_cA1yYQanevpcCskZ8YwOmsNdeXFfe9A1399ooOae83cSayZU3X9qx)
+## System Architecture 
+![https://drive.google.com/uc?export=view&id=1Pans113DsrSl2VJpSNzwnXtE2GrwmteR](https://drive.google.com/uc?export=view&id=1Pans113DsrSl2VJpSNzwnXtE2GrwmteR)
 
 
 ## Installation
