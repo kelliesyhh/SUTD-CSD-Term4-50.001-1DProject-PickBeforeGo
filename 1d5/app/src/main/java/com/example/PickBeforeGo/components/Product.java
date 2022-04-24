@@ -18,21 +18,22 @@ public class Product {
 
     public Product(){}
 
-    private Product(ProductBuilder productBuilder){
-        this.category = productBuilder.category;
-        this.date = productBuilder.date;
-        this.description = productBuilder.description;
-        this.imageURL = productBuilder.imageURL;
-        this.productID = productBuilder.productID;
-        this.productName = productBuilder.productName;
-        this.price = productBuilder.price;
-        this.time = productBuilder.time;
-        this.weight= productBuilder.weight;
-        this.nextRestockTime = productBuilder.nextRestockTime;
-        this.discountPercent = productBuilder.discountPercent;
-        this.isPromo = productBuilder.isPromo;
-        this.isFavourite = productBuilder.isFavourite;
-        this.inStock = productBuilder.inStock;
+    private Product(String category, String date, String description, String imageURL, String productID, String productName, String price,
+                    String time, String weight, String nextRestockTime, Double discountPercent, Boolean isPromo, Boolean isFavourite, Boolean inStock){
+        this.category = category;
+        this.date = date;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.productID = productID;
+        this.productName = productName;
+        this.price = price;
+        this.time = time;
+        this.weight= weight;
+        this.nextRestockTime = nextRestockTime;
+        this.discountPercent = discountPercent;
+        this.isPromo = isPromo;
+        this.isFavourite = isFavourite;
+        this.inStock = inStock;
     }
 
     public String getCategory(){
@@ -106,101 +107,5 @@ public class Product {
     public void setIsFavourite(Boolean isFavourite) {this.isFavourite = isFavourite;}
 
     public void setInStock(Boolean inStock) {this.inStock = inStock;}
-
-    public static class ProductBuilder {
-        private String category;
-        private String date;
-        private String description;
-        private String imageURL;
-        private String productID;
-        private String productName;
-        private String price;
-        private String time;
-        private String weight;
-        private String nextRestockTime;
-        private Double discountPercent;
-        private Boolean isPromo;
-        private Boolean isFavourite;
-        private Boolean inStock;
-
-        public ProductBuilder(){}
-
-        public ProductBuilder setCategory(String category){
-            this.category = category;
-            return this;
-        }
-
-        public ProductBuilder setDate(String date){
-            this.date = date;
-            return this;
-        }
-
-        public ProductBuilder setDescription(String description){
-            this.description = description;
-            return this;
-        }
-
-        public ProductBuilder setImageURL(String imageURL){
-            this.imageURL = imageURL;
-            return this;
-        }
-
-        public ProductBuilder setProductID(String productID){
-            this.productID = productID;
-            return this;
-        }
-
-        public ProductBuilder setProductName(String productName){
-            this.productName = productName;
-            return this;
-        }
-
-        public ProductBuilder setPrice(String price){
-            this.price = price;
-            return this;
-        }
-
-        public ProductBuilder setTime(String time){
-            this.time = time;
-            return this;
-        }
-
-        public ProductBuilder setWeight(String weight){
-            this.weight = weight;
-            return this;
-        }
-
-        public ProductBuilder setNextRestockTime(String nextRestockTime){
-            this.nextRestockTime = nextRestockTime;
-            return this;
-        }
-
-        public ProductBuilder setDiscountPercent(Double discountPercent){
-            this.discountPercent = discountPercent;
-            return this;
-        }
-
-        public ProductBuilder setIsPromo(Boolean isPromo){
-            this.isPromo = isPromo;
-            return this;
-        }
-
-        public ProductBuilder setIsFavourite(Boolean isFavourite){
-            this.isFavourite = isFavourite;
-            return this;
-        }
-
-        public ProductBuilder setInStock(Boolean inStock){
-            this.inStock = inStock;
-            return this;
-        }
-
-        public Product build(){
-            Product product = new Product(this);
-            //validate the product
-            return product;
-        }
-
-        }
 
 }
