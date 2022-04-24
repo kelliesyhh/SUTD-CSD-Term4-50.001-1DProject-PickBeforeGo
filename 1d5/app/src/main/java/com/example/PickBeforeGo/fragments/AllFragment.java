@@ -61,7 +61,6 @@ public class AllFragment extends Fragment {
             @Override
             public void onItemClick(int position, String productName, String imageUrl, String description, String productID, String productPrice, Boolean isFavourite, Boolean inStock, Boolean isPromo, Double discountPercent, String restock_time) {
                 Intent intent = new Intent(getActivity(), ProductScreenActivity.class);
-                System.out.println("item click all frag " + productPrice);
                 intent.putExtra(ProductAttributes.NAME, productName);
                 intent.putExtra(ProductAttributes.IMAGE_URL, imageUrl);
                 intent.putExtra(ProductAttributes.DESCRIPTION, description);
@@ -96,7 +95,6 @@ public class AllFragment extends Fragment {
         });
         productRVAdapter.notifyDataSetChanged();
 
-        //TODO: get isAdmin property from other screens/activity
         final Container<Boolean> isAdmin = new Container(false);
         FirebaseFirestore db;
         FirebaseAuth fAuth = FirebaseAuth.getInstance();

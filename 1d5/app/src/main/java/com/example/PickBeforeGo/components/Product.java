@@ -160,7 +160,6 @@ public class Product {
             return this;
         }
 
-        //TODO get system time and input as time attribute
         public ProductBuilder setTime(String time){
             this.time = time;
             return this;

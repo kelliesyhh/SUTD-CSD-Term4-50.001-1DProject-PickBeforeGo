@@ -24,9 +24,6 @@ public class MainActivity extends AppCompatActivity{
     private static final String TAG = "Main activity";
     private ArrayList<Product> allProductArrayList;
     private ArrayList<Product> favouriteProductArrayList;
-    private ArrayList<Product> promoProductArrayList;
-    private ArrayList<Product> noStockProductArrayList;
-    private FirebaseAuth fAuth;
 
 
 
@@ -48,11 +45,7 @@ public class MainActivity extends AppCompatActivity{
         if (allProductArrayList == null){
             GetProductHelper getProduct = new GetProductHelper();
             allProductArrayList = getProduct.getAllProducts();
-//            System.out.println("in main activity all size: " + allProductArrayList.size());
             favouriteProductArrayList = getProduct.getFavouriteProducts();
-            promoProductArrayList = getProduct.getPromotionProducts();
-//            System.out.println("in main activity promo size: " + promoProductArrayList.size());
-            noStockProductArrayList = getProduct.getNoStockProducts();
         }
     }
 
@@ -65,11 +58,4 @@ public class MainActivity extends AppCompatActivity{
         return this.favouriteProductArrayList;
     }
 
-    public ArrayList<Product> getPromotionProducts(){
-        return this.promoProductArrayList;
-    }
-
-    public ArrayList<Product> getNoStockProducts(){
-        return this.noStockProductArrayList;
-    }
 }

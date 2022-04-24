@@ -46,17 +46,3 @@ public class UserHelperClass {
         this.isAdmin = isAdmin;
     }
 }
-
-
-    /*
-        ArrayList<ProductHelperClass> favourites;
-
-
-    /*public ArrayList<ProductHelperClass> getFavourites() {
-        return favourites;
-    }
-
-    public void setFavourites(ArrayList<ProductHelperClass> favourites) {
-        this.favourites = favourites;
-    }
-    */

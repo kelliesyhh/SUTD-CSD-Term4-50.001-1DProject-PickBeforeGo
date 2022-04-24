@@ -18,7 +18,6 @@ public class CalendarPicker {
             public void onDateSet(DatePicker datePicker, int day, int month, int year) {
                 month = month + 1;
                 String date = makeDateString(year, month, day);
-                System.out.println("i was called" + day + month + year);
                 dateButton.setText(date);
                 AdminFormActivity.restockDay = String.valueOf(year);
                 AdminFormActivity.restockMonth = String.valueOf(month);

@@ -106,7 +106,6 @@ public class InStockProductCardFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                  boolean favorite = (boolean) snapshot.child("isFavourite").getValue();
-                System.out.println(favorite);
                 if (favorite) {
                     reference.child(productId).child("isFavourite").setValue(false);
 
