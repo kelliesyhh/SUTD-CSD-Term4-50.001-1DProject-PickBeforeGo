@@ -54,6 +54,7 @@ Password: IAmAnAdmin
 7. Use the QR code on the home page to enter Pick & GO’s physical store.
 
 ## Team Members
+C101 Team 1C
 * Chong Pok Shun (1004992)
 * Lee Wai Shun (1005115)
 * Lek Jie Wei (1005007)
@@ -61,3 +62,6 @@ Password: IAmAnAdmin
 * Sim Yu Hui, Kellie (1004204)
 * Wang Yanbao (1004865)
 * Zhang Tianqin (1004878)
+
+## Video:
+[https://drive.google.com/file/d/1DPZkrgN_oO9rmsWWD66dUzKD0gs80uSw/view?usp=sharing](https://drive.google.com/file/d/1DPZkrgN_oO9rmsWWD66dUzKD0gs80uSw/view?usp=sharing)
