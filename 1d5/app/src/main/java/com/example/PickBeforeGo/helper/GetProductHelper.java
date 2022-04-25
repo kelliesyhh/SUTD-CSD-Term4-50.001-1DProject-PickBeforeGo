@@ -23,16 +23,13 @@ public class GetProductHelper {
         prodDatabaseReference = prodDatabase.getReference();
         allProductArrayList = new ArrayList<Product>();
         favouriteProductArrayList = new ArrayList<Product>();
-
         prodDatabaseReference.child("Product_List").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 if (!allProductArrayList.isEmpty()){
                     allProductArrayList.clear();
                     favouriteProductArrayList.clear();
                 }
-
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 for (DataSnapshot childSnapshot : children) {
                     Product product = childSnapshot.getValue(Product.class);
@@ -40,15 +37,12 @@ public class GetProductHelper {
                     if (product.getIsFavourite()){favouriteProductArrayList.add(product);}
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("GetProductHelper", "error in calling database");
             }
-
         });
     }
-
     public ArrayList<Product> getAllProducts() {
         return this.allProductArrayList;
     }
