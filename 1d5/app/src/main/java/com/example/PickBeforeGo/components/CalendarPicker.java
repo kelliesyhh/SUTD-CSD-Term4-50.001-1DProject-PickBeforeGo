@@ -20,7 +20,7 @@ public class CalendarPicker {
                 String date = makeDateString(year, month, day);
                 dateButton.setText(date);
                 AdminFormActivity.restockDay = String.valueOf(year);
-                AdminFormActivity.restockMonth = String.valueOf(month);
+                AdminFormActivity.restockMonth = getMonthFormat(month);
                 AdminFormActivity.restockYear = String.valueOf(day);
             }
         };

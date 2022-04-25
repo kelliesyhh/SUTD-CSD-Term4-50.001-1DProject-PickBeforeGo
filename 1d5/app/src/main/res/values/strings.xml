@@ -1,7 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Pick before Go</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="availability">Availability</string>
+
+    <!-- Strings used as placeholders -->
     <string name="placeholder_product_name">Hokkaido Milk Bread Gardenia</string>
     <string name="placeholder_weight">400g</string>
     <string name="placeholder_price">0.00</string>
@@ -10,17 +11,9 @@
     <string name="placeholder_stock">In Stock</string>
     <string name="placeholder_no_stock">Next Restock Time - 10:00 28 Feb 2021</string>
     <string name="title_activity_main2">MainActivity2</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="promo_placeholder">Promo 20%</string>
 
-    <!--    for the AdminFormActivity-->
+    <!--   Strings used for the AdminFormActivity-->
     <string-array name="arrSpinnerStockAvailability">
         <item>No Stock</item>
         <item>Available</item>
@@ -58,7 +51,5 @@
         <item>20%</item>
         <item>50%</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

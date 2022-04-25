@@ -131,7 +131,6 @@ public class ProductScreenActivity extends AppCompatActivity {
         // set up product description below availability
         txtDescription.setText("Product Description: " + description);
 
-        //TODO: get isAdmin property from other screens/activity
         FirebaseFirestore db;
         FirebaseAuth fAuth = FirebaseAuth.getInstance();
         String userid = fAuth.getCurrentUser().getUid();

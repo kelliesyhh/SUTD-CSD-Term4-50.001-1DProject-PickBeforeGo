@@ -83,7 +83,6 @@ public class SignUpActivity extends AppCompatActivity {
                     Log.i(TAG, "create user success");
 
                     //to store other values into the Firestore
-                    //TODO Show some error when password not long enough
                     FirebaseUser user = fAuth.getCurrentUser();
                     DocumentReference df = fStore.collection("Users").document(user.getUid());
 

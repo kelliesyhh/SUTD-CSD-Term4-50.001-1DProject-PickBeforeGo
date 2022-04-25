@@ -75,7 +75,7 @@ public class AdminFormActivity extends AppCompatActivity {
     final String[] itemDescriptionValue = new String[1];
     final String[] newPrice = new String[1];
 
-    private static final int galleryPick = 1;
+    private static final int GALLERY_PICK = 1;
     private ImageView imgViewUploadedImage;
 
     private String saveCurrentDate;
@@ -246,6 +246,12 @@ public class AdminFormActivity extends AppCompatActivity {
             btnDate = findViewById(R.id.btnDate);
             CalendarPicker.initDatePicker(this, btnDate);
             btnDate.setText(CalendarPicker.getTodayDate());
+            btnDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CalendarPicker.datePickerDialog.show();
+                }
+            });
 
             //// Next Restock time ////
             spinnerRestockTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -406,7 +412,7 @@ public class AdminFormActivity extends AppCompatActivity {
                             reference.child("isPromo").setValue(true);
                         }
                         reference.child("discountPercent").setValue(Double.valueOf(promotionChoice[0].substring(0, promotionChoice[0].length() - 1)));
-                        reference.child("nextRestockTime").setValue((sbmtRestockTime[0])+" "+restockDay+" "+ restockMonth +" "+ restockYear);
+                        reference.child("nextRestockTime").setValue((sbmtRestockTime[0]) + " " + restockDay + " " + restockMonth + " " + restockYear);
                         reference.child("description").setValue(itemDescriptionValue[0]);
                         Toast.makeText(AdminFormActivity.this, "Product details have been updated!", Toast.LENGTH_LONG).show();
 
@@ -436,14 +442,14 @@ public class AdminFormActivity extends AppCompatActivity {
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, galleryPick);
+        startActivityForResult(galleryIntent, GALLERY_PICK);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == galleryPick && resultCode == RESULT_OK && data != null) {
+        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null) {
             imageUri = data.getData();
             Log.d(DEBUG, "new image uri is " + imageUri);
             imgViewUploadedImage.setImageURI(imageUri);
@@ -463,8 +469,6 @@ public class AdminFormActivity extends AppCompatActivity {
         saveCurrentDate = currentDate.format(calendar.getTime());
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calendar.getTime());
-
-        //TODO Change Product Key
 
         Log.d(DEBUG, "Image URI:" + imageUri);
         final StorageReference filePath = storageRefProductImages.child(imageUri.getLastPathSegment() + productHashfromUUID + ".jpg");
