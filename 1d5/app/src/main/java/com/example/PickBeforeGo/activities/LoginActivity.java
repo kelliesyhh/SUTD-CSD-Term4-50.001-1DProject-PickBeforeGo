@@ -52,9 +52,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (!editTextEmail.getText().toString().isEmpty() & !editTextPassword.getText().toString().isEmpty()){
-                    fAuth.signInWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                String email = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
+                if (!email.isEmpty() & !password.isEmpty()){
+                    fAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Log.i(TAG,"Successful Login");

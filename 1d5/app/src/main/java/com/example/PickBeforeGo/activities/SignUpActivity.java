@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.security.MessageDigest;
+
 //import com.google.android.material.textfield.TextInputLayout;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -76,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
         // check validation of email, password and username
         if (validateEmail() && validatePassword() && validateUsername()){
             Log.i(TAG, "user validated");
-            fAuth.createUserWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            fAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
                     Toast.makeText(SignUpActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
@@ -86,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
                     FirebaseUser user = fAuth.getCurrentUser();
                     DocumentReference df = fStore.collection("Users").document(user.getUid());
 
-                    User helperClass = new User(username,email,password, false);
+                    User helperClass = new User(username, email, sha256(password), false);
 
                     df.set(helperClass);
 
@@ -143,6 +145,23 @@ public class SignUpActivity extends AppCompatActivity {
             editTextPassword.setError(null);
             return true;
         }
-
     }
+
+    private static String sha256(String base) {
+        try {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(base.getBytes("UTF-8"));
+        StringBuffer hexString = new StringBuffer();
+
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
+        }
+
+        return hexString.toString();
+    } catch(Exception ex){
+        throw new RuntimeException(ex);
+    }
+}
 }
