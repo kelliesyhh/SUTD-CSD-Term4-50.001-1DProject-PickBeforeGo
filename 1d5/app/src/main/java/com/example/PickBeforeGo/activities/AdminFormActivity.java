@@ -351,8 +351,7 @@ public class AdminFormActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Checking if product details are properly entered before submitting
                 if (imgViewUploadedImage == null || imageUri == null) {
-                    Toast toast = Toast.makeText(AdminFormActivity.this, "Product image is mandatory!", Toast.LENGTH_SHORT);
-                    toast.show();
+                    Toast.makeText(AdminFormActivity.this, "Product image is mandatory!", Toast.LENGTH_SHORT).show();
                 }
                 else if (TextUtils.isEmpty(itemDescriptionValue[0])) {
                     Toast.makeText(AdminFormActivity.this, "Please enter product description!", Toast.LENGTH_SHORT).show();
