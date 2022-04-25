@@ -22,7 +22,7 @@ Personally, we want to know when products would be restocked, so that we can mak
 
 ## Installation
 1. Clone, fork, or download the repository
-2. Open the project in Android Studio and sync project with Gradle files
+2. Open the '1d5' folder in Android Studio and sync project with Gradle files
 3. Run the project on any Android device (local emulator or a physical device paired via Wi-Fi or wire)
 
 ## User View
