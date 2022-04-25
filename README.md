@@ -64,4 +64,4 @@ C101 Team 1C
 * Zhang Tianqin (1004878)
 
 ## Video:
-[https://drive.google.com/file/d/1DPZkrgN_oO9rmsWWD66dUzKD0gs80uSw/view?usp=sharing](https://drive.google.com/file/d/1DPZkrgN_oO9rmsWWD66dUzKD0gs80uSw/view?usp=sharing)
+[https://youtu.be/toqGCCv_OMs](https://youtu.be/toqGCCv_OMs)
