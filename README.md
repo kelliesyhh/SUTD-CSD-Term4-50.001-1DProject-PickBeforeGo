@@ -65,3 +65,6 @@ C101 Team 1C
 
 ## Video:
 [https://youtu.be/toqGCCv_OMs](https://youtu.be/toqGCCv_OMs)
+
+## Poster:
+![https://raw.githubusercontent.com/kelliesyhh/SUTD-CSD-Term4-50.001-1DProject-PickBeforeGo/705edcc27ebabc9e9b249418787e12ac4d0aed1b/Project%20Checkoffs/C101_Team1C_Poster.png](https://raw.githubusercontent.com/kelliesyhh/SUTD-CSD-Term4-50.001-1DProject-PickBeforeGo/705edcc27ebabc9e9b249418787e12ac4d0aed1b/Project%20Checkoffs/C101_Team1C_Poster.png)
